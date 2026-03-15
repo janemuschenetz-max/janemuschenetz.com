@@ -354,11 +354,11 @@ import Base from '../../layouts/Base.astro';
   </section>
 
 <!-- ── AMCharts 5 ─────────────────────────────────────────────────────── -->
-<script type="module" is:inline>
-import * as am5        from "https://cdn.amcharts.com/lib/5/index.js";
-import * as am5xy      from "https://cdn.amcharts.com/lib/5/xy.js";
-import * as am5percent from "https://cdn.amcharts.com/lib/5/percent.js";
-import am5themes_Animated from "https://cdn.amcharts.com/lib/5/themes/Animated.js";
+<script is:inline src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script is:inline>
 
 const MAUVE      = am5.color(0xc4a8bc);
 const MAUVE_DARK = am5.color(0x9b7aaa);
@@ -444,7 +444,9 @@ function initMortality() {
     cornerRadiusTL: 3, cornerRadiusTR: 3,
     strokeOpacity: 0,
     width: am5.percent(70),
-    templateField: "colSet",
+  });
+  series.columns.template.adapters.add("fill", function(fill, target) {
+    return target.dataItem.dataContext.color;
   });
 
   series.bullets.push(() => am5.Bullet.new(root, {
@@ -458,13 +460,13 @@ function initMortality() {
   }));
 
   const data = [
-    { country: "Norway",    value: 2,  colSet: { fill: MAUVE_LITE } },
-    { country: "Netherlands", value: 3, colSet: { fill: MAUVE_LITE } },
-    { country: "Germany",   value: 4,  colSet: { fill: MAUVE_LITE } },
-    { country: "Canada",    value: 8,  colSet: { fill: MAUVE_LITE } },
-    { country: "France",    value: 8,  colSet: { fill: MAUVE_LITE } },
-    { country: "UK",        value: 10, colSet: { fill: MAUVE_LITE } },
-    { country: "United States", value: 24, colSet: { fill: MAUVE_DARK } },
+    { country: "Norway",        value: 2,  color: MAUVE_LITE },
+    { country: "Netherlands",   value: 3,  color: MAUVE_LITE },
+    { country: "Germany",       value: 4,  color: MAUVE_LITE },
+    { country: "Canada",        value: 8,  color: MAUVE_LITE },
+    { country: "France",        value: 8,  color: MAUVE_LITE },
+    { country: "UK",            value: 10, color: MAUVE_LITE },
+    { country: "United States", value: 24, color: MAUVE_DARK },
   ];
 
   xAxis.data.setAll(data);
@@ -565,7 +567,9 @@ function initRace() {
     cornerRadiusTR: 3, cornerRadiusBR: 3,
     strokeOpacity: 0,
     height: am5.percent(55),
-    templateField: "colSet",
+  });
+  series.columns.template.adapters.add("fill", function(fill, target) {
+    return target.dataItem.dataContext.color;
   });
 
   series.bullets.push(() => am5.Bullet.new(root, {
@@ -579,9 +583,9 @@ function initRace() {
   }));
 
   const data = [
-    { race: "Hispanic", value: 18.2, colSet: { fill: MAUVE_LITE } },
-    { race: "White",    value: 19.1, colSet: { fill: MAUVE_LITE } },
-    { race: "Black",    value: 55.3, colSet: { fill: MAUVE_DARK } },
+    { race: "Hispanic", value: 18.2, color: MAUVE_LITE },
+    { race: "White",    value: 19.1, color: MAUVE_LITE },
+    { race: "Black",    value: 55.3, color: MAUVE_DARK },
   ];
 
   yAxis.data.setAll(data);

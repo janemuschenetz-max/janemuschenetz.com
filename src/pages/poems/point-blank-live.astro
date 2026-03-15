@@ -1,0 +1,591 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<style>
+  .live-hero {
+    padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+  }
+  .live-hero .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+  .live-hero .eyebrow a { color: inherit; text-decoration: none; }
+  .live-hero .eyebrow a:hover { text-decoration: underline; }
+  .live-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 2px 8px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Gun poem container ─────────────────────────────────── */
+  .gun-section { padding: var(--space-md) 0 var(--space-lg); }
+
+  .gun-epigraph {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: clamp(0.88rem, 1.4vw, 1rem);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+    max-width: 640px;
+  }
+
+  .pb-svg-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .pb-svg-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .gun-source {
+    font-size: 0.72rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.75rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Explore ────────────────────────────────────────────── */
+  .explore-card {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background: var(--color-bg-alt);
+    border-radius: 4px;
+  }
+  .explore-card h5 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.35rem;
+  }
+  .explore-source {
+    font-size: 0.8rem !important;
+    color: var(--color-text-secondary) !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .explore-source a { color: var(--color-text-secondary); text-decoration: underline; }
+  .explore-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    margin-bottom: 1.5rem !important;
+  }
+  #explore-pb-intl  { width: 100%; height: 520px; }
+  #explore-pb-child { width: 100%; height: 240px; }
+  #explore-pb-types { width: 100%; height: 300px; }
+
+  .poem-about {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+
+  @media (max-width: 600px) {
+    #explore-pb-intl  { height: 400px; }
+    #explore-pb-child,
+    #explore-pb-types { height: 240px; }
+    .explore-card { padding: 1.25rem; }
+  }
+</style>
+
+<Base title="Point Blank (Live) — Jane Muschenetz" description="An animated, interactive data poem on gun violence in America — rendered inside the silhouette of a handgun.">
+
+  <section class="live-hero">
+    <div class="container">
+      <p class="eyebrow"><a href="/visual-data-poetry">← Visual &amp; Data Poetry</a></p>
+      <h1 class="page-hero__title">Point Blank <span class="live-badge">Interactive</span></h1>
+      <p class="page-hero__subtitle" style="max-width:none;font-style:italic;">from <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</p>
+      <p style="margin-top:var(--space-sm);font-size:0.85rem;color:var(--color-text-secondary);">
+        <a href="/poems/point-blank" class="link-underline">View original static version →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="gun-section">
+    <div class="container">
+      <!-- Inline original SVG — data bar <g> elements get class="pb-data-bar" for JS animation -->
+      <div class="pb-svg-container">
+        <svg viewBox="140 310 2100 1520" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:10;" aria-label="Point Blank — gun violence data chart">
+    <g transform="matrix(1,0,0,1,0,52)">
+        <path d="M654.356,1699.93L659.987,1748.4L208.288,1748.91L208.288,1699.93L654.356,1699.93Z" style="fill:rgb(206,203,202);"/>
+    </g>
+    <g transform="matrix(1,0,0,1,4.69765,102.974)">
+        <path d="M655.29,1699.93L660.753,1748.4L203.59,1748.91L203.59,1699.93L655.29,1699.93Z" style="fill:rgb(206,203,202);"/>
+    </g>
+    <path d="M648.974,1699.93L654.356,1749.12L359.133,1749.12L375.541,1699.93L648.974,1699.93Z" style="fill:rgb(206,203,202);"/>
+    <g transform="matrix(1.0468,0,0,1.05734,-10.3318,-152.187)">
+        <path d="M625.36,1699.93L629.829,1749.12L368.621,1749.12L389.799,1699.93L625.36,1699.93Z" style="fill:rgb(204,204,204);"/>
+    </g>
+    <g transform="matrix(1.04614,0,0,1.12056,-105.553,-36.1666)">
+        <g transform="matrix(0.955897,0,0,0.892415,13.2309,32.2756)">
+            <text x="680.458px" y="538.133px" style="font-family:'MillerText-Italic', Georgia, serif;font-style:italic;font-size:41.667px;"><tspan x="680.458px" y="538.133px">Comprehensive Gun Violence-Related Deaths (per 100K population) 2021</tspan></text>
+            <text x="891.667px" y="1232.01px" style="font-family:'MillerText-Italic', Georgia, serif;font-style:italic;font-size:41.667px;"><tspan x="891.667px" y="1232.01px">Child and Teen Firearm-Related Deaths, 2021</tspan></text>
+        </g>
+    </g>
+    <g transform="matrix(1.8153,0,0,1.8153,183.21,874.71)">
+        <path d="M402.369,443.576L388.058,443.576L388.058,260.712C388.058,257.995 389.716,255.771 391.742,255.771L404.467,255.771C403.313,255.771 402.369,257.995 402.369,260.712L402.369,443.576ZM466.667,446.093L466.667,256.991C466.667,254.226 464.404,251.963 461.639,251.963L380.96,251.963C378.195,251.963 375.933,254.226 375.933,256.991L375.933,446.093L466.667,446.093Z" style="fill:rgb(255,0,0);"/>
+    </g>
+    <g transform="matrix(1.8153,0,0,1.8153,183.21,874.71)">
+        <path d="M401.932,451.192L387.292,451.192L387.292,518.964L401.932,518.964L401.932,451.192ZM467.712,447.385L467.712,521.48L374.888,521.48L374.888,447.385L467.712,447.385Z" style="fill:rgb(255,0,0);"/>
+    </g>
+    <g transform="matrix(1.8153,0,0,1.8153,183.21,874.71)">
+        <path d="M471.557,526.529L471.557,533.37L471.556,533.396C471.528,534.266 470.653,534.972 469.576,534.994L373.023,534.994C371.929,534.972 371.043,534.242 371.043,533.353L371.043,524.657C371.043,523.62 371.911,522.772 372.972,522.772L469.628,522.772C470.688,522.772 471.556,523.62 471.556,524.657L471.556,526.529L471.557,526.529Z" style="fill:rgb(255,0,0);"/>
+    </g>
+    <g transform="matrix(4.10197,0,0,4.16667,1136.56,1272.92)">
+        <rect x="0.5" y="0.5" width="257" height="96" style="fill:white;stroke:black;stroke-width:0.5px;"/>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,1136.53,1297.92)">
+        <text x="7.2px" y="14px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:11px;">In terms of gun violence "comprehensive,"</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,1136.53,1297.92)">
+        <text x="7.2px" y="30px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:11px;">US leads large economies by bounds and leaps . . .</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,1136.53,1297.92)">
+        <text x="7.2px" y="60px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:11px;">Is cost of living more expensive</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,1136.53,1297.92)">
+        <text x="7.2px" y="75px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:11px;">When guns and lives are cheap?</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,860.148,1248.58)">
+        <text x="18.642px" y="15px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10px;">6</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,767.148,1154.58)">
+        <text x="90.25px" y="148px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10px;">0.2</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,880.723,1159.58)">
+        <text x="7.35px" y="179px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10px;">US</text>
+    </g>
+    <g transform="matrix(4.16667,0,0,4.16667,873.723,1154.82)">
+        <text x="60.047px" y="180px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10px;">Peer</text>
+        <text x="48.333px" y="191px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10px;">Countries</text>
+    </g>
+    <g transform="matrix(0.999318,0,0,1,58.224,176.994)">
+        <path d="M150.166,1572.12C150.166,1572.12 272.067,1108.51 312.641,967.721C349.216,840.81 394.343,708.844 310.724,673.479C246.743,646.419 256.443,618.619 308.943,586.308C361.443,553.996 303.837,520.404 305.997,503.291C308.157,486.179 305.459,449.814 309.94,448.527C314.421,447.24 309.145,421.101 284.844,423.532C260.542,425.963 247.633,400.122 286.971,381.951C326.31,363.78 331.186,363.812 337.73,392.116C344.274,420.421 340.939,421.124 357.909,399.768C389.527,359.98 397.468,383.945 398.074,377.916C398.681,371.887 430.289,396.396 431.746,360.964C433.203,325.531 470.285,335.941 477.449,360.964C484.614,385.986 496.379,381.762 554.609,379.042C612.84,376.321 1943.27,379.318 1943.27,379.318C1943.27,379.318 2034.5,337.283 2057.61,360.964C2080.72,384.644 2072.13,383.164 2072.13,383.164C2072.13,383.164 2131.7,383.422 2131.79,423.192C2131.88,462.962 2133.52,503.291 2133.52,503.291C2133.52,503.291 2124.81,528.982 2084.15,537.544C2043.5,546.105 2081.52,614.786 2081.52,614.786C2081.52,614.786 2083.32,641.459 2045.59,642.93C2007.86,644.4 1562.89,643.637 1562.89,643.637L1562.83,672.787C1562.83,672.787 1219.19,663.872 1174.6,680.627C1130.01,697.383 1110.36,729.382 1103.67,751.298C1096.99,773.215 1074.26,889.864 937.518,891.882C800.777,893.899 701.783,880.434 673.529,991.997C645.276,1103.56 567.975,1572.12 567.975,1572.12L150.166,1572.12Z" style="fill:none;"/>
+        <clipPath id="_clip1">
+            <path d="M150.166,1572.12C150.166,1572.12 272.067,1108.51 312.641,967.721C349.216,840.81 394.343,708.844 310.724,673.479C246.743,646.419 256.443,618.619 308.943,586.308C361.443,553.996 303.837,520.404 305.997,503.291C308.157,486.179 305.459,449.814 309.94,448.527C314.421,447.24 309.145,421.101 284.844,423.532C260.542,425.963 247.633,400.122 286.971,381.951C326.31,363.78 331.186,363.812 337.73,392.116C344.274,420.421 340.939,421.124 357.909,399.768C389.527,359.98 397.468,383.945 398.074,377.916C398.681,371.887 430.289,396.396 431.746,360.964C433.203,325.531 470.285,335.941 477.449,360.964C484.614,385.986 496.379,381.762 554.609,379.042C612.84,376.321 1943.27,379.318 1943.27,379.318C1943.27,379.318 2034.5,337.283 2057.61,360.964C2080.72,384.644 2072.13,383.164 2072.13,383.164C2072.13,383.164 2131.7,383.422 2131.79,423.192C2131.88,462.962 2133.52,503.291 2133.52,503.291C2133.52,503.291 2124.81,528.982 2084.15,537.544C2043.5,546.105 2081.52,614.786 2081.52,614.786C2081.52,614.786 2083.32,641.459 2045.59,642.93C2007.86,644.4 1562.89,643.637 1562.89,643.637L1562.83,672.787C1562.83,672.787 1219.19,663.872 1174.6,680.627C1130.01,697.383 1110.36,729.382 1103.67,751.298C1096.99,773.215 1074.26,889.864 937.518,891.882C800.777,893.899 701.783,880.434 673.529,991.997C645.276,1103.56 567.975,1572.12 567.975,1572.12L150.166,1572.12Z"/>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(0.983084,0,0,1,-540.109,-3.39137)">
+                <g transform="matrix(3.18129,0,0,3.15152,467.268,-732.215)"><rect x="69.5" y="370" width="642.724" height="16.5" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(3.18129,0,0,3.15152,467.268,-786.542)"><rect x="69.5" y="370" width="642.724" height="16.5" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(3.18129,0,0,3.15152,467.268,-840.542)"><rect x="69.5" y="370" width="642.724" height="16.5" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.516221,0,0,0.947989,410.75,85.5952)"><rect x="537.789" y="540.205" width="3960.89" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(1,0,0,0.947989,150.579,30.9758)"><rect x="537.789" y="540.205" width="2044.69" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(1.21829,0,0,0.947989,33.1861,-23.6436)"><rect x="537.789" y="540.205" width="1678.33" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.192681,0,0,0.947989,584.746,194.834)"><rect x="537.789" y="540.205" width="8972.44" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.192681,0,0,0.947989,584.746,249.453)"><rect x="537.789" y="540.205" width="8972.44" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.192681,0,0,0.947989,584.746,304.073)"><rect x="537.789" y="540.205" width="8972.44" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.175313,0,0,0.947989,594.087,358.692)"><rect x="537.789" y="540.205" width="9861.37" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.155969,0,0,0.947989,604.49,413.312)"><rect x="537.789" y="540.205" width="11084.4" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.132399,0,0,0.947989,617.165,467.931)"><rect x="537.789" y="540.205" width="13057.6" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.116263,0,0,0.947989,625.843,522.55)"><rect x="537.789" y="540.205" width="14869.9" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.0853419,0,0,0.947989,642.472,577.17)"><rect x="537.789" y="540.205" width="20257.6" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.278404,0,0,0.947989,538.646,140.215)"><rect x="537.789" y="540.205" width="6209.76" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.0853425,0,0,0.947989,642.472,631.789)"><rect x="537.789" y="540.205" width="20257.5" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.0488233,0,0,0.947989,662.111,686.409)"><rect x="537.789" y="540.205" width="35409.8" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.0488233,0,0,0.947989,662.111,741.028)"><rect x="537.789" y="540.205" width="35409.8" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.0488227,0,0,0.947989,662.112,795.648)"><rect x="537.789" y="540.205" width="35410.2" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.0331841,0,0,0.947989,670.522,850.267)"><rect x="537.789" y="540.205" width="52097.9" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.00484752,0,0,0.947989,685.761,904.886)"><rect x="537.789" y="540.205" width="356641" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.00484752,0,0,0.947989,685.761,959.506)"><rect x="537.789" y="540.205" width="356641" height="54.853" style="fill:rgb(230,230,230);"/></g>
+                <g transform="matrix(0.00484752,0,0,0.947989,685.761,1014.22)"><rect x="537.789" y="540.205" width="356641" height="54.853" style="fill:rgb(230,230,230);"/></g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,41.0207,155.219)">
+        <path d="M791.893,712.103C791.893,712.103 742.587,713.826 751.641,788.559C760.694,863.293 818.59,865.116 833.8,869.869C856.567,876.983 979.421,866.91 979.421,866.91C979.421,866.91 1063.8,855.876 1050.08,754.547C1036.37,653.219 1005.34,653.468 966.562,655.225C920.63,657.306 860.597,705.995 862.789,741.806C864.733,773.559 863.469,801.117 900.014,827.259C933.766,851.403 893.408,842.855 868.139,818.981C849.743,801.6 841.599,804.318 830.767,780.108C811.496,737.036 808.359,716.519 791.893,712.103Z" style="fill:white;"/>
+    </g>
+    <!-- Data bars — animated by JS. The outer <g transform="matrix(1,0,0,1,-99.8228,173.603)"> wraps all colored bars -->
+    <g transform="matrix(1,0,0,1,-99.8228,173.603)">
+        <g transform="matrix(3.18129,0,0,3.1713,399.125,602.54)">
+            <rect x="69.5" y="370" width="488.5" height="16.5" style="fill:rgb(255,0,0);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.516221,0,0,0.947989,410.75,85.5952)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(1,0,0,0.947989,150.579,30.9758)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(3.18129,0,0,3.1713,467.42,-738)">
+            <rect x="69.5" y="370" width="488.5" height="16.5" style="fill:rgb(220,47,47);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(1.21829,0,0,0.947989,33.1861,-23.6436)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.192681,0,0,0.947989,584.746,194.834)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.192681,0,0,0.947989,584.746,249.453)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.192681,0,0,0.947989,584.746,304.073)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.175313,0,0,0.947989,594.087,358.692)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.155969,0,0,0.947989,604.49,413.312)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.132399,0,0,0.947989,617.165,467.931)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.116263,0,0,0.947989,625.843,522.55)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.0853419,0,0,0.947989,642.472,577.17)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.278404,0,0,0.947989,538.646,140.215)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.0853425,0,0,0.947989,642.472,631.789)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.0488233,0,0,0.947989,662.111,686.409)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.0488233,0,0,0.947989,662.111,741.028)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.0488227,0,0,0.947989,662.112,795.648)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.0331841,0,0,0.947989,670.522,850.267)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.00484752,0,0,0.947989,685.761,904.886)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+        <g class="pb-data-bar" transform="matrix(0.00484752,0,0,0.947989,685.761,959.506)">
+            <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+        </g>
+    </g>
+    <g transform="matrix(2e-06,0,0,0.947989,583.545,1131.93)">
+        <rect x="537.789" y="540.205" width="412.582" height="54.853" style="fill:rgb(68,114,196);"/>
+    </g>
+    <g transform="matrix(3.18129,0,0,3.1713,399.125,602.54)"><text x="26.959px" y="357px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Japan</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,397.955,603.689)"><text x="27.064px" y="339.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Korea</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,391.729,606.164)"><text x="40.254px" y="322.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">UK</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,405.394,606.532)"><text x="10.704px" y="305px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Romania</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,402.998,607.88)"><text x="19.619px" y="288px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Taiwan</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,402.274,605.11)"><text x="21.644px" y="271px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Poland</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,405.228,603.893)"><text x="10.094px" y="253.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Germany</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,399.197,604.553)"><text x="28.679px" y="236.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Spain</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,401.358,606.767)"><text x="18.109px" y="219px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Czechia</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,405.153,608.33)"><text x="10.784px" y="202px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Australia</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,353.996,604.977)"><text x="12.534px" y="185px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Netherlands</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,404.603,605.049)"><text x="13.569px" y="167.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Portugal</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,403.515,602.925)"><text x="14.614px" y="133px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Belgium</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,402.942,605.454)"><text x="22.564px" y="116px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Greece</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,402.82,606.047)"><text x="17.909px" y="81.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Sweden</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,401.135,606.056)"><text x="19.059px" y="64.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Canada</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,397.32,604.582)"><text x="31.344px" y="47.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Chile</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,298.004,604.205)"><text x="28.849px" y="30px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Saudi Arabia</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,393.219,604.691)"><text x="42.424px" y="13px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">US</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,396.834,603.738)"><text x="34.629px" y="150.5px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">Italy</text></g>
+    <g transform="matrix(3.18129,0,0,3.1713,400.517,605.235)"><text x="22.459px" y="99px" style="font-family:'MillerText-Roman', Georgia, serif;font-size:10.511px;fill:rgb(89,89,89);">France</text></g>
+    <g transform="matrix(1.8153,0,0,1.8153,406.466,1333.25)">
+        <path d="M402.369,266.363L388.058,266.363L388.058,260.712C388.058,257.995 389.716,255.771 391.742,255.771L404.467,255.771C403.313,255.771 402.369,257.995 402.369,260.712L402.369,266.363ZM466.667,268.88L466.667,256.991C466.667,254.226 464.404,251.963 461.639,251.963L380.96,251.963C378.195,251.963 375.933,254.226 375.933,256.991L375.933,268.88L466.667,268.88Z" style="fill:rgb(68,114,196);"/>
+    </g>
+    <g transform="matrix(1.8153,0,0,1.8153,406.466,874.71)">
+        <path d="M471.557,526.529L471.557,533.37L471.556,533.396C471.528,534.266 470.653,534.972 469.576,534.994L373.023,534.994C371.929,534.972 371.043,534.242 371.043,533.353L371.043,524.657C371.043,523.62 371.911,522.772 372.972,522.772L469.628,522.772C470.688,522.772 471.556,523.62 471.556,524.657L471.556,526.529L471.557,526.529Z" style="fill:rgb(68,114,196);"/>
+    </g>
+
+    <g transform="matrix(1.03875,0,0,1.03875,-85.4973,-65.8686)">
+        <path d="M649.274,1699.93L649.274,1747.28" style="fill:none;stroke:rgb(74,113,183);stroke-width:0.6px;stroke-miterlimit:1.5;"/>
+    </g>
+        </svg>
+      </div>
+
+      <p class="gun-source">
+        Source: Institute for Health Metrics and Evaluation (IHME), Global Burden of Disease, 2021.
+        All-cause firearm mortality (accidental &amp; intentional) per 100K. High-income nations, population &gt;10M.
+      </p>
+
+      <div class="sr-only">
+        <p>POINT BLANK. Comprehensive Gun Violence-Related Deaths per 100,000 Population, 2021,
+        rendered inside the silhouette of a handgun. The US leads at approximately 6.0 —
+        all peer countries below 1.0. Is cost of living more expensive when guns and lives are cheap?</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container--narrow">
+      <h3>About This Poem</h3>
+      <p>'Point Blank' renders comprehensive gun violence data inside the silhouette of a handgun, showing the US leads peer nations by orders of magnitude. The poem in the data asks: "Is cost of living more expensive / When guns and lives are cheap?"</p>
+      <p class="mt-sm" style="font-size:0.9rem;color:var(--color-text-secondary);">This interactive version animates the bars inside the gun shape. Hover any bar to see the exact figure.</p>
+
+      <h4 class="mt-md">Explore the Data</h4>
+
+      <div class="explore-card">
+        <h5>International Comparison — All Firearm Deaths per 100K, 2021</h5>
+        <p class="explore-source">Source: <a href="https://www.healthdata.org/research-analysis/gbd" target="_blank" rel="noopener">IHME, Global Burden of Disease, 2021</a>; United Nations population data</p>
+        <p class="explore-desc">Comprehensive firearm mortality across high-income nations (population &gt;10M). Includes all causes — homicide, suicide, and unintentional. The US leads every peer nation by orders of magnitude.</p>
+        <div id="explore-pb-intl"></div>
+      </div>
+
+      <div class="explore-card">
+        <h5>Child &amp; Teen Firearm Deaths — US vs. Peer Countries, 2021</h5>
+        <p class="explore-source">Source: <a href="https://www.kff.org/other/issue-brief/child-and-teen-firearm-mortality-in-the-u-s-and-peer-countries/" target="_blank" rel="noopener">KFF, "Child and Teen Firearm Mortality," 2023</a>; CDC WISQARS</p>
+        <p class="explore-desc">In 2020, firearms became the #1 cause of death for American children and teenagers — surpassing car accidents. US children die from guns at 30 times the rate of peer nations.</p>
+        <div id="explore-pb-child"></div>
+      </div>
+
+      <div class="explore-card">
+        <h5>US Gun Deaths by Type — 2021</h5>
+        <p class="explore-source">Source: <a href="https://www.cdc.gov/injury/wisqars/" target="_blank" rel="noopener">CDC, WISQARS, 2021</a></p>
+        <p class="explore-desc">Of the 48,830 US gun deaths in 2021, more than half were suicides — a fact often absent from the public debate about gun violence.</p>
+        <div id="explore-pb-types"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="poem-about">
+    <div class="container--narrow">
+      <h4>Data Sources</h4>
+      <div class="poem-footnotes">
+        <ol>
+          <li>Graphics treatment by Ingo Muschenetz. Institute for Health Metrics and Evaluation (IHME), Global Burden of Disease, 2021. United Nations population data. Includes all firearm mortality per 100K for high-income economies with populations over 10M.</li>
+          <li>M. McGough, K. Amin, N. Panchal, C. Cox, "Child and Teen Firearm Mortality in the U.S. and Peer Countries," KFF.org, Jul. 2023; CDC, WISQARS.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<script is:inline src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<script is:inline>
+// ── POEM CHART: animate original SVG data bars (expand width from 0) ──
+(function () {
+  var bars = document.querySelectorAll('.pb-data-bar');
+  if (!bars.length) return;
+
+  // Collect rects and their natural widths; start at 0
+  var targets = [];
+  bars.forEach(function (g) {
+    var rect = g.querySelector('rect');
+    if (!rect) return;
+    var origWidth = parseFloat(rect.getAttribute('width'));
+    targets.push({ rect: rect, origWidth: origWidth });
+    rect.setAttribute('width', '0');
+  });
+
+  function animateBars() {
+    var start = null;
+    var duration = 1600;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+      targets.forEach(function (item) {
+        item.rect.setAttribute('width', String(item.origWidth * e));
+      });
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var svg = document.querySelector('.pb-svg-container svg');
+  if (!svg) return;
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      observer.disconnect();
+      animateBars();
+    }
+  }, { threshold: 0.2 });
+  observer.observe(svg);
+})();
+
+// ── EXPLORE CHART 1: International Comparison ─────────────────────────
+(function () {
+  var root = am5.Root.new("explore-pb-intl");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var chart = root.container.children.push(am5xy.XYChart.new(root, {
+    panX: false, panY: false,
+    paddingLeft: 0, paddingRight: 65, paddingTop: 10, paddingBottom: 10,
+  }));
+
+  var yRenderer = am5xy.AxisRendererY.new(root, { inversed: true, minGridDistance: 20 });
+  yRenderer.labels.template.setAll({ fontSize: 11, fill: am5.color(0x555555) });
+  yRenderer.grid.template.setAll({ visible: false });
+
+  var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+    categoryField: "country", renderer: yRenderer,
+  }));
+
+  var xRenderer = am5xy.AxisRendererX.new(root, {});
+  xRenderer.labels.template.setAll({ fontSize: 11, fill: am5.color(0x666666) });
+  xRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3, 3] });
+
+  var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+    min: 0, renderer: xRenderer,
+  }));
+  xAxis.children.push(am5.Label.new(root, {
+    text: "All-cause firearm deaths per 100,000 population",
+    x: am5.p50, centerX: am5.p50, fontSize: 11, fill: am5.color(0x999999), dy: 8,
+  }));
+
+  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+    xAxis, yAxis, valueXField: "value", categoryYField: "country",
+    tooltip: am5.Tooltip.new(root, { labelText: "{country}: {valueX} per 100K" }),
+  }));
+  series.columns.template.setAll({
+    cornerRadiusTR: 2, cornerRadiusBR: 2, strokeOpacity: 0, height: am5.percent(60),
+  });
+  series.columns.template.adapters.add("fill", function (fill, target) {
+    var dc = target.dataItem && target.dataItem.dataContext;
+    return (dc && dc.colorHex) ? am5.color(dc.colorHex) : fill;
+  });
+  series.bullets.push(function () {
+    return am5.Bullet.new(root, { locationX: 1, sprite: am5.Label.new(root, {
+      text: "{valueX}", centerY: am5.p50, centerX: 0, dx: 6, fontSize: 10, populateText: true,
+    }) });
+  });
+
+  var data = [
+    { country: "US",           value: 6.0,  colorHex: 0xD32F2F },
+    { country: "Chile",        value: 4.52, colorHex: 0xcbd5e1 },
+    { country: "Saudi Arabia", value: 3.0,  colorHex: 0xcbd5e1 },
+    { country: "France",       value: 2.7,  colorHex: 0xcbd5e1 },
+    { country: "Canada",       value: 2.1,  colorHex: 0xcbd5e1 },
+    { country: "Italy",        value: 1.4,  colorHex: 0xcbd5e1 },
+    { country: "Sweden",       value: 1.2,  colorHex: 0xcbd5e1 },
+    { country: "Australia",    value: 1.0,  colorHex: 0xcbd5e1 },
+    { country: "Belgium",      value: 0.9,  colorHex: 0xcbd5e1 },
+    { country: "Czechia",      value: 0.9,  colorHex: 0xcbd5e1 },
+    { country: "Germany",      value: 0.9,  colorHex: 0xcbd5e1 },
+    { country: "Greece",       value: 0.8,  colorHex: 0xcbd5e1 },
+    { country: "Portugal",     value: 0.7,  colorHex: 0xcbd5e1 },
+    { country: "Spain",        value: 0.6,  colorHex: 0xcbd5e1 },
+    { country: "Netherlands",  value: 0.5,  colorHex: 0xcbd5e1 },
+    { country: "Poland",       value: 0.5,  colorHex: 0xcbd5e1 },
+    { country: "Taiwan",       value: 0.4,  colorHex: 0xcbd5e1 },
+    { country: "Romania",      value: 0.4,  colorHex: 0xcbd5e1 },
+    { country: "Korea",        value: 0.4,  colorHex: 0xcbd5e1 },
+    { country: "Japan",        value: 0.3,  colorHex: 0xcbd5e1 },
+    { country: "UK",           value: 0.2,  colorHex: 0xcbd5e1 },
+  ];
+  yAxis.data.setAll(data);
+  series.data.setAll(data);
+  series.appear(1000);
+  chart.appear(1000, 100);
+})();
+
+// ── EXPLORE CHART 2: Child & Teen Deaths ─────────────────────────────
+(function () {
+  var root = am5.Root.new("explore-pb-child");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var chart = root.container.children.push(am5xy.XYChart.new(root, {
+    panX: false, panY: false,
+    paddingLeft: 0, paddingRight: 70, paddingTop: 10, paddingBottom: 20,
+  }));
+
+  var yRenderer = am5xy.AxisRendererY.new(root, { inversed: true, minGridDistance: 30 });
+  yRenderer.labels.template.setAll({ fontSize: 13, fill: am5.color(0x555555) });
+  yRenderer.grid.template.setAll({ visible: false });
+
+  var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+    categoryField: "category", renderer: yRenderer,
+  }));
+
+  var xRenderer = am5xy.AxisRendererX.new(root, {});
+  xRenderer.labels.template.setAll({ fontSize: 11, fill: am5.color(0x666666) });
+  xRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3, 3] });
+
+  var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, { min: 0, renderer: xRenderer }));
+  xAxis.children.push(am5.Label.new(root, {
+    text: "Firearm deaths per 100,000 children & teens",
+    x: am5.p50, centerX: am5.p50, fontSize: 11, fill: am5.color(0x999999), dy: 10,
+  }));
+
+  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+    xAxis, yAxis, valueXField: "value", categoryYField: "category",
+    tooltip: am5.Tooltip.new(root, { labelText: "{category}: {valueX} per 100K" }),
+  }));
+  series.columns.template.setAll({
+    cornerRadiusTR: 3, cornerRadiusBR: 3, strokeOpacity: 0, height: am5.percent(50),
+  });
+  series.columns.template.adapters.add("fill", function (fill, target) {
+    var dc = target.dataItem && target.dataItem.dataContext;
+    return (dc && dc.colorHex) ? am5.color(dc.colorHex) : fill;
+  });
+  series.bullets.push(function () {
+    return am5.Bullet.new(root, { locationX: 1, sprite: am5.Label.new(root, {
+      text: "{valueX}", centerY: am5.p50, centerX: 0, dx: 8, fontSize: 13, fontWeight: "500", populateText: true,
+    }) });
+  });
+
+  var data = [
+    { category: "Peer Countries (avg)", value: 0.2, colorHex: 0xcbd5e1 },
+    { category: "United States",        value: 6.0, colorHex: 0xD32F2F },
+  ];
+  yAxis.data.setAll(data);
+  series.data.setAll(data);
+  series.appear(1000);
+  chart.appear(1000, 100);
+})();
+
+// ── EXPLORE CHART 3: US Deaths by Type ───────────────────────────────
+(function () {
+  var root = am5.Root.new("explore-pb-types");
+  root.setThemes([am5themes_Animated.new(root)]);
+  var RED  = am5.color(0xD32F2F);
+  var GRAY = am5.color(0x64748b);
+  var LITE = am5.color(0xcbd5e1);
+
+  var chart = root.container.children.push(am5percent.PieChart.new(root, {
+    innerRadius: am5.percent(60), layout: root.horizontalLayout, paddingRight: 20,
+  }));
+
+  var series = chart.series.push(am5percent.PieSeries.new(root, {
+    valueField: "value", categoryField: "label", alignLabels: false,
+  }));
+  series.labels.template.setAll({ forceHidden: true });
+  series.ticks.template.setAll({ forceHidden: true });
+  series.slices.template.setAll({ stroke: am5.color(0xfaf9f6), strokeWidth: 3 });
+  series.get("colors").set("colors", [RED, GRAY, LITE, am5.color(0xe5e7eb)]);
+
+  series.data.setAll([
+    { label: "Suicide (54%)",             value: 26328 },
+    { label: "Homicide (43%)",            value: 20958 },
+    { label: "Unintentional (1%)",        value: 535   },
+    { label: "Undetermined / Other (2%)", value: 1009  },
+  ]);
+
+  chart.seriesContainer.children.push(am5.Label.new(root, {
+    textAlign: "center", centerY: am5.p50, centerX: am5.p50,
+    text: "[fontSize:28px fontWeight:300]48,830[/]\n[fontSize:11px fill:#999999]total deaths[/]\n[fontSize:11px fill:#999999]in 2021[/]",
+  }));
+
+  var legend = chart.children.push(am5.Legend.new(root, {
+    centerY: am5.p50, y: am5.p50, layout: root.verticalLayout, paddingLeft: 30,
+  }));
+  legend.labels.template.setAll({ fontSize: 13 });
+  legend.data.setAll(series.dataItems);
+  series.appear(1000, 100);
+})();
+</script>
