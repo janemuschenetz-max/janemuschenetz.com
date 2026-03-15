@@ -8,7 +8,7 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
 
 <style>
   .live-hero {
-    padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+    padding: calc(80px + var(--space-xl)) 0 var(--space-sm);
   }
   .live-hero .eyebrow {
     font-size: 0.8rem;
@@ -73,7 +73,6 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
 
   /* Explore section */
   .explore {
-    border-top: 1px solid var(--color-border);
     padding: var(--space-lg) 0;
   }
   .explore h2 {
@@ -140,8 +139,13 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
     z-index: 1;
   }
 
+  .poem-section {
+    padding: var(--space-sm) 0 var(--space-lg);
+  }
+
   /* About */
   .poem-about {
+    border-top: 1px solid var(--color-border);
     padding: var(--space-md) 0 var(--space-lg);
   }
 
@@ -218,7 +222,7 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
   <!-- About -->
   <section class="poem-about">
     <div class="container">
-      <h3>About This Poem</h3>
+      <h2>About This Poem</h2>
       <p>Inspired by a Minute Physics video about thermal energy per unit volume, this poem celebrates human radiance &mdash; &ldquo;pound-for-pound, more Life-Source, more Bomb, more Season-Spinning Searing Center&rdquo; &mdash; than the Sun itself. A resting human body produces roughly 6&times; the thermal energy per unit volume as the Sun&rsquo;s core (276 W/m&sup3;, Bahcall et al.). Only sheer size tips the scales back.</p>
       <p class="mt-sm" style="font-size:0.85rem;color:var(--color-text-secondary);">Data: Henry Reich, Minute Physics; standard solar model; NIH/WHO human metabolic data. Hover any chart element to see exact values.</p>
     </div>

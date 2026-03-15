@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 
 <style>
   .live-hero {
-    padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+    padding: calc(80px + var(--space-xl)) 0 var(--space-sm);
   }
   .live-hero .eyebrow {
     font-size: 0.8rem;
@@ -62,44 +62,110 @@ import Base from '../../layouts/Base.astro';
     margin-right: auto;
   }
 
-  /* ── Explore ────────────────────────────────────────────── */
-  .explore-card {
-    margin-top: 2.5rem;
-    padding: 2rem;
-    background: var(--color-bg-alt);
-    border-radius: 4px;
-  }
-  .explore-card h5 {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 0.35rem;
-  }
-  .explore-source {
-    font-size: 0.8rem !important;
-    color: var(--color-text-secondary) !important;
-    margin-bottom: 0.75rem !important;
-  }
-  .explore-source a { color: var(--color-text-secondary); text-decoration: underline; }
-  .explore-desc {
-    font-size: 0.95rem !important;
-    line-height: 1.7 !important;
-    margin-bottom: 1.5rem !important;
-  }
-  #explore-pb-intl  { width: 100%; height: 520px; }
-  #explore-pb-child { width: 100%; height: 240px; }
-  #explore-pb-types { width: 100%; height: 300px; }
-
+  /* ── About ──────────────────────────────────────────────── */
   .poem-about {
     border-top: 1px solid var(--color-border);
     padding: var(--space-lg) 0;
   }
 
+  /* ── Explore ────────────────────────────────────────────── */
+  .explore {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+  .explore h2 { margin-bottom: 0.25rem; }
+  .explore-intro {
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+    max-width: 560px;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Chart panels */
+  .chart-panel {
+    background: var(--color-bg-alt);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .chart-panel.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .chart-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    margin-bottom: var(--space-sm);
+  }
+  .chart-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  #explore-pb-intl  { width: 100%; height: 520px; }
+  #explore-pb-child { width: 100%; height: 240px; }
+
+  /* Big-number stat block */
+  .stat-block {
+    padding: var(--space-md) 0 var(--space-sm);
+  }
+  .stat-total {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+  .stat-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-top: 0.4rem;
+    margin-bottom: var(--space-md);
+  }
+  .stat-bars { max-width: 560px; }
+  .stat-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 130px;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    font-family: var(--font-body);
+  }
+  .stat-track {
+    height: 10px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .stat-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .stat-pct {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    white-space: nowrap;
+  }
+
   @media (max-width: 600px) {
     #explore-pb-intl  { height: 400px; }
-    #explore-pb-child,
-    #explore-pb-types { height: 240px; }
-    .explore-card { padding: 1.25rem; }
+    #explore-pb-child { height: 240px; }
+    .stat-row { grid-template-columns: 130px 1fr; }
+    .stat-pct { display: none; }
   }
 </style>
 
@@ -326,45 +392,62 @@ import Base from '../../layouts/Base.astro';
     </div>
   </section>
 
-  <section>
-    <div class="container--narrow">
-      <h3>About This Poem</h3>
+  <!-- About -->
+  <section class="poem-about">
+    <div class="container">
+      <h2>About This Poem</h2>
       <p>'Point Blank' renders comprehensive gun violence data inside the silhouette of a handgun, showing the US leads peer nations by orders of magnitude. The poem in the data asks: "Is cost of living more expensive / When guns and lives are cheap?"</p>
       <p class="mt-sm" style="font-size:0.9rem;color:var(--color-text-secondary);">This interactive version animates the bars inside the gun shape. Hover any bar to see the exact figure.</p>
-
-      <h4 class="mt-md">Explore the Data</h4>
-
-      <div class="explore-card">
-        <h5>International Comparison — All Firearm Deaths per 100K, 2021</h5>
-        <p class="explore-source">Source: <a href="https://www.healthdata.org/research-analysis/gbd" target="_blank" rel="noopener">IHME, Global Burden of Disease, 2021</a>; United Nations population data</p>
-        <p class="explore-desc">Comprehensive firearm mortality across high-income nations (population &gt;10M). Includes all causes — homicide, suicide, and unintentional. The US leads every peer nation by orders of magnitude.</p>
-        <div id="explore-pb-intl"></div>
-      </div>
-
-      <div class="explore-card">
-        <h5>Child &amp; Teen Firearm Deaths — US vs. Peer Countries, 2021</h5>
-        <p class="explore-source">Source: <a href="https://www.kff.org/other/issue-brief/child-and-teen-firearm-mortality-in-the-u-s-and-peer-countries/" target="_blank" rel="noopener">KFF, "Child and Teen Firearm Mortality," 2023</a>; CDC WISQARS</p>
-        <p class="explore-desc">In 2020, firearms became the #1 cause of death for American children and teenagers — surpassing car accidents. US children die from guns at 30 times the rate of peer nations.</p>
-        <div id="explore-pb-child"></div>
-      </div>
-
-      <div class="explore-card">
-        <h5>US Gun Deaths by Type — 2021</h5>
-        <p class="explore-source">Source: <a href="https://www.cdc.gov/injury/wisqars/" target="_blank" rel="noopener">CDC, WISQARS, 2021</a></p>
-        <p class="explore-desc">Of the 48,830 US gun deaths in 2021, more than half were suicides — a fact often absent from the public debate about gun violence.</p>
-        <div id="explore-pb-types"></div>
-      </div>
     </div>
   </section>
 
-  <section class="poem-about">
-    <div class="container--narrow">
-      <h4>Data Sources</h4>
-      <div class="poem-footnotes">
-        <ol>
-          <li>Graphics treatment by Ingo Muschenetz. Institute for Health Metrics and Evaluation (IHME), Global Burden of Disease, 2021. United Nations population data. Includes all firearm mortality per 100K for high-income economies with populations over 10M.</li>
-          <li>M. McGough, K. Amin, N. Panchal, C. Cox, "Child and Teen Firearm Mortality in the U.S. and Peer Countries," KFF.org, Jul. 2023; CDC, WISQARS.</li>
-        </ol>
+  <!-- Explore the Data -->
+  <section class="explore">
+    <div class="container">
+      <h2>Explore the Data</h2>
+      <p class="explore-intro">The three datasets behind 'Point Blank' — international firearm mortality, child deaths, and breakdown by type.</p>
+
+      <div class="chart-panel" id="panel-pb-intl">
+        <p class="chart-label">International Comparison — All Firearm Deaths per 100K, 2021</p>
+        <div id="explore-pb-intl"></div>
+        <p class="chart-note">Source: <a href="https://www.healthdata.org/research-analysis/gbd" target="_blank" rel="noopener">IHME, Global Burden of Disease, 2021</a>; United Nations population data. Comprehensive firearm mortality across high-income nations (population &gt;10M). Includes all causes — homicide, suicide, and unintentional.</p>
+      </div>
+
+      <div class="chart-panel" id="panel-pb-child">
+        <p class="chart-label">Child &amp; Teen Firearm Deaths — US vs. Peer Countries, 2021</p>
+        <div id="explore-pb-child"></div>
+        <p class="chart-note">Source: <a href="https://www.kff.org/other/issue-brief/child-and-teen-firearm-mortality-in-the-u-s-and-peer-countries/" target="_blank" rel="noopener">KFF, "Child and Teen Firearm Mortality," 2023</a>; CDC WISQARS. In 2020, firearms became the #1 cause of death for American children and teenagers — surpassing car accidents.</p>
+      </div>
+
+      <div class="chart-panel visible" id="panel-pb-types">
+        <p class="chart-label">US Gun Deaths by Type — 2021</p>
+        <div class="stat-block">
+          <div class="stat-total">48,830</div>
+          <div class="stat-subtitle">total gun deaths in 2021</div>
+          <div class="stat-bars">
+            <div class="stat-row">
+              <span class="stat-label">Suicide</span>
+              <div class="stat-track"><div class="stat-fill" style="width:54%;background:#D32F2F;"></div></div>
+              <span class="stat-pct">54% &mdash; 26,328</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Homicide</span>
+              <div class="stat-track"><div class="stat-fill" style="width:43%;background:#64748b;"></div></div>
+              <span class="stat-pct">43% &mdash; 20,958</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Unintentional</span>
+              <div class="stat-track"><div class="stat-fill" style="width:1%;background:#cbd5e1;"></div></div>
+              <span class="stat-pct">1% &mdash; 535</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Other / Undetermined</span>
+              <div class="stat-track"><div class="stat-fill" style="width:2%;background:#e5e7eb;"></div></div>
+              <span class="stat-pct">2% &mdash; 1,009</span>
+            </div>
+          </div>
+        </div>
+        <p class="chart-note">Source: <a href="https://www.cdc.gov/injury/wisqars/" target="_blank" rel="noopener">CDC, WISQARS, 2021</a>. More than half of all gun deaths are suicides — a fact often absent from the public debate about gun violence.</p>
       </div>
     </div>
   </section>
@@ -418,8 +501,32 @@ import Base from '../../layouts/Base.astro';
   observer.observe(svg);
 })();
 
-// ── EXPLORE CHART 1: International Comparison ─────────────────────────
+// ── Scroll-triggered explore chart initialization ──────────────────────
 (function () {
+  var panels = {
+    "panel-pb-intl":  initIntl,
+    "panel-pb-child": initChild,
+  };
+  var initialized = {};
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        entry.target.classList.add("visible");
+        if (!initialized[id] && panels[id]) {
+          initialized[id] = true;
+          panels[id]();
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+  Object.keys(panels).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // ── EXPLORE CHART 1: International Comparison ─────────────────────────
+  function initIntl() {
   var root = am5.Root.new("explore-pb-intl");
   root.setThemes([am5themes_Animated.new(root)]);
 
@@ -492,10 +599,10 @@ import Base from '../../layouts/Base.astro';
   series.data.setAll(data);
   series.appear(1000);
   chart.appear(1000, 100);
-})();
+  } // end initIntl
 
-// ── EXPLORE CHART 2: Child & Teen Deaths ─────────────────────────────
-(function () {
+  // ── EXPLORE CHART 2: Child & Teen Deaths ─────────────────────────────
+  function initChild() {
   var root = am5.Root.new("explore-pb-child");
   root.setThemes([am5themes_Animated.new(root)]);
 
@@ -547,45 +654,7 @@ import Base from '../../layouts/Base.astro';
   series.data.setAll(data);
   series.appear(1000);
   chart.appear(1000, 100);
-})();
+  } // end initChild
 
-// ── EXPLORE CHART 3: US Deaths by Type ───────────────────────────────
-(function () {
-  var root = am5.Root.new("explore-pb-types");
-  root.setThemes([am5themes_Animated.new(root)]);
-  var RED  = am5.color(0xD32F2F);
-  var GRAY = am5.color(0x64748b);
-  var LITE = am5.color(0xcbd5e1);
-
-  var chart = root.container.children.push(am5percent.PieChart.new(root, {
-    innerRadius: am5.percent(60), layout: root.horizontalLayout, paddingRight: 20,
-  }));
-
-  var series = chart.series.push(am5percent.PieSeries.new(root, {
-    valueField: "value", categoryField: "label", alignLabels: false,
-  }));
-  series.labels.template.setAll({ forceHidden: true });
-  series.ticks.template.setAll({ forceHidden: true });
-  series.slices.template.setAll({ stroke: am5.color(0xfaf9f6), strokeWidth: 3 });
-  series.get("colors").set("colors", [RED, GRAY, LITE, am5.color(0xe5e7eb)]);
-
-  series.data.setAll([
-    { label: "Suicide (54%)",             value: 26328 },
-    { label: "Homicide (43%)",            value: 20958 },
-    { label: "Unintentional (1%)",        value: 535   },
-    { label: "Undetermined / Other (2%)", value: 1009  },
-  ]);
-
-  chart.seriesContainer.children.push(am5.Label.new(root, {
-    textAlign: "center", centerY: am5.p50, centerX: am5.p50,
-    text: "[fontSize:28px fontWeight:300]48,830[/]\n[fontSize:11px fill:#999999]total deaths[/]\n[fontSize:11px fill:#999999]in 2021[/]",
-  }));
-
-  var legend = chart.children.push(am5.Legend.new(root, {
-    centerY: am5.p50, y: am5.p50, layout: root.verticalLayout, paddingLeft: 30,
-  }));
-  legend.labels.template.setAll({ fontSize: 13 });
-  legend.data.setAll(series.dataItems);
-  series.appear(1000, 100);
-})();
+})(); // end scroll-trigger IIFE
 </script>

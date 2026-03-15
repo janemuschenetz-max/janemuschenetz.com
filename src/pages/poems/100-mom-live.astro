@@ -1,10 +1,22 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+function loadSvg(file: string) {
+  return readFileSync(join(process.cwd(), file), 'utf-8')
+    .replace(/<\?xml[^?]*\?>/g, '')
+    .replace(/<!DOCTYPE[^>]*>/g, '')
+    .replace(/MillerText-Roman/g, 'miller-text')
+    .replace(/MillerText-Italic/g, 'miller-text')
+    .trim();
+}
+const momSvg = loadSvg('src/assets/mom2.svg');
 ---
 
 <style>
   .live-hero {
-    padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+    padding: calc(80px + var(--space-xl)) 0 var(--space-sm);
   }
   .live-hero .eyebrow {
     font-size: 0.8rem;
@@ -29,62 +41,28 @@ import Base from '../../layouts/Base.astro';
     color: var(--color-text-secondary);
   }
 
-  /* ── Slide text ─────────────────────────────────────────── */
-  .slide {
-    padding: var(--space-lg) 0 var(--space-md);
-  }
-  .slide-n {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    margin-bottom: 0.75rem;
-    font-family: var(--font-body);
-  }
-  .slide-text {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.45rem);
-    line-height: 1.65;
-    max-width: 640px;
-  }
+  /* ── Animated SVG poem ──────────────────────────────────── */
+  .poem-section { padding: var(--space-md) 0 var(--space-lg); }
+  .mom-svg-panel { width: 100%; overflow: hidden; }
+  .mom-svg-panel svg { width: 100%; height: auto; display: block; }
 
-  /* ── Chart panels ────────────────────────────────────────── */
-  .chart-panel {
-    background: var(--color-bg-alt);
-    border-radius: 4px;
-    padding: var(--space-md) var(--space-md) var(--space-sm);
-    margin-bottom: var(--space-md);
+  /* Stanzas start hidden; JS adds opacity:1 via inline style.
+     :global() needed because these live inside an inlined SVG Fragment. */
+  :global(.mt-stanza-1), :global(.mt-stanza-2), :global(.mt-stanza-3),
+  :global(.mt-stanza-4), :global(.mt-stanza-5) {
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 1s ease;
   }
-  .chart-panel.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .chart-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    font-family: var(--font-body);
-    margin-bottom: var(--space-sm);
-  }
-  #chart-mortality   { width: 100%; height: 340px; }
-  #chart-preventable { width: 100%; height: 280px; }
-  #chart-race        { width: 100%; height: 300px; }
-  #chart-workforce   { width: 100%; height: 320px; }
 
   /* ── Explorer section ───────────────────────────────────── */
-  .explorer {
+  .explore {
     border-top: 1px solid var(--color-border);
     padding: var(--space-xl) 0;
   }
-  .explorer h2 {
+  .explore h2 {
     margin-bottom: 0.25rem;
   }
-  .explorer-intro {
+  .explore-intro {
     color: var(--color-text-secondary);
     margin-bottom: var(--space-lg);
     max-width: 560px;
@@ -168,10 +146,6 @@ import Base from '../../layouts/Base.astro';
     padding: var(--space-lg) 0;
   }
 
-  @media (max-width: 600px) {
-    #chart-mortality, #chart-race, #chart-workforce { height: 260px; }
-    #chart-preventable { height: 240px; }
-  }
 </style>
 
 <Base title="100% Mom (Live) — Jane Muschenetz" description="An animated, interactive data poem on maternal mortality and workforce inequality.">
@@ -188,71 +162,28 @@ import Base from '../../layouts/Base.astro';
     </div>
   </section>
 
-  <section>
+  <!-- Animated SVG poem -->
+  <section class="poem-section">
     <div class="container">
-
-      <!-- Slide 1 -->
-      <div class="slide">
-        <p class="slide-n">1</p>
-        <p class="slide-text">Moms are 5 times more likely to die giving birth in the US<br>than moms in other, 'equally developed' lands.</p>
+      <div class="mom-svg-panel" id="panel-mom">
+        <Fragment set:html={momSvg} />
       </div>
+    </div>
+  </section>
 
-      <!-- Chart 1: Maternal Mortality -->
-      <div class="chart-panel" id="panel-mortality">
-        <p class="chart-label">Maternal Mortality Ratio — Deaths per 100,000 Live Births, 2020</p>
-        <div id="chart-mortality"></div>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="slide">
-        <p class="slide-n">2</p>
-        <p class="slide-text">Some of these moms we can't save, but most, we can.</p>
-      </div>
-
-      <!-- Chart 2: Preventable -->
-      <div class="chart-panel" id="panel-preventable">
-        <p class="chart-label">US Pregnancy-Related Deaths — Preventability, 2020</p>
-        <div id="chart-preventable"></div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="slide">
-        <p class="slide-n">3</p>
-        <p class="slide-text">Black and Hispanic moms die more frequently than do White.<br>We study this, make charts / policies, and write</p>
-      </div>
-
-      <!-- Chart 3: Race -->
-      <div class="chart-panel" id="panel-race">
-        <p class="chart-label">US Maternal Mortality Rate by Race/Ethnicity — Per 100,000 Live Births, 2020</p>
-        <div id="chart-race"></div>
-      </div>
-
-      <!-- Slide 4 -->
-      <div class="slide">
-        <p class="slide-n">4</p>
-        <p class="slide-text">about labor (paid and unpaid), status, values of the hour…</p>
-      </div>
-
-      <!-- Chart 4: Workforce -->
-      <div class="chart-panel" id="panel-workforce">
-        <p class="chart-label">Global Workforce by Gender — 2020</p>
-        <div id="chart-workforce"></div>
-      </div>
-
-      <!-- Slide 5 -->
-      <div class="slide">
-        <p class="slide-n">5</p>
-        <p class="slide-text">What is the "real cost" of good?<br>Is knowledge power?</p>
-      </div>
-
+  <!-- About -->
+  <section class="poem-about">
+    <div class="container">
+      <h2>About This Poem</h2>
+      <p>'100% Mom' renders maternal mortality, unpaid labor, and workforce inequality through charts created in Microsoft PowerPoint. The data reveals that US moms are 5 times more likely to die giving birth than mothers in other developed nations, while women bear 60–75% of unpaid labor. This interactive version animates those charts in the browser.</p>
     </div>
   </section>
 
   <!-- Explorer -->
-  <section class="explorer">
+  <section class="explore">
     <div class="container">
       <h2>Explore the Data</h2>
-      <p class="explorer-intro">The underlying datasets behind the poem. Sort, compare, and explore the numbers directly.</p>
+      <p class="explore-intro">The underlying datasets behind the poem. Sort, compare, and explore the numbers directly.</p>
 
       <div class="dataset-tabs">
         <button class="tab-btn active" data-tab="mortality">Maternal Mortality</button>
@@ -339,355 +270,124 @@ import Base from '../../layouts/Base.astro';
     </div>
   </section>
 
-  <!-- About -->
-  <section class="poem-about">
-    <div class="container--narrow">
-      <h3>About This Poem</h3>
-      <p>'100% Mom' renders maternal mortality, unpaid labor, and workforce inequality through charts created in Microsoft PowerPoint. The data reveals that US moms are 5 times more likely to die giving birth than mothers in other developed nations, while women bear 60–75% of unpaid labor. This interactive version animates those charts in the browser.</p>
-      <h4 class="mt-md">Data Sources</h4>
-      <div class="poem-footnotes">
-        <ol>
-          <li>"Life Stages and Populations by Sex," CDC, NCHS; "Most pregnancy-related deaths are preventable," Hear Her Campaign, CDC, 2022; "The U.S. Maternal Mortality Crisis Continues to Worsen: An International Comparison," Commonwealth Fund, 2022; "The World's Women 2020 Trends and Statistics," United Nations; "Women Work More, But are Still Paid Less," Intl. Labor Organization Report, 2022.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
 
-<!-- ── AMCharts 5 ─────────────────────────────────────────────────────── -->
-<script is:inline src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script is:inline src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script is:inline src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-<script is:inline src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<!-- ── SVG animation ──────────────────────────────────────────────────── -->
 <script is:inline>
-
-const MAUVE      = am5.color(0xc4a8bc);
-const MAUVE_DARK = am5.color(0x9b7aaa);
-const MAUVE_LITE = am5.color(0xe0d0dc);
-const NEUTRAL    = am5.color(0xb8b8b8);
-const BG         = am5.color(0xF0EFEB);
-
-// ── Intersection Observer: init charts on scroll ──────────────────────
-const panels = {
-  "panel-mortality":   initMortality,
-  "panel-preventable": initPreventable,
-  "panel-race":        initRace,
-  "panel-workforce":   initWorkforce,
-};
-const initialized = new Set();
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      entry.target.classList.add("visible");
-      if (!initialized.has(id) && panels[id]) {
-        initialized.add(id);
-        panels[id]();
-      }
+(function () {
+  // ── SVG arc sector path builder ──────────────────────────────────────
+  function sectorPath(cx, cy, r, startDeg, endDeg) {
+    var span = endDeg - startDeg;
+    if (Math.abs(span) < 0.05) {
+      var s0 = startDeg * Math.PI / 180;
+      return 'M ' + cx + ' ' + cy + ' L ' + (cx + r * Math.cos(s0)).toFixed(2) + ' ' + (cy + r * Math.sin(s0)).toFixed(2) + ' Z';
     }
-  });
-}, { threshold: 0.15 });
+    var s = startDeg * Math.PI / 180;
+    var e = endDeg   * Math.PI / 180;
+    var x1 = (cx + r * Math.cos(s)).toFixed(2);
+    var y1 = (cy + r * Math.sin(s)).toFixed(2);
+    var x2 = (cx + r * Math.cos(e)).toFixed(2);
+    var y2 = (cy + r * Math.sin(e)).toFixed(2);
+    var large = (Math.abs(span) > 180) ? 1 : 0;
+    return 'M ' + cx + ' ' + cy + ' L ' + x1 + ' ' + y1 + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + x2 + ' ' + y2 + ' Z';
+  }
 
-Object.keys(panels).forEach(id => {
-  const el = document.getElementById(id);
-  if (el) observer.observe(el);
-});
+  // ── Collect targets ───────────────────────────────────────────────────
+  var targets = [];
+  var panel = document.querySelector('#panel-mom');
+  if (!panel) return;
 
-// ── Chart 1: Maternal Mortality by Country ────────────────────────────
-function initMortality() {
-  const root = am5.Root.new("chart-mortality");
-  root.setThemes([am5themes_Animated.new(root)]);
+  // SVG midpoint — left = first M (group 0), pie = O (group 1), right = last M (group 2)
+  var MID = 5312;
 
-  const chart = root.container.children.push(am5xy.XYChart.new(root, {
-    panX: false, panY: false,
-    wheelX: "none", wheelY: "none",
-    paddingLeft: 0, paddingRight: 10,
-  }));
-
-  chart.get("colors").set("colors", [MAUVE_LITE, MAUVE_LITE, MAUVE_LITE, MAUVE_LITE, MAUVE_LITE, MAUVE_LITE, MAUVE_DARK]);
-
-  const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
-  xRenderer.labels.template.setAll({ fontSize: 12, fill: am5.color(0x666666) });
-  xRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1 });
-
-  const xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-    categoryField: "country",
-    renderer: xRenderer,
-  }));
-
-  const yRenderer = am5xy.AxisRendererY.new(root, {});
-  yRenderer.labels.template.setAll({ fontSize: 12, fill: am5.color(0x666666) });
-  yRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3,3] });
-
-  const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-    min: 0,
-    strictMinMax: true,
-    renderer: yRenderer,
-  }));
-
-  yAxis.children.unshift(am5.Label.new(root, {
-    rotation: -90, y: am5.p50, centerX: am5.p50,
-    text: "Deaths per 100,000 live births",
-    fontSize: 11, fill: am5.color(0x999999),
-  }));
-
-  const series = chart.series.push(am5xy.ColumnSeries.new(root, {
-    xAxis, yAxis,
-    valueYField: "value",
-    categoryXField: "country",
-    tooltip: am5.Tooltip.new(root, {
-      labelText: "{categoryX}: {valueY} per 100k",
-    }),
-  }));
-
-  series.columns.template.setAll({
-    cornerRadiusTL: 3, cornerRadiusTR: 3,
-    strokeOpacity: 0,
-    width: am5.percent(70),
-  });
-  series.columns.template.adapters.add("fill", function(fill, target) {
-    return target.dataItem.dataContext.color;
+  panel.querySelectorAll('.mt-bar').forEach(function (rect) {
+    var h = parseFloat(rect.getAttribute('height'));
+    var y = parseFloat(rect.getAttribute('y'));
+    var x = parseFloat(rect.getAttribute('x'));
+    var group = x < MID ? 0 : 2;
+    targets.push({ el: rect, kind: 'v', targetH: h, bottom: y + h, group: group });
+    rect.setAttribute('height', 0);
+    rect.setAttribute('y', y + h);
   });
 
-  series.bullets.push(() => am5.Bullet.new(root, {
-    locationY: 1,
-    sprite: am5.Label.new(root, {
-      text: "{valueY}",
-      centerY: am5.p100, centerX: am5.p50,
-      dy: -6, fontSize: 12,
-      populateText: true,
-    }),
-  }));
-
-  const data = [
-    { country: "Norway",        value: 2,  color: MAUVE_LITE },
-    { country: "Netherlands",   value: 3,  color: MAUVE_LITE },
-    { country: "Germany",       value: 4,  color: MAUVE_LITE },
-    { country: "Canada",        value: 8,  color: MAUVE_LITE },
-    { country: "France",        value: 8,  color: MAUVE_LITE },
-    { country: "UK",            value: 10, color: MAUVE_LITE },
-    { country: "United States", value: 24, color: MAUVE_DARK },
-  ];
-
-  xAxis.data.setAll(data);
-  series.data.setAll(data);
-  series.appear(1000);
-  chart.appear(1000, 100);
-}
-
-// ── Chart 2: Preventable Deaths (Donut) ──────────────────────────────
-function initPreventable() {
-  const root = am5.Root.new("chart-preventable");
-  root.setThemes([am5themes_Animated.new(root)]);
-
-  const chart = root.container.children.push(am5percent.PieChart.new(root, {
-    innerRadius: am5.percent(65),
-    layout: root.horizontalLayout,
-  }));
-
-  const series = chart.series.push(am5percent.PieSeries.new(root, {
-    valueField: "value",
-    categoryField: "label",
-    alignLabels: false,
-  }));
-
-  series.labels.template.setAll({ forceHidden: true });
-  series.ticks.template.setAll({ forceHidden: true });
-  series.slices.template.setAll({ stroke: am5.color(0xfaf9f6), strokeWidth: 3 });
-  series.get("colors").set("colors", [MAUVE_DARK, MAUVE_LITE]);
-
-  series.data.setAll([
-    { label: "Preventable (84%)", value: 84 },
-    { label: "Not preventable (16%)", value: 16 },
-  ]);
-
-  // Center label
-  chart.seriesContainer.children.push(am5.Label.new(root, {
-    textAlign: "center",
-    centerY: am5.p50, centerX: am5.p50,
-    text: "[fontSize:36px fontWeight:300]84%[/]\n[fontSize:11px fill:#999999]preventable[/]",
-  }));
-
-  // Legend
-  const legend = chart.children.push(am5.Legend.new(root, {
-    centerY: am5.p50, y: am5.p50,
-    layout: root.verticalLayout,
-    paddingLeft: 30,
-  }));
-  legend.labels.template.setAll({ fontSize: 13 });
-  legend.data.setAll(series.dataItems);
-
-  series.appear(1000, 100);
-}
-
-// ── Chart 3: Maternal Mortality by Race ──────────────────────────────
-function initRace() {
-  const root = am5.Root.new("chart-race");
-  root.setThemes([am5themes_Animated.new(root)]);
-
-  const chart = root.container.children.push(am5xy.XYChart.new(root, {
-    panX: false, panY: false,
-    wheelX: "none", wheelY: "none",
-    paddingLeft: 0, paddingRight: 10,
-    layout: root.verticalLayout,
-  }));
-
-  const yRenderer = am5xy.AxisRendererY.new(root, { inversed: false, minGridDistance: 20 });
-  yRenderer.labels.template.setAll({ fontSize: 13, fill: am5.color(0x555555) });
-  yRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3,3] });
-
-  const yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
-    categoryField: "race",
-    renderer: yRenderer,
-  }));
-
-  const xRenderer = am5xy.AxisRendererX.new(root, {});
-  xRenderer.labels.template.setAll({ fontSize: 12, fill: am5.color(0x666666) });
-  xRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3,3] });
-
-  const xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
-    min: 0, renderer: xRenderer,
-  }));
-
-  xAxis.children.push(am5.Label.new(root, {
-    text: "Deaths per 100,000 live births",
-    x: am5.p50, centerX: am5.p50,
-    fontSize: 11, fill: am5.color(0x999999),
-    dy: 8,
-  }));
-
-  const series = chart.series.push(am5xy.ColumnSeries.new(root, {
-    xAxis, yAxis,
-    valueXField: "value",
-    categoryYField: "race",
-    tooltip: am5.Tooltip.new(root, { labelText: "{categoryY}: {valueX} per 100k" }),
-  }));
-
-  series.columns.template.setAll({
-    cornerRadiusTR: 3, cornerRadiusBR: 3,
-    strokeOpacity: 0,
-    height: am5.percent(55),
-  });
-  series.columns.template.adapters.add("fill", function(fill, target) {
-    return target.dataItem.dataContext.color;
+  panel.querySelectorAll('.mt-pie').forEach(function (path) {
+    var cx    = parseFloat(path.dataset.cx);
+    var cy    = parseFloat(path.dataset.cy);
+    var r     = parseFloat(path.dataset.r);
+    var start = parseFloat(path.dataset.start);
+    var end   = parseFloat(path.dataset.end);
+    targets.push({ el: path, kind: 'pie', cx: cx, cy: cy, r: r, start: start, end: end, group: 1 });
+    path.setAttribute('d', sectorPath(cx, cy, r, start, start));
   });
 
-  series.bullets.push(() => am5.Bullet.new(root, {
-    locationX: 1,
-    sprite: am5.Label.new(root, {
-      text: "{valueX}",
-      centerY: am5.p50, centerX: 0,
-      dx: 8, fontSize: 12,
-      populateText: true,
-    }),
-  }));
-
-  const data = [
-    { race: "Hispanic", value: 18.2, color: MAUVE_LITE },
-    { race: "White",    value: 19.1, color: MAUVE_LITE },
-    { race: "Black",    value: 55.3, color: MAUVE_DARK },
-  ];
-
-  yAxis.data.setAll(data);
-  series.data.setAll(data);
-  series.appear(1000);
-  chart.appear(1000, 100);
-}
-
-// ── Chart 4: Global Workforce ─────────────────────────────────────────
-function initWorkforce() {
-  const root = am5.Root.new("chart-workforce");
-  root.setThemes([am5themes_Animated.new(root)]);
-
-  const chart = root.container.children.push(am5xy.XYChart.new(root, {
-    panX: false, panY: false,
-    wheelX: "none", wheelY: "none",
-    paddingLeft: 0, paddingRight: 10,
-    layout: root.verticalLayout,
-  }));
-
-  const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 40 });
-  xRenderer.labels.template.setAll({ fontSize: 12, fill: am5.color(0x666666) });
-  xRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3,3] });
-
-  const xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-    categoryField: "category",
-    renderer: xRenderer,
-  }));
-
-  const yRenderer = am5xy.AxisRendererY.new(root, {});
-  yRenderer.labels.template.setAll({ fontSize: 12, fill: am5.color(0x666666) });
-  yRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3,3] });
-
-  const yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-    min: 0, max: 100,
-    strictMinMax: true,
-    renderer: yRenderer,
-  }));
-
-  yAxis.children.unshift(am5.Label.new(root, {
-    rotation: -90, y: am5.p50, centerX: am5.p50,
-    text: "% Women", fontSize: 11, fill: am5.color(0x999999),
-  }));
-
-  // 50% reference line
-  const range = yAxis.makeDataItem({ value: 50 });
-  yAxis.createAxisRange(range);
-  range.get("grid").setAll({
-    stroke: am5.color(0x999999), strokeWidth: 1, strokeDasharray: [4,4],
-  });
-  range.get("label").setAll({
-    text: "50%", fill: am5.color(0x999999), fontSize: 10,
-    location: 1, inside: true, dy: -4,
+  panel.querySelectorAll('.mt-path-bar').forEach(function (path) {
+    var bb = path.getBBox();
+    var bottom = bb.y + bb.height;
+    var startX = parseFloat((path.getAttribute('d').match(/M([\d.]+)/) || [])[1] || 0);
+    var group = startX < MID ? 0 : 2;
+    targets.push({ el: path, kind: 'path', bottom: bottom, group: group });
+    path.setAttribute('transform', 'translate(0,' + bottom + ') scale(1,0) translate(0,' + (-bottom) + ')');
   });
 
-  const mkSeries = (name, field, color) => {
-    const s = chart.series.push(am5xy.ColumnSeries.new(root, {
-      name, xAxis, yAxis,
-      valueYField: field,
-      categoryXField: "category",
-      tooltip: am5.Tooltip.new(root, { labelText: `${name}: {valueY}%` }),
-    }));
-    s.columns.template.setAll({
-      width: am5.percent(40),
-      cornerRadiusTL: 3, cornerRadiusTR: 3,
-      fill: color, stroke: color, strokeOpacity: 0,
+  // ── Stanza fade-in setup ──────────────────────────────────────────────
+  var stanzaGroups = [];
+  for (var n = 1; n <= 5; n++) {
+    var els = panel.querySelectorAll('.mt-stanza-' + n);
+    stanzaGroups.push(els);
+  }
+
+  // ── Animator: groups animate in turn — first M (0), O (1), last M (2) ─
+  function animate() {
+    var t0 = null;
+    var dur = 1400;   // duration per group (ms)
+    var gap = 300;    // pause between groups (ms)
+    var groupDelay = [0, dur + gap, (dur + gap) * 2];
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var elapsed = ts - t0;
+      var allDone = true;
+      targets.forEach(function (item) {
+        var local = elapsed - groupDelay[item.group];
+        if (local <= 0) { allDone = false; return; }
+        var p = Math.min(local / dur, 1);
+        if (p < 1) allDone = false;
+        var e = 1 - Math.pow(1 - p, 3);
+        if (item.kind === 'v') {
+          var h = item.targetH * e;
+          item.el.setAttribute('height', h);
+          item.el.setAttribute('y', item.bottom - h);
+        } else if (item.kind === 'pie') {
+          var currentEnd = item.start + (item.end - item.start) * e;
+          item.el.setAttribute('d', sectorPath(item.cx, item.cy, item.r, item.start, currentEnd));
+        } else if (item.kind === 'path') {
+          item.el.setAttribute('transform', 'translate(0,' + item.bottom + ') scale(1,' + e + ') translate(0,' + (-item.bottom) + ')');
+        }
+      });
+      if (!allDone) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    // Fade in each stanza group in order, 2 seconds apart
+    stanzaGroups.forEach(function (els, i) {
+      setTimeout(function () {
+        els.forEach(function (g) { g.style.opacity = '1'; });
+      }, i * 2000);
     });
-    s.bullets.push(() => am5.Bullet.new(root, {
-      locationY: 1,
-      sprite: am5.Label.new(root, {
-        text: "{valueY}%",
-        centerY: am5.p100, centerX: am5.p50,
-        dy: -6, fontSize: 11,
-        populateText: true,
-      }),
-    }));
-    return s;
-  };
+  }
 
-  const seriesW = mkSeries("Women", "women", MAUVE_DARK);
-  const seriesM = mkSeries("Men",   "men",   NEUTRAL);
-
-  const legend = chart.children.push(am5.Legend.new(root, {
-    centerX: am5.p50, x: am5.p50,
-  }));
-  legend.labels.template.setAll({ fontSize: 12 });
-  legend.data.setAll([seriesW, seriesM]);
-
-  const data = [
-    { category: "Unpaid Labor",      women: 75, men: 25 },
-    { category: "Low-wage Workers",  women: 60, men: 40 },
-    { category: "Senior Management", women: 28, men: 72 },
-  ];
-
-  xAxis.data.setAll(data);
-  seriesW.data.setAll(data);
-  seriesM.data.setAll(data);
-  seriesW.appear(1000);
-  seriesM.appear(1200);
-  chart.appear(1000, 100);
-}
+  // ── IntersectionObserver ──────────────────────────────────────────────
+  if (!targets.length && !stanzaGroups.some(function(g) { return g.length; })) return;
+  var svg = panel.querySelector('svg');
+  if (!svg) return;
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      obs.disconnect();
+      animate();
+    }
+  }, { threshold: 0.15 });
+  obs.observe(svg);
+})();
 </script>
+
 
 <!-- ── Tab switching + bar animation ─────────────────────────────────── -->
 <script is:inline>

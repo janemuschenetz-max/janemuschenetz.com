@@ -3,29 +3,22 @@ import Base from '../../layouts/Base.astro';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-// Inline both SVGs at build time — strip XML/DOCTYPE and substitute missing fonts
+// Inline both SVGs at build time (strip XML declaration & DOCTYPE)
 function loadSvg(file: string) {
   return readFileSync(join(process.cwd(), file), 'utf-8')
     .replace(/<\?xml[^?]*\?>/g, '')
     .replace(/<!DOCTYPE[^>]*>/g, '')
-    // MillerText-Roman / Miller Text is not loaded; replace with the site heading font
-    .replace(/font-family:'MillerText-Roman', 'Miller Text'/g,
-             "font-family:'Playfair Display', Georgia, serif")
-    // Italic variant — preserve font-style if already set, just swap family
-    .replace(/font-family:'MillerText-Italic', 'Miller Text'/g,
-             "font-family:'Playfair Display', Georgia, serif")
-    // Didot (used in meetoo_1.svg titles) → Playfair Display
-    .replace(/font-family:'Didot-Bold', 'Didot'/g,
-             "font-family:'Playfair Display', Georgia, serif")
+    .replace(/MillerText-Roman/g, 'miller-text')
+    .replace(/MillerText-Italic/g, 'miller-text')
     .trim();
 }
-const meSvg  = loadSvg('me.svg');
-const tooSvg = loadSvg('too.svg');
+const meSvg  = loadSvg('src/assets/me2.svg');
+const tooSvg = loadSvg('src/assets/too2.svg');
 ---
 
 <style>
   .live-hero {
-    padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+    padding: calc(80px + var(--space-xl)) 0 var(--space-sm);
   }
   .live-hero .eyebrow {
     font-size: 0.8rem;
@@ -50,43 +43,17 @@ const tooSvg = loadSvg('too.svg');
     color: var(--color-text-secondary);
   }
 
-  /* ── Poem slides ─────────────────────────────────────────── */
-  .slides {
-    padding: var(--space-lg) 0 var(--space-xl);
-  }
-  .slide {
-    padding: var(--space-md) 0;
-    border-top: 1px solid var(--color-border);
-  }
-  .slide:first-child { border-top: none; }
-  .slide-n {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    margin-bottom: 0.5rem;
-    font-family: var(--font-body);
-  }
-  .slide-text {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: clamp(1.1rem, 2vw, 1.45rem);
-    line-height: 1.65;
-    max-width: 640px;
+  /* ── SVG poem stanza text — hidden until animated in ────── */
+  :global(.mt-stanza-m),
+  :global(.mt-stanza-e),
+  :global(.mt-stanza-final),
+  :global(.mt-stanza-isnt) {
+    opacity: 0;
+    transition: opacity 1.2s ease;
   }
 
   /* ── SVG charts stacked vertically ──────────────────────── */
   .poem-section { padding: var(--space-md) 0 var(--space-lg); }
-
-  .poem-epigraph {
-    font-family: var(--font-heading);
-    font-style: italic;
-    font-size: clamp(0.88rem, 1.4vw, 1rem);
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    margin-bottom: 1.25rem;
-    max-width: 640px;
-  }
 
   .mt-svg-stack {
     width: 100%;
@@ -103,7 +70,13 @@ const tooSvg = loadSvg('too.svg');
     display: block;
   }
 
-  /* ── Data sources ────────────────────────────────────────── */
+  /* ── About ──────────────────────────────────────────────── */
+  .poem-about {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+
+  /* ── Explore section ─────────────────────────────────────── */
   .explore {
     border-top: 1px solid var(--color-border);
     padding: var(--space-lg) 0 var(--space-xl);
@@ -115,45 +88,90 @@ const tooSvg = loadSvg('too.svg');
     max-width: 560px;
     margin-bottom: var(--space-lg);
   }
-  .data-sources {
-    margin-top: var(--space-lg);
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-sm);
-  }
-  .data-source-card {
-    display: block;
+
+  /* Chart panels */
+  .chart-panel {
     background: var(--color-bg-alt);
     border-radius: 4px;
-    padding: var(--space-sm) var(--space-md);
-    border-left: 3px solid var(--color-border);
-    text-decoration: none;
-    transition: border-color 0.2s;
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .data-source-card:hover { border-left-color: var(--color-text); }
-  .data-source-card .source-org {
-    font-size: 0.68rem;
+  .chart-panel.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .chart-label {
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
     font-family: var(--font-body);
-    margin-bottom: 0.3rem;
+    margin-bottom: var(--space-sm);
   }
-  .data-source-card .source-title {
-    font-size: 0.88rem;
-    line-height: 1.4;
-    color: var(--color-text);
-  }
-  .data-source-card .source-year {
+  .chart-note {
     font-size: 0.75rem;
     color: var(--color-text-secondary);
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  #chart-mt-prevalence { width: 100%; height: 320px; }
+
+  /* Big-number stat block */
+  .stat-block {
+    padding: var(--space-md) 0 var(--space-sm);
+  }
+  .stat-total {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+  .stat-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-top: 0.4rem;
+    max-width: 480px;
+  }
+  .stat-bars { max-width: 560px; }
+  .stat-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 80px;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    font-family: var(--font-body);
+  }
+  .stat-track {
+    height: 10px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .stat-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .stat-pct {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    white-space: nowrap;
   }
 
-  /* ── About ──────────────────────────────────────────────── */
-  .poem-about {
-    border-top: 1px solid var(--color-border);
-    padding: var(--space-lg) 0;
+  @media (max-width: 600px) {
+    #chart-mt-prevalence { height: 260px; }
+    .stat-row { grid-template-columns: 130px 1fr; }
+    .stat-pct { display: none; }
   }
 </style>
 
@@ -171,35 +189,9 @@ const tooSvg = loadSvg('too.svg');
     </div>
   </section>
 
-  <!-- Poem Slides -->
-  <section class="slides">
-    <div class="container">
-      <div class="slide">
-        <p class="slide-n">1</p>
-        <p class="slide-text">1 in every 4 American women<br>has experienced rape.</p>
-      </div>
-      <div class="slide">
-        <p class="slide-n">2</p>
-        <p class="slide-text">Of those who are assaulted,<br>fewer than 1 in 3 will ever report it.</p>
-      </div>
-      <div class="slide">
-        <p class="slide-n">3</p>
-        <p class="slide-text">All of us are paying for it.<br>The lifetime economic burden: over $6 trillion.</p>
-      </div>
-      <div class="slide">
-        <p class="slide-n">4</p>
-        <p class="slide-text">We know how to reduce it.<br>Evidence-based prevention programs work —<br>cutting incidents by up to 40%.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- Animated SVG charts stacked vertically -->
   <section class="poem-section">
     <div class="container">
-      <p class="poem-epigraph">
-        <em>The five charts correspond to the five letters of #METOO: Many are affected; Everyone knows their assailant; Timing skews young; Only a fraction report; there is Opportunity to change this.</em>
-      </p>
-
       <div class="mt-svg-stack">
         <!-- M + E charts — bars animated by JS -->
         <div class="mt-svg-panel" id="panel-me">
@@ -213,92 +205,284 @@ const tooSvg = loadSvg('too.svg');
     </div>
   </section>
 
-  <!-- Data Sources -->
-  <section class="explore">
+  <!-- About -->
+  <section class="poem-about">
     <div class="container">
-      <h2>Data Sources</h2>
-      <p class="explore-intro">The five data sets behind the five charts of #METOO.</p>
-      <div class="data-sources">
-        <a class="data-source-card" href="https://www.cdc.gov/violenceprevention/sexualviolence/fastfact.html" target="_blank" rel="noopener">
-          <p class="source-org">CDC</p>
-          <p class="source-title">&ldquo;Preventing Sexual Violence&rdquo; &mdash; Fast Facts</p>
-          <p class="source-year">2023</p>
-        </a>
-        <a class="data-source-card" href="https://bjs.ojp.gov/document/cv22.pdf" target="_blank" rel="noopener">
-          <p class="source-org">US Dept. of Justice &mdash; Bureau of Justice Statistics</p>
-          <p class="source-title">Criminal Victimization Report</p>
-          <p class="source-year">2022</p>
-        </a>
-        <a class="data-source-card" href="https://www.rainn.org/statistics/scope-problem" target="_blank" rel="noopener">
-          <p class="source-org">RAINN.org</p>
-          <p class="source-title">&ldquo;Scope of the Problem&rdquo; &mdash; Statistics</p>
-          <p class="source-year">2020</p>
-        </a>
-        <a class="data-source-card" href="https://www.ajpmonline.org/article/S0749-3797(16)30615-8/fulltext" target="_blank" rel="noopener">
-          <p class="source-org">American Journal of Preventive Medicine</p>
-          <p class="source-title">&ldquo;Lifetime Economic Burden of Rape Among US Adults&rdquo; &mdash; C. Peterson et al.</p>
-          <p class="source-year">2017</p>
-        </a>
-        <a class="data-source-card" href="https://www.cdc.gov/violenceprevention/pdf/SV-Prevention-Resource_508.pdf" target="_blank" rel="noopener">
-          <p class="source-org">CDC</p>
-          <p class="source-title">&ldquo;Sexual Violence Prevention Resource for Action Report&rdquo;</p>
-          <p class="source-year">2016</p>
-        </a>
-      </div>
+      <h2>About This Poem</h2>
+      <p>A two-page data visualization examining sexual violence in America. The five charts correspond to the five letters of #METOO: Many are affected; Everyone knows their assailant; Timing skews young; Only a fraction report; and there is Opportunity to change this through evidence-based prevention.</p>
     </div>
   </section>
 
-  <!-- About -->
-  <section class="poem-about">
-    <div class="container--narrow">
-      <h3>About This Poem</h3>
-      <p>A two-page data visualization examining sexual violence in America. The five charts correspond to the five letters of #METOO: Many are affected; Everyone knows their assailant; Timing skews young; Only a fraction report; and there is Opportunity to change this through evidence-based prevention.</p>
+  <!-- Explore the Data -->
+  <section class="explore">
+    <div class="container">
+      <h2>Explore the Data</h2>
+      <p class="explore-intro">The data behind the five charts of #METOO &mdash; prevalence, reporting rates, and the shared economic burden.</p>
+
+      <div class="chart-panel" id="panel-mt-prevalence">
+        <p class="chart-label">Sexual Violence Prevalence &mdash; Lifetime Victimization Rates, US</p>
+        <div id="chart-mt-prevalence"></div>
+        <p class="chart-note">Source: CDC, &ldquo;Preventing Sexual Violence&rdquo; Fast Facts, 2023. 1 in 4 women and 1 in 26 men experience completed or attempted rape in their lifetime. An estimated 81% of women and 35% of men report PTSD or other lasting impacts.</p>
+      </div>
+
+      <div class="chart-panel visible" id="panel-mt-reporting">
+        <p class="chart-label">Reporting Rate &mdash; Sexual Violence Cases Reported to Police</p>
+        <div class="stat-block">
+          <div class="stat-total">310</div>
+          <div class="stat-subtitle">out of every 1,000 sexual assaults reported to police</div>
+          <div class="stat-bars" style="margin-top:var(--space-md);">
+            <div class="stat-row">
+              <span class="stat-label">Reported</span>
+              <div class="stat-track"><div class="stat-fill" style="width:31%;background:#b4c7e7;"></div></div>
+              <span class="stat-pct">31% &mdash; 310 per 1,000</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Not reported</span>
+              <div class="stat-track"><div class="stat-fill" style="width:69%;background:#d4d0c8;"></div></div>
+              <span class="stat-pct">69% &mdash; 690 per 1,000</span>
+            </div>
+          </div>
+        </div>
+        <p class="chart-note">Source: RAINN.org, &ldquo;Scope of the Problem,&rdquo; 2020; US Dept. of Justice, Bureau of Justice Statistics, Criminal Victimization Report, 2022.</p>
+      </div>
+
+      <div class="chart-panel visible" id="panel-mt-economic">
+        <p class="chart-label">Lifetime Economic Burden of Rape &mdash; Cost Breakdown per Victim</p>
+        <div class="stat-block">
+          <div class="stat-total">$122,461</div>
+          <div class="stat-subtitle">lifetime economic cost per rape victim &mdash; $6 trillion nationally</div>
+          <div class="stat-bars" style="margin-top:var(--space-md);">
+            <div class="stat-row">
+              <span class="stat-label">Lost productivity</span>
+              <div class="stat-track"><div class="stat-fill" style="width:52%;background:#ffb7ff;"></div></div>
+              <span class="stat-pct">52%</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Medical costs</span>
+              <div class="stat-track"><div class="stat-fill" style="width:39%;background:#b4c7e7;"></div></div>
+              <span class="stat-pct">39%</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Legal &amp; other</span>
+              <div class="stat-track"><div class="stat-fill" style="width:9%;background:#d4d0c8;"></div></div>
+              <span class="stat-pct">9%</span>
+            </div>
+          </div>
+        </div>
+        <p class="chart-note">Source: C. Peterson et al., &ldquo;Lifetime Economic Burden of Rape Among US Adults,&rdquo; American Journal of Preventive Medicine, 2017.</p>
+      </div>
     </div>
   </section>
 
   <script is:inline>
   (function () {
-    // Animate all .mt-bar rects: each grows upward from its bottom edge on scroll.
-    var bars = document.querySelectorAll('.mt-bar');
-    if (!bars.length) return;
+    var DUR = 3200; // 2× slower
 
-    var targets = [];
-    bars.forEach(function (rect) {
-      var targetH = parseFloat(rect.getAttribute('height'));
-      var targetY = parseFloat(rect.getAttribute('y'));
-      var bottom  = targetY + targetH;
-      targets.push({ el: rect, targetH: targetH, bottom: bottom });
-      rect.setAttribute('height', 0);
-      rect.setAttribute('y', bottom);
-    });
+    // ── Collect vertical bar targets ──────────────────────────────────────
+    function collectV(selector) {
+      var targets = [];
+      document.querySelectorAll(selector).forEach(function (rect) {
+        var h = parseFloat(rect.getAttribute('height'));
+        var y = parseFloat(rect.getAttribute('y'));
+        targets.push({ el: rect, kind: 'v', targetH: h, bottom: y + h });
+        rect.setAttribute('height', 0);
+        rect.setAttribute('y', y + h);
+      });
+      return targets;
+    }
 
-    function animateBars() {
-      var start    = null;
-      var duration = 1600;
+    // ── Collect horizontal bar targets ────────────────────────────────────
+    function collectH(selector) {
+      var targets = [];
+      document.querySelectorAll(selector).forEach(function (rect) {
+        var w = parseFloat(rect.getAttribute('width'));
+        targets.push({ el: rect, kind: 'h', targetW: w });
+        rect.setAttribute('width', 0);
+      });
+      return targets;
+    }
+
+    // ── Animator with optional completion callback ────────────────────────
+    function animate(targets, onDone) {
+      var t0 = null;
       function step(ts) {
-        if (!start) start = ts;
-        var p = Math.min((ts - start) / duration, 1);
+        if (!t0) t0 = ts;
+        var p = Math.min((ts - t0) / DUR, 1);
         var e = 1 - Math.pow(1 - p, 3); // ease-out cubic
         targets.forEach(function (item) {
-          var h = item.targetH * e;
-          item.el.setAttribute('height', h);
-          item.el.setAttribute('y', item.bottom - h);
+          if (item.kind === 'v') {
+            var h = item.targetH * e;
+            item.el.setAttribute('height', h);
+            item.el.setAttribute('y', item.bottom - h);
+          } else if (item.kind === 'h') {
+            item.el.setAttribute('width', item.targetW * e);
+          }
         });
-        if (p < 1) requestAnimationFrame(step);
+        if (p < 1) {
+          requestAnimationFrame(step);
+        } else if (onDone) {
+          onDone();
+        }
       }
       requestAnimationFrame(step);
     }
 
-    var svg = document.querySelector('#panel-me svg');
-    if (!svg) return;
+    // ── Helper: fade in all SVG elements with a given class ──────────────
+    function fadeInStanza(cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) {
+        el.style.opacity = '1';
+      });
+    }
+
+    // ── Collect targets upfront ───────────────────────────────────────────
+    var mTargets   = collectV('#panel-me .mt-bar');
+    var eTargets   = collectH('#panel-me .mt-bar-h');
+    var tooTargets = collectV('#panel-too .mt-bar');
+
+    // ── panel-me: M bars + M text → E bars + E text ───────────────────────
+    var mePanel = document.getElementById('panel-me');
+    if (mePanel) {
+      var meObs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          meObs.disconnect();
+          fadeInStanza('mt-stanza-m');
+          animate(mTargets, function () {
+            fadeInStanza('mt-stanza-e');
+            animate(eTargets);
+          });
+        }
+      }, { threshold: 0 });
+      meObs.observe(mePanel);
+    }
+
+    // ── panel-too: T bars + first stanza → T done → final stanza ─────────
+    var tooPanel = document.getElementById('panel-too');
+    if (tooPanel) {
+      var tooObs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          tooObs.disconnect();
+          fadeInStanza('mt-stanza-final');
+          animate(tooTargets, function () {
+            fadeInStanza('mt-stanza-isnt');
+          });
+        }
+      }, { threshold: 0 });
+      tooObs.observe(tooPanel);
+    }
+  })();
+  </script>
+
+  <!-- AMCharts 5 — explore charts -->
+  <script is:inline src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script is:inline src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+  <script is:inline>
+  (function () {
+    var BLUE   = am5.color(0xb4c7e7);   // from SVG palette
+    var PINK   = am5.color(0xffb7ff);   // from SVG palette
+    var DARK   = am5.color(0x1A1A1A);
+    var MUTED  = am5.color(0xd4d0c8);
+    var BG     = am5.color(0xF0EFEB);
+
+    // ── Scroll-triggered initialization ───────────────────────────────
+    var panels = {
+      "panel-mt-prevalence": initPrevalence,
+    };
+    var initialized = {};
 
     var observer = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        observer.disconnect();
-        animateBars();
-      }
-    }, { threshold: 0.2 });
-    observer.observe(svg);
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          entry.target.classList.add("visible");
+          if (!initialized[id] && panels[id]) {
+            initialized[id] = true;
+            panels[id]();
+          }
+        }
+      });
+    }, { threshold: 0.15 });
+
+    Object.keys(panels).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // ── Chart 1: Prevalence ─────────────────────────────────────────
+    function initPrevalence() {
+      var root = am5.Root.new("chart-mt-prevalence");
+      root.setThemes([am5themes_Animated.new(root)]);
+
+      var chart = root.container.children.push(am5xy.XYChart.new(root, {
+        panX: false, panY: false,
+        wheelX: "none", wheelY: "none",
+        paddingLeft: 0, paddingRight: 80, paddingTop: 20,
+      }));
+
+      var data = [
+        { group: "1 in 26 men",   pct: 3.8,  colCfg: { fill: BLUE } },
+        { group: "1 in 4 women",  pct: 25.0, colCfg: { fill: PINK } },
+      ];
+
+      var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 80 });
+      xRenderer.labels.template.setAll({ fontSize: 14, fill: DARK });
+      xRenderer.grid.template.setAll({ visible: false });
+
+      var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+        categoryField: "group", renderer: xRenderer,
+      }));
+
+      var yRenderer = am5xy.AxisRendererY.new(root, {});
+      yRenderer.labels.template.setAll({ fontSize: 11, fill: DARK });
+      yRenderer.grid.template.setAll({ strokeOpacity: 0.1 });
+
+      var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+        min: 0, max: 30, strictMinMax: true,
+        numberFormat: "#'%'", renderer: yRenderer,
+      }));
+
+      yAxis.children.unshift(am5.Label.new(root, {
+        rotation: -90, y: am5.p50, centerX: am5.p50,
+        text: "Lifetime victimization rate",
+        fontSize: 11, fill: am5.color(0x888888),
+      }));
+
+      var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+        xAxis: xAxis, yAxis: yAxis,
+        valueYField: "pct", categoryXField: "group",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{group}: {valueY}%",
+          getFillFromSprite: false, autoTextColor: false,
+        }),
+      }));
+      series.get("tooltip").get("background").setAll({ fill: BG, stroke: DARK, strokeWidth: 1 });
+      series.get("tooltip").label.setAll({ fill: DARK, fontSize: 13 });
+
+      series.columns.template.setAll({
+        cornerRadiusTL: 3, cornerRadiusTR: 3,
+        strokeOpacity: 0, width: am5.percent(45),
+        templateField: "colCfg",
+      });
+
+      series.bullets.push(function () {
+        return am5.Bullet.new(root, {
+          locationY: 1,
+          sprite: am5.Label.new(root, {
+            text: "{valueY}%",
+            centerY: am5.p100, centerX: am5.p50,
+            dy: -10, fontSize: 15, fontWeight: "600",
+            fill: DARK, populateText: true,
+          }),
+        });
+      });
+
+      xAxis.data.setAll(data);
+      series.data.setAll(data);
+      series.appear(1200);
+      chart.appear(1000, 100);
+    }
+
   })();
   </script>
 

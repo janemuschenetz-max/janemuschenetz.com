@@ -22,12 +22,17 @@ import Poem from '../../layouts/Poem.astro';
     </div>
   </section>
 
-  <section>
-    <div class="container--narrow">
-      <h3>About This Poem</h3>
+  <section class="poem-about">
+    <div class="container">
+      <h2>About This Poem</h2>
       <p>'Low Point' charts how US childhood poverty reached its lowest point in 2021 when the pandemic child tax credit sent up to $300/kid/month to families in need — then Congress let it expire. The annotated graph turns dry policy data into a visual narrative about what happens when a proven intervention is abandoned.</p>
       <p class="mt-sm" style="font-size:0.9rem; color:var(--color-text-secondary);">This interactive version animates the data to unfold the story sequentially. Hover over any data point to see the exact poverty rate.</p>
-      <h4 class="mt-md">Explore the Data</h4>
+    </div>
+  </section>
+
+  <section class="explore">
+    <div class="container">
+      <h2>Explore the Data</h2>
 
       <div class="explore-card">
         <h5>Supplemental Poverty Measure: Child Poverty Rate, 2009–2022</h5>
@@ -54,6 +59,17 @@ import Poem from '../../layouts/Poem.astro';
 </Poem>
 
 <style>
+  /* About & Explore sections */
+  .poem-about {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+  .explore {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+  .explore h2 { margin-bottom: 0.25rem; }
+
   .low-point-chart-wrap {
     max-width: 900px;
     margin: 0 auto;
