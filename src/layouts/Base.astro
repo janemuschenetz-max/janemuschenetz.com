@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -29,5 +30,6 @@ const { title, description = 'Poetic practice at the intersection of economics, 
   <Newsletter />
   <Footer />
   <script src="/main.js" is:inline></script>
+  <Analytics />
 </body>
 </html>
