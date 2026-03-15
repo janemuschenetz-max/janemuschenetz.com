@@ -78,6 +78,7 @@ const datasets = {
   // ── Low Point ────────────────────────────────────────────────────────────
   'low-point': {
     intro: 'The poem tracks one policy intervention — the 2021 expanded Child Tax Credit — and what happened when it ended. These are the underlying numbers.',
+    liveLink: '/poems/low-point-live',
     tabs: [
       {
         id: 'poverty-rate',
@@ -131,9 +132,67 @@ const datasets = {
     ],
   },
 
+  // ── You Are 600% Hotter Than the Sun ────────────────────────────────────
+  'make-belief-600': {
+    intro: 'The physics behind the poem — thermal energy per unit volume. A resting human produces roughly 6× the energy density of the Sun\'s core. Here are the numbers.',
+    liveLink: '/poems/make-belief-600-live',
+    tabs: [
+      {
+        id: 'percup',
+        label: 'Per Cup',
+        year: 'Minute Physics / Standard Solar Model',
+        columns: ['Source', 'mW per cup (~237 mL)', 'W per Liter', 'Ratio to Sun'],
+        rows: [
+          { label: "Sun's core",           value: '~60 mW',  value2: '0.25 W/L', value3: '1×' },
+          { label: 'Human body (resting)', value: '~350 mW', value2: '~1.5 W/L', value3: '5.8×', highlight: true },
+        ],
+        source: 'Henry Reich, Minute Physics. Solar core: 276 W/m³ (Bahcall et al., standard solar model). Human: ~80 W basal metabolic rate in ~57 L body volume (NIH/WHO). 1 cup = 237 mL.',
+      },
+      {
+        id: 'density',
+        label: 'Energy Density',
+        year: 'Approximate values',
+        columns: ['Object', 'W / Liter', '× Sun\'s Core', ''],
+        rows: [
+          { label: "Sun's core",              value: '0.25',    value2: '1×',    bar: 0.13 },
+          { label: 'Compost pile',             value: '~0.5–1', value2: '~2–4×', bar: 0.5 },
+          { label: 'Human body (resting)',     value: '~1.5',   value2: '~6×',   bar: 1,   highlight: true },
+          { label: 'Human body (jogging)',     value: '~7',     value2: '~28×',  bar: 3 },
+          { label: 'Laptop computer',          value: '~25',    value2: '~100×', bar: 14 },
+          { label: 'Incandescent light bulb',  value: '~200',   value2: '~800×', bar: 100 },
+        ],
+        source: 'Solar core: Bahcall, Basu & Kumar (1995), standard solar model. Human metabolic data: NIH/WHO. Other values estimated from typical device specifications.',
+        note: 'All non-solar values are approximate. The key insight: a resting human sits above the Sun on this scale.',
+      },
+      {
+        id: 'total',
+        label: 'Total Output',
+        year: 'Various sources',
+        columns: ['Object', 'Total Power', 'Scientific Notation'],
+        rows: [
+          { label: 'Human body (resting)',   value: '~80 W',       value2: '8 × 10¹ W',   highlight: true },
+          { label: 'Human body (sprinting)', value: '~1,000 W',    value2: '10³ W' },
+          { label: 'Average US home',        value: '~1,200 W',    value2: '1.2 × 10³ W' },
+          { label: 'City of Los Angeles',    value: '~2.8 GW',     value2: '2.8 × 10⁹ W' },
+          { label: 'Earth (geothermal)',     value: '~47 TW',      value2: '4.7 × 10¹³ W' },
+          { label: 'The Sun',               value: '3.8 × 10²⁶ W', value2: '3.828 × 10²⁶ W' },
+        ],
+        source: 'EIA (US residential energy); LADWP (LA peak demand); USGS (geothermal flux); IAU 2015 nominal solar luminosity (3.828 × 10²⁶ W).',
+        note: 'The Sun\'s total output is ~4.75 × 10²⁴ times a resting human\'s — "there\'s just not as much of you."',
+      },
+    ],
+    resources: [
+      { name: 'Minute Physics — YouTube', url: 'https://www.youtube.com/@minutephysics', desc: 'Henry Reich\'s video on thermal energy per unit volume and the Sun vs. human comparison.' },
+      { name: 'NASA — The Sun', url: 'https://science.nasa.gov/sun/', desc: 'Solar structure, energy output, and the science of stellar energy production.' },
+      { name: 'NIH — Human Metabolism', url: 'https://www.ncbi.nlm.nih.gov/books/NBK279088/', desc: 'Basal metabolic rate, energy expenditure, and body composition data.' },
+      { name: 'Standard Solar Model (Wikipedia)', url: 'https://en.wikipedia.org/wiki/Standard_solar_model', desc: 'Overview of the theoretical model behind solar power density estimates.' },
+    ],
+  },
+
   // ── #MeToo ───────────────────────────────────────────────────────────────
   'metoo': {
     intro: 'Two pages of data: who is affected, how rarely justice follows — and the economic cost we all carry.',
+    liveLink: '/poems/metoo-live',
     tabs: [
       {
         id: 'prevalence',
@@ -203,6 +262,7 @@ const datasets = {
   // ── Point Blank ──────────────────────────────────────────────────────────
   'point-blank': {
     intro: 'The poem\'s data is rendered inside the silhouette of a handgun. Here are the numbers directly — by country, by victim age, and over time.',
+    liveLink: '/poems/point-blank-live',
     tabs: [
       {
         id: 'international',

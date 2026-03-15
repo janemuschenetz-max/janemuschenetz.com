@@ -1,0 +1,615 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const poem = await getEntry('poems', 'make-belief-600');
+const { poemText, epigraphText, epigraphAttribution } = poem.data;
+---
+
+<style>
+  .live-hero {
+    padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+  }
+  .live-hero .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+  .live-hero .eyebrow a { color: inherit; text-decoration: none; }
+  .live-hero .eyebrow a:hover { text-decoration: underline; }
+  .live-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 2px 8px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    color: var(--color-text-secondary);
+  }
+
+  /* Epigraph */
+  .poem-epigraph {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    line-height: 1.75;
+    color: var(--color-text);
+    border-left: 3px solid #E8941A;
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-md);
+    max-width: 680px;
+  }
+  .poem-epigraph .attribution {
+    display: block;
+    margin-top: 0.6rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+  }
+
+  .poem-em {
+    color: #B5342A;
+    font-weight: 500;
+  }
+
+  .sun-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 49vmin;
+    height: 49vmin;
+    transform: translate(-50%, -50%);
+    opacity: 0.17;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Explore section */
+  .explore {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+  .explore h2 {
+    margin-bottom: 0.25rem;
+  }
+  .explore-intro {
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+    max-width: 560px;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Chart panels */
+  .chart-panel {
+    background: var(--color-bg-alt);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .chart-panel.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .chart-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    margin-bottom: var(--space-sm);
+  }
+  .chart-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  #chart-per-cup  { width: 100%; height: 320px; }
+  #chart-density  { width: 100%; height: 400px; }
+  #chart-total    { width: 100%; height: 360px; }
+
+  /* Sun rays — full-screen fixed background */
+  .sun-rays {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 140vmax;
+    height: 140vmax;
+    transform: translate(-50%, -50%);
+    animation: sun-spin 28s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes sun-spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  /* ensure page content sits above the rays */
+  .live-hero, section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* About */
+  .poem-about {
+    padding: var(--space-md) 0 var(--space-lg);
+  }
+
+  @media (max-width: 600px) {
+    #chart-per-cup  { height: 260px; }
+    #chart-density  { height: 320px; }
+    #chart-total    { height: 300px; }
+  }
+</style>
+
+<Base
+  title="You Are 600% Hotter Than the Sun (Live) — Jane Muschenetz"
+  description="An interactive poem about thermal energy density — per unit volume, you are pound-for-pound more radiant than the Sun itself."
+>
+
+  <!-- Full-screen animated sun rays background -->
+  <svg class="sun-rays" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="#E8941A" opacity="0.06">
+      <polygon points="0,0 -3.5,-105 3.5,-105"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(30)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(60)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(90)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(120)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(150)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(180)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(210)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(240)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(270)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(300)"/>
+      <polygon points="0,0 -3.5,-105 3.5,-105" transform="rotate(330)"/>
+    </g>
+    <g fill="#E8941A" opacity="0.03">
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(15)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(45)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(75)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(105)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(135)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(165)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(195)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(225)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(255)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(285)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(315)"/>
+      <polygon points="0,0 -2,-105 2,-105" transform="rotate(345)"/>
+    </g>
+  </svg>
+
+  <!-- Hero -->
+  <section class="live-hero">
+    <div class="container">
+      <p class="eyebrow"><a href="/visual-data-poetry">&larr; Visual &amp; Data Poetry</a></p>
+      <h1 class="page-hero__title">You Are 600% Hotter Than the Sun <span class="live-badge">Interactive</span></h1>
+      <p class="page-hero__subtitle" style="max-width:none;font-style:italic;">from <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</p>
+      <p style="margin-top:var(--space-sm);font-size:0.85rem;color:var(--color-text-secondary);">
+        <a href="/poems/make-belief-600" class="link-underline">View original static version &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Centered fixed sun illustration behind content -->
+  <img src="/images/sun_transparent.png" alt="" aria-hidden="true" class="sun-center">
+
+  <!-- Poem -->
+  <section class="poem-section">
+    <div class="container">
+      <div class="poem-epigraph">
+        &ldquo;{epigraphText}&rdquo;
+        <span style="display:block; margin-top:0.5rem;">&mdash; {epigraphAttribution}</span>
+      </div>
+      <div class="poem-text" aria-label={`Poem: ${poem.data.title}`} set:html={poemText.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')} />
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="poem-about">
+    <div class="container">
+      <h3>About This Poem</h3>
+      <p>Inspired by a Minute Physics video about thermal energy per unit volume, this poem celebrates human radiance &mdash; &ldquo;pound-for-pound, more Life-Source, more Bomb, more Season-Spinning Searing Center&rdquo; &mdash; than the Sun itself. A resting human body produces roughly 6&times; the thermal energy per unit volume as the Sun&rsquo;s core (276 W/m&sup3;, Bahcall et al.). Only sheer size tips the scales back.</p>
+      <p class="mt-sm" style="font-size:0.85rem;color:var(--color-text-secondary);">Data: Henry Reich, Minute Physics; standard solar model; NIH/WHO human metabolic data. Hover any chart element to see exact values.</p>
+    </div>
+  </section>
+
+  <!-- Explore the Data -->
+  <section class="explore">
+    <div class="container">
+      <h2>Explore the Data</h2>
+      <p class="explore-intro">The physics behind the poem &mdash; energy density per unit volume, and how human radiance compares to objects across the cosmos.</p>
+
+      <div class="chart-panel" id="panel-per-cup">
+        <p class="chart-label">Thermal Energy Output &mdash; Per Cup (~237 mL) of Volume</p>
+        <div id="chart-per-cup"></div>
+        <p class="chart-note">A resting adult produces ~80 W in ~57 L of body volume: 80 W &divide; 57 L &times; 0.237 L/cup &asymp; 333 mW/cup &asymp; 350 mW. The Sun&rsquo;s core averages 276 W/m&sup3; &times; 0.000237 m&sup3;/cup &asymp; 65 mW/cup &asymp; 60 mW.</p>
+      </div>
+
+      <div class="chart-panel" id="panel-density">
+        <p class="chart-label">Energy Density &mdash; Power per Liter of Volume (Sun&rsquo;s Core = 1&times; baseline)</p>
+        <div id="chart-density"></div>
+        <p class="chart-note">Log scale. A resting human produces ~6&times; the thermal energy per unit volume as the Sun&rsquo;s core. Hover any bar for the exact value.</p>
+      </div>
+
+      <div class="chart-panel" id="panel-total">
+        <p class="chart-label">Total Power Output &mdash; Watts (Log Scale)</p>
+        <div id="chart-total"></div>
+        <p class="chart-note">The Sun&rsquo;s total luminosity is 3.8 &times; 10&sup2;&sup6; W &mdash; roughly 4.75 septillion times a resting human&rsquo;s 80 W. Sheer size wins. But per cup? You do.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AMCharts 5 — loaded as regular scripts (not ES modules) to avoid CORS in dev -->
+  <script is:inline src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script is:inline src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+  <script is:inline src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+  <script is:inline>
+  (function () {
+    var SUN   = am5.color(0xE8941A);   // solar amber
+    var HUMAN = am5.color(0xB5342A);   // body crimson
+    var MUTED = am5.color(0xC4B49A);   // warm neutral
+    var BLACK = am5.color(0x1A1A1A);
+    var BG    = am5.color(0xF0EFEB);
+
+    // ── Scroll-triggered initialization ──────────────────────────────
+    var panels = {
+      "panel-per-cup": initPerCup,
+      "panel-density":  initDensity,
+      "panel-total":    initTotal,
+    };
+    var initialized = {};
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          entry.target.classList.add("visible");
+          if (!initialized[id] && panels[id]) {
+            initialized[id] = true;
+            panels[id]();
+          }
+        }
+      });
+    }, { threshold: 0.15 });
+
+    Object.keys(panels).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // ── Chart 1: Per-Cup Comparison (60 mW vs 350 mW) ────────────────
+    function initPerCup() {
+      var root = am5.Root.new("chart-per-cup");
+      root.setThemes([am5themes_Animated.new(root)]);
+
+      var chart = root.container.children.push(am5xy.XYChart.new(root, {
+        panX: false, panY: false,
+        wheelX: "none", wheelY: "none",
+        paddingLeft: 0, paddingRight: 60,
+        paddingTop: 30,
+      }));
+
+      var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 80 });
+      xRenderer.labels.template.setAll({
+        fontSize: 14, fill: BLACK,
+        fontFamily: "Inter, sans-serif",
+        paddingTop: 8,
+      });
+      xRenderer.grid.template.setAll({ visible: false });
+
+      var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
+        categoryField: "source",
+        renderer: xRenderer,
+      }));
+
+      var yRenderer = am5xy.AxisRendererY.new(root, {});
+      yRenderer.labels.template.setAll({
+        fontSize: 11, fill: BLACK,
+        fontFamily: "Inter, sans-serif",
+      });
+      yRenderer.grid.template.setAll({ strokeOpacity: 0.1 });
+
+      var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+        min: 0, max: 420,
+        strictMinMax: true,
+        numberFormat: "#' mW'",
+        renderer: yRenderer,
+      }));
+
+      yAxis.children.unshift(am5.Label.new(root, {
+        rotation: -90, y: am5.p50, centerX: am5.p50,
+        text: "Milliwatts per cup (~237 mL)",
+        fontSize: 11, fill: am5.color(0x888888),
+        fontFamily: "Inter, sans-serif",
+      }));
+
+      var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+        xAxis: xAxis, yAxis: yAxis,
+        valueYField: "mw",
+        categoryXField: "source",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{source}: {valueY} mW per cup",
+          getFillFromSprite: false, autoTextColor: false,
+        }),
+      }));
+
+      series.get("tooltip").get("background").setAll({ fill: BG, stroke: BLACK, strokeWidth: 1 });
+      series.get("tooltip").label.setAll({ fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 13 });
+
+      series.columns.template.setAll({
+        cornerRadiusTL: 3, cornerRadiusTR: 3,
+        strokeOpacity: 0,
+        width: am5.percent(45),
+        templateField: "colCfg",
+      });
+
+      series.bullets.push(function () {
+        return am5.Bullet.new(root, {
+          locationY: 1,
+          sprite: am5.Label.new(root, {
+            text: "{valueY} mW",
+            centerY: am5.p100, centerX: am5.p50,
+            dy: -12, fontSize: 14, fontWeight: "600",
+            fill: BLACK, fontFamily: "Inter, sans-serif",
+            populateText: true,
+          }),
+        });
+      });
+
+      var data = [
+        { source: "Sun's Core", mw: 60,  colCfg: { fill: SUN } },
+        { source: "You",        mw: 350, colCfg: { fill: HUMAN } },
+      ];
+
+      xAxis.data.setAll(data);
+      series.data.setAll(data);
+
+      chart.plotContainer.children.push(am5.Label.new(root, {
+        text: "5.8\u00d7 more\nenergy dense",
+        fontFamily: "Inter, sans-serif",
+        fontSize: 12,
+        fontWeight: "500",
+        fill: HUMAN,
+        x: am5.percent(80),
+        y: am5.percent(25),
+        centerX: am5.p50,
+        background: am5.RoundedRectangle.new(root, {
+          fill: BG, stroke: HUMAN, strokeWidth: 1.5,
+          cornerRadiusTL: 0, cornerRadiusTR: 0,
+          cornerRadiusBL: 0, cornerRadiusBR: 0,
+        }),
+        paddingTop: 6, paddingBottom: 6, paddingLeft: 10, paddingRight: 10,
+      }));
+
+      series.appear(1200);
+      chart.appear(1000, 100);
+    }
+
+    // ── Chart 2: Energy Density Ladder (log scale) ───────────────────
+    function initDensity() {
+      var root = am5.Root.new("chart-density");
+      root.setThemes([am5themes_Animated.new(root)]);
+
+      var chart = root.container.children.push(am5xy.XYChart.new(root, {
+        panX: false, panY: false,
+        wheelX: "none", wheelY: "none",
+        paddingLeft: 0, paddingRight: 90,
+        paddingTop: 10, paddingBottom: 10,
+      }));
+
+      var data = [
+        { item: "Sun's Core",        mult: 1,    label: "0.25 W/L",  colCfg: { fill: SUN } },
+        { item: "Compost Pile",       mult: 3,    label: "~0.8 W/L",  colCfg: { fill: MUTED } },
+        { item: "You (resting)",      mult: 5.8,  label: "~1.5 W/L",  colCfg: { fill: HUMAN } },
+        { item: "You (jogging)",      mult: 28,   label: "~7 W/L",    colCfg: { fill: MUTED } },
+        { item: "Laptop",             mult: 100,  label: "~25 W/L",   colCfg: { fill: MUTED } },
+        { item: "Incandescent Bulb",  mult: 800,  label: "~200 W/L",  colCfg: { fill: MUTED } },
+      ];
+
+      var yRenderer = am5xy.AxisRendererY.new(root, { inversed: true, minGridDistance: 35 });
+      yRenderer.labels.template.setAll({
+        fontSize: 12, fill: BLACK,
+        fontFamily: "Inter, sans-serif",
+        maxWidth: 130, oversizedBehavior: "wrap",
+      });
+      yRenderer.grid.template.setAll({ visible: false });
+
+      var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+        categoryField: "item",
+        renderer: yRenderer,
+      }));
+      yAxis.data.setAll(data);
+
+      var xRenderer = am5xy.AxisRendererX.new(root, {});
+      xRenderer.labels.template.setAll({
+        fontSize: 11, fill: am5.color(0x888888),
+        fontFamily: "Inter, sans-serif",
+      });
+      xRenderer.grid.template.setAll({ strokeOpacity: 0.08 });
+
+      var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+        min: 0.7,
+        logarithmic: true,
+        treatZeroAs: 0.7,
+        renderer: xRenderer,
+        numberFormat: "#.##'\u00d7'",
+      }));
+
+      xAxis.children.push(am5.Label.new(root, {
+        text: "Energy density relative to Sun's core (log scale)",
+        x: am5.p50, centerX: am5.p50,
+        fontSize: 11, fill: am5.color(0x888888),
+        fontFamily: "Inter, sans-serif",
+        dy: 10,
+      }));
+
+      var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+        xAxis: xAxis, yAxis: yAxis,
+        valueXField: "mult",
+        categoryYField: "item",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{item}: {label} ({valueX}\u00d7 sun's core)",
+          getFillFromSprite: false, autoTextColor: false,
+        }),
+      }));
+
+      series.get("tooltip").get("background").setAll({ fill: BG, stroke: BLACK, strokeWidth: 1 });
+      series.get("tooltip").label.setAll({ fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 12 });
+
+      series.columns.template.setAll({
+        cornerRadiusTR: 3, cornerRadiusBR: 3,
+        strokeOpacity: 0,
+        height: am5.percent(45),
+        templateField: "colCfg",
+      });
+
+      series.bullets.push(function (root, series, dataItem) {
+        var d = dataItem.dataContext;
+        return am5.Bullet.new(root, {
+          locationX: 1,
+          sprite: am5.Label.new(root, {
+            text: d.label,
+            fontFamily: "Inter, sans-serif",
+            fontSize: 11,
+            fill: BLACK,
+            centerY: am5.p50, centerX: 0,
+            dx: 8,
+            populateText: true,
+          }),
+        });
+      });
+
+      var rangeDataItem = xAxis.makeDataItem({ value: 1 });
+      var range = xAxis.createAxisRange(rangeDataItem);
+      range.get("grid").setAll({
+        stroke: SUN, strokeWidth: 2, strokeDasharray: [4, 3],
+      });
+      range.get("label").setAll({
+        text: "Sun = 1\u00d7",
+        fontSize: 10, fill: SUN,
+        fontWeight: "600",
+        fontFamily: "Inter, sans-serif",
+        inside: true, location: 1, dy: -6,
+      });
+
+      series.data.setAll(data);
+      series.appear(1200);
+      chart.appear(1000, 100);
+    }
+
+    // ── Chart 3: Total Power Output (log scale) ──────────────────────
+    function initTotal() {
+      var root = am5.Root.new("chart-total");
+      root.setThemes([am5themes_Animated.new(root)]);
+
+      var chart = root.container.children.push(am5xy.XYChart.new(root, {
+        panX: false, panY: false,
+        wheelX: "none", wheelY: "none",
+        paddingLeft: 0, paddingRight: 110,
+        paddingTop: 10, paddingBottom: 10,
+      }));
+
+      var data = [
+        { item: "You (resting)",       watts: 80,       label: "80 W",         colCfg: { fill: HUMAN } },
+        { item: "You (sprinting)",     watts: 1000,     label: "1 kW",         colCfg: { fill: MUTED } },
+        { item: "Average US home",     watts: 1200,     label: "1.2 kW",       colCfg: { fill: MUTED } },
+        { item: "City of Los Angeles", watts: 2.8e9,    label: "2.8 GW",       colCfg: { fill: MUTED } },
+        { item: "Earth (geothermal)",  watts: 4.7e13,   label: "47 TW",        colCfg: { fill: MUTED } },
+        { item: "The Sun",             watts: 3.828e26, label: "3.8 \u00d7 10\u00b2\u2076 W", colCfg: { fill: SUN } },
+      ];
+
+      var yRenderer = am5xy.AxisRendererY.new(root, { inversed: true, minGridDistance: 35 });
+      yRenderer.labels.template.setAll({
+        fontSize: 12, fill: BLACK,
+        fontFamily: "Inter, sans-serif",
+        maxWidth: 150, oversizedBehavior: "wrap",
+      });
+      yRenderer.grid.template.setAll({ visible: false });
+
+      var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+        categoryField: "item",
+        renderer: yRenderer,
+      }));
+      yAxis.data.setAll(data);
+
+      var xRenderer = am5xy.AxisRendererX.new(root, {});
+      xRenderer.labels.template.setAll({
+        fontSize: 11, fill: am5.color(0x888888),
+        fontFamily: "Inter, sans-serif",
+      });
+      xRenderer.grid.template.setAll({ strokeOpacity: 0.08 });
+
+      var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+        min: 50,
+        logarithmic: true,
+        treatZeroAs: 50,
+        renderer: xRenderer,
+      }));
+
+      xAxis.children.push(am5.Label.new(root, {
+        text: "Total power output in Watts (log scale \u2014 each step is \u00d710)",
+        x: am5.p50, centerX: am5.p50,
+        fontSize: 11, fill: am5.color(0x888888),
+        fontFamily: "Inter, sans-serif",
+        dy: 10,
+      }));
+
+      var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+        xAxis: xAxis, yAxis: yAxis,
+        valueXField: "watts",
+        categoryYField: "item",
+        tooltip: am5.Tooltip.new(root, {
+          labelText: "{item}: {label}",
+          getFillFromSprite: false, autoTextColor: false,
+        }),
+      }));
+
+      series.get("tooltip").get("background").setAll({ fill: BG, stroke: BLACK, strokeWidth: 1 });
+      series.get("tooltip").label.setAll({ fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 12 });
+
+      series.columns.template.setAll({
+        cornerRadiusTR: 3, cornerRadiusBR: 3,
+        strokeOpacity: 0,
+        height: am5.percent(45),
+        templateField: "colCfg",
+      });
+
+      series.bullets.push(function (root, series, dataItem) {
+        var d = dataItem.dataContext;
+        return am5.Bullet.new(root, {
+          locationX: 1,
+          sprite: am5.Label.new(root, {
+            text: d.label,
+            fontFamily: "Inter, sans-serif",
+            fontSize: 11,
+            fill: BLACK,
+            centerY: am5.p50, centerX: 0,
+            dx: 8,
+            populateText: true,
+          }),
+        });
+      });
+
+      series.data.setAll(data);
+      series.appear(1200);
+      chart.appear(1000, 100);
+    }
+
+  })();
+  </script>
+
+
+</Base>
