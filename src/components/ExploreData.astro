@@ -1,0 +1,598 @@
+---
+const { slug } = Astro.props;
+
+// ── Dataset definitions ────────────────────────────────────────────────────
+const datasets = {
+
+  // ── 100% Mom ────────────────────────────────────────────────────────────
+  '100-mom': {
+    intro: 'The underlying datasets behind the poem. The poem was built from real CDC, UN, Commonwealth Fund, and ILO data.',
+    liveLink: '/poems/100-mom-live',
+    tabs: [
+      {
+        id: 'mortality',
+        label: 'Maternal Mortality',
+        year: '2020',
+        columns: ['Country', 'Deaths per 100,000 live births', ''],
+        rows: [
+          { label: 'Norway',        value: 2,  bar: 8.3  },
+          { label: 'Germany',       value: 4,  bar: 16.7 },
+          { label: 'Netherlands',   value: 3,  bar: 12.5 },
+          { label: 'Sweden',        value: 5,  bar: 20.8 },
+          { label: 'Australia',     value: 3,  bar: 12.5 },
+          { label: 'Canada',        value: 8,  bar: 33.3 },
+          { label: 'France',        value: 8,  bar: 33.3 },
+          { label: 'UK',            value: 10, bar: 41.7 },
+          { label: 'United States', value: 24, bar: 100, highlight: true },
+        ],
+        source: 'Commonwealth Fund, "The U.S. Maternal Mortality Crisis Continues to Worsen: An International Comparison," 2022.',
+        note: 'Updated 2022 US rate: 22.3 per 100,000 — still highest among peer nations.',
+      },
+      {
+        id: 'preventable',
+        label: 'Preventability',
+        year: '2022',
+        columns: ['Category', 'Share of US pregnancy-related deaths', ''],
+        rows: [
+          { label: 'Preventable',     value: '84%', bar: 84, highlight: true },
+          { label: 'Not preventable', value: '16%', bar: 16 },
+        ],
+        source: '"Most pregnancy-related deaths are preventable," Hear Her Campaign, CDC, 2022.',
+      },
+      {
+        id: 'race',
+        label: 'Race & Ethnicity',
+        year: '2022',
+        columns: ['Race / Ethnicity', 'Deaths per 100,000 live births', ''],
+        rows: [
+          { label: 'Hispanic',                     value: 16.9, bar: 34.2 },
+          { label: 'White',                        value: 19.6, bar: 39.7 },
+          { label: 'American Indian / Alaska Native', value: 32.5, bar: 65.8 },
+          { label: 'Black',                        value: 49.5, bar: 100, highlight: true },
+        ],
+        source: 'CDC, Maternal Mortality Rates in the United States, 2022 (published 2024).',
+        note: 'Updated from 2020 figures cited in the poem (Black: 55.3, White: 19.1, Hispanic: 18.2). Black mothers remain most at risk by a wide margin.',
+      },
+      {
+        id: 'workforce',
+        label: 'Women & Work',
+        year: '2022',
+        columns: ['Category', '% Women', '% Men', ''],
+        rows: [
+          { label: 'Unpaid Labor Hours',  value: '75%', value2: '25%', bar: 75, highlight: true },
+          { label: 'Low-wage Workers',    value: '60%', value2: '40%', bar: 60 },
+          { label: 'Senior Management',   value: '28%', value2: '72%', bar: 28 },
+        ],
+        source: 'ILO, "Women Work More, But Are Still Paid Less," 2022; UN, "The World\'s Women 2020 Trends and Statistics."',
+      },
+    ],
+    resources: [
+      { name: 'WHO — Maternal Mortality', url: 'https://www.who.int/news-room/fact-sheets/detail/maternal-mortality', desc: 'Global statistics and country profiles.' },
+      { name: 'CDC Hear Her Campaign', url: 'https://www.cdc.gov/hearher/', desc: 'US maternal mortality data and warning signs.' },
+      { name: 'Commonwealth Fund', url: 'https://www.commonwealthfund.org/topics/maternal-health', desc: 'International maternal health comparisons.' },
+      { name: 'ILO — Women at Work', url: 'https://www.ilo.org/global/topics/equality-and-discrimination/gender-equality/lang--en/index.htm', desc: 'Global gender and labor statistics.' },
+      { name: 'UN Women — Data Hub', url: 'https://data.unwomen.org/', desc: 'UN gender data, SDG tracking, and country profiles.' },
+    ],
+  },
+
+  // ── Low Point ────────────────────────────────────────────────────────────
+  'low-point': {
+    intro: 'The poem tracks one policy intervention — the 2021 expanded Child Tax Credit — and what happened when it ended. These are the underlying numbers.',
+    tabs: [
+      {
+        id: 'poverty-rate',
+        label: 'Poverty Rate by Year',
+        year: '2018–2023',
+        columns: ['Year', 'SPM Child Poverty Rate', ''],
+        rows: [
+          { label: '2018', value: '12.8%', bar: 92.8 },
+          { label: '2019', value: '11.9%', bar: 86.2 },
+          { label: '2020', value: '9.7%',  bar: 70.3, note: 'COVID relief' },
+          { label: '2021', value: '5.2%',  bar: 37.7, highlight: true, note: 'Expanded CTC' },
+          { label: '2022', value: '12.4%', bar: 89.9, note: 'CTC expired' },
+          { label: '2023', value: '13.7%', bar: 99.3 },
+        ],
+        source: 'US Census Bureau, Supplemental Poverty Measure, 2017–2023 (2023 data released Sept 2024).',
+        note: 'The SPM accounts for government benefits and regional living costs — a fuller picture than the official poverty measure.',
+      },
+      {
+        id: 'ctc',
+        label: 'Child Tax Credit',
+        year: '2021 vs. Before/After',
+        columns: ['Status', 'Max credit per child', 'Monthly payments?', 'Fully refundable?'],
+        rows: [
+          { label: 'Pre-2021',     value: '$2,000',          value2: 'No',  value3: 'Partial' },
+          { label: '2021 (ARPA) — age <6',  value: '$3,600', value2: 'Yes ($300/mo)', value3: 'Yes', highlight: true },
+          { label: '2021 (ARPA) — age 6–17', value: '$3,000', value2: 'Yes ($250/mo)', value3: 'Yes', highlight: true },
+          { label: '2022–present', value: '$2,000',          value2: 'No',  value3: 'Partial' },
+        ],
+        source: 'IRS; American Rescue Plan Act (ARPA), 2021; Tax Policy Center, 2022.',
+      },
+      {
+        id: 'impact',
+        label: 'Impact of 2021 Expansion',
+        year: '2021',
+        columns: ['Outcome', 'Scale', ''],
+        rows: [
+          { label: 'Children lifted out of poverty (CTC alone)', value: '3.7 million', bar: 64 },
+          { label: 'Children lifted by all pandemic relief', value: '5.8 million', bar: 100, highlight: true },
+          { label: 'Monthly child poverty reduction (peak)', value: '−46%', bar: 46 },
+          { label: 'Families who received advance payments', value: '39 million', bar: 67 },
+        ],
+        source: 'Columbia Center on Poverty and Social Policy, "The Monthly Child Poverty Rate," 2022; IRS data.',
+      },
+    ],
+    resources: [
+      { name: 'Columbia CPSP — Child Poverty Tracker', url: 'https://www.povertycenter.columbia.edu/child-poverty', desc: 'Monthly real-time child poverty estimates from leading poverty researchers.' },
+      { name: 'Census Bureau — Supplemental Poverty Measure', url: 'https://www.census.gov/topics/income-poverty/supplemental-poverty-measure.html', desc: 'Official annual SPM data and historical tables.' },
+      { name: 'Center on Budget and Policy Priorities — CTC', url: 'https://www.cbpp.org/research/federal-tax/the-child-tax-credit', desc: 'Policy analysis on the Child Tax Credit and anti-poverty proposals.' },
+      { name: 'Children\'s Defense Fund', url: 'https://www.childrensdefense.org/policy/policy-priorities/poverty/', desc: 'Child poverty data, policy advocacy, and state-by-state breakdowns.' },
+      { name: 'Tax Policy Center', url: 'https://www.taxpolicycenter.org/briefing-book/how-does-child-tax-credit-work', desc: 'Nonpartisan analysis of the Child Tax Credit\'s design and effects.' },
+    ],
+  },
+
+  // ── #MeToo ───────────────────────────────────────────────────────────────
+  'metoo': {
+    intro: 'Two pages of data: who is affected, how rarely justice follows — and the economic cost we all carry.',
+    tabs: [
+      {
+        id: 'prevalence',
+        label: 'Prevalence',
+        year: '2016–2017 (NISVS)',
+        columns: ['Group', 'Lifetime experience of rape', ''],
+        rows: [
+          { label: 'Women',                     value: '1 in 4 (26%)',  bar: 100, highlight: true },
+          { label: 'Men',                       value: '1 in 26 (4%)',  bar: 15  },
+          { label: 'Female victims first raped before age 18', value: '43%', bar: 43 },
+          { label: 'Female victims first raped before age 25', value: '79%', bar: 79 },
+        ],
+        source: 'CDC, National Intimate Partner and Sexual Violence Survey (NISVS) 2016–2017 Report (published 2022).',
+        note: '"Rape" includes completed and attempted rape in the NISVS definition.',
+      },
+      {
+        id: 'reporting',
+        label: 'Reporting & Justice',
+        year: '2022',
+        columns: ['Stage', 'Percentage of assaults', ''],
+        rows: [
+          { label: 'Assaults reported to police',   value: '~21%',  bar: 21 },
+          { label: 'Reports leading to arrest',     value: '~12%',  bar: 12 },
+          { label: 'Cases prosecuted',              value: '~7%',   bar: 7  },
+          { label: 'Resulting in felony conviction', value: '~5%',  bar: 5  },
+        ],
+        source: 'RAINN, "Criminal Justice Information" (citing DOJ Bureau of Justice Statistics, 2022 Criminal Victimization Report).',
+      },
+      {
+        id: 'economic',
+        label: 'Economic Burden per Victim',
+        year: '2017 (2022 dollars)',
+        columns: ['Cost Category', 'Per rape victim', ''],
+        rows: [
+          { label: 'Medical costs',         value: '$956',     bar: 0.8  },
+          { label: 'Lost productivity',     value: '$14,025',  bar: 11.4 },
+          { label: 'Criminal justice',      value: '$23,377',  bar: 19.1 },
+          { label: 'Premature death',       value: '$84,103',  bar: 68.7 },
+          { label: 'Total per victim',      value: '$122,461', bar: 100, highlight: true },
+        ],
+        source: 'Peterson et al., "Lifetime Economic Burden of Rape Among US Adults," American Journal of Preventive Medicine, 2017.',
+        note: 'Updated to 2022 dollars, the total US lifetime burden exceeds $6 trillion — cited in the poem.',
+      },
+      {
+        id: 'prevention',
+        label: 'Prevention',
+        year: '2016–2023',
+        columns: ['Finding', 'Data', ''],
+        rows: [
+          { label: 'Reduction in perpetration by prevention programs', value: 'Up to 40%', bar: 40, highlight: true },
+          { label: 'Annual victims (US, age 12+)',                     value: '~460,000',  bar: 38 },
+          { label: 'Annual cost of sexual violence (US)',              value: '$56B+',     bar: 47 },
+          { label: 'Effectiveness of bystander intervention programs', value: 'Significant', bar: 30 },
+        ],
+        source: '"Preventing Sexual Violence," CDC Fast Facts, 2023; "Sexual Violence Prevention Resource for Action," CDC, 2016.',
+      },
+    ],
+    resources: [
+      { name: 'RAINN — Sexual Violence Statistics', url: 'https://www.rainn.org/statistics', desc: 'Comprehensive US statistics on prevalence, reporting, and justice outcomes.' },
+      { name: 'CDC — NISVS Survey Data', url: 'https://www.cdc.gov/violenceprevention/nisvs/', desc: 'The National Intimate Partner and Sexual Violence Survey — the gold standard prevalence data.' },
+      { name: 'National Sexual Violence Resource Center', url: 'https://www.nsvrc.org/statistics', desc: 'Research summaries, fact sheets, and resources for practitioners.' },
+      { name: 'DOJ Bureau of Justice Statistics', url: 'https://bjs.ojp.gov/topics/crime-type/rape-and-sexual-assault', desc: 'Annual criminal victimization reports with reporting rates and demographics.' },
+      { name: 'JAMA Network Open — Sexual Violence Research', url: 'https://jamanetwork.com/journals/jamanetworkopen', desc: 'Peer-reviewed public health research on prevention and outcomes.' },
+    ],
+  },
+
+  // ── Point Blank ──────────────────────────────────────────────────────────
+  'point-blank': {
+    intro: 'The poem\'s data is rendered inside the silhouette of a handgun. Here are the numbers directly — by country, by victim age, and over time.',
+    tabs: [
+      {
+        id: 'international',
+        label: 'International Comparison',
+        year: '2021',
+        columns: ['Country', 'Gun deaths per 100,000 population', ''],
+        rows: [
+          { label: 'Japan',          value: 0.03, bar: 0.5   },
+          { label: 'UK',             value: 0.2,  bar: 3.3   },
+          { label: 'Spain',          value: 0.6,  bar: 10.0  },
+          { label: 'Netherlands',    value: 0.5,  bar: 8.3   },
+          { label: 'Germany',        value: 0.9,  bar: 15.0  },
+          { label: 'Australia',      value: 1.0,  bar: 16.7  },
+          { label: 'Italy',          value: 1.4,  bar: 23.3  },
+          { label: 'Canada',         value: 2.1,  bar: 35.0  },
+          { label: 'France',         value: 2.7,  bar: 45.0  },
+          { label: 'United States',  value: 6.0,  bar: 100,  highlight: true },
+        ],
+        source: 'Institute for Health Metrics and Evaluation (IHME), Global Burden of Disease 2021. High-income nations with population >10 million. All-cause firearm mortality (suicide + homicide + unintentional).',
+      },
+      {
+        id: 'children',
+        label: 'Child & Teen Deaths',
+        year: '2020–2021',
+        columns: ['Country', 'Firearm deaths per 100,000 (ages <18)', ''],
+        rows: [
+          { label: 'UK',            value: 0.04, bar: 0.7   },
+          { label: 'Germany',       value: 0.2,  bar: 3.3   },
+          { label: 'Australia',     value: 0.3,  bar: 5.0   },
+          { label: 'Canada',        value: 0.5,  bar: 8.3   },
+          { label: 'Peer country average', value: 0.2, bar: 3.3 },
+          { label: 'United States', value: 6.0,  bar: 100,  highlight: true },
+        ],
+        source: 'KFF (Kaiser Family Foundation), "Child and Teen Firearm Mortality in the U.S. and Peer Countries," July 2023; CDC.',
+        note: 'In 2020, firearms surpassed vehicle crashes to become the #1 cause of death for US children and teens.',
+      },
+      {
+        id: 'types',
+        label: 'Types of US Gun Deaths',
+        year: '2022',
+        columns: ['Type', 'Share of 48,117 deaths', ''],
+        rows: [
+          { label: 'Suicide',       value: '54%', bar: 54, highlight: true },
+          { label: 'Homicide',      value: '43%', bar: 43 },
+          { label: 'Unintentional', value: '3%',  bar: 3  },
+        ],
+        source: 'CDC, National Center for Injury Prevention and Control, WISQARS Data, 2022.',
+        note: 'Total 2022 US firearm deaths: 48,117. More than half are by suicide — a fact often missing from gun violence coverage.',
+      },
+      {
+        id: 'trend',
+        label: 'US Trend',
+        year: '2018–2023',
+        columns: ['Year', 'Total US gun deaths', ''],
+        rows: [
+          { label: '2018', value: '39,740', bar: 81.4 },
+          { label: '2019', value: '39,707', bar: 81.3 },
+          { label: '2020', value: '45,222', bar: 92.6 },
+          { label: '2021', value: '48,830', bar: 100, highlight: true },
+          { label: '2022', value: '48,117', bar: 98.5 },
+          { label: '2023', value: '~45,000', bar: 92.1 },
+        ],
+        source: 'CDC, WISQARS; Everytown Research & Policy. 2023 figures are preliminary.',
+      },
+    ],
+    resources: [
+      { name: 'KFF — Gun Violence Data', url: 'https://www.kff.org/other/issue-brief/key-facts-about-gun-violence-in-the-united-states/', desc: 'Regularly updated breakdowns by type, race, age, and state.' },
+      { name: 'CDC WISQARS — Injury Data', url: 'https://www.cdc.gov/injury/wisqars/', desc: 'The CDC\'s interactive query system for US injury and death data.' },
+      { name: 'Everytown Research', url: 'https://everytownresearch.org/', desc: 'Data-driven research on gun violence, policies, and prevention.' },
+      { name: 'Johns Hopkins Center for Gun Violence Solutions', url: 'https://publichealth.jhu.edu/departments/health-policy-and-management/research-and-practice/center-for-gun-violence-solutions', desc: 'Peer-reviewed research from one of the leading academic centers on the issue.' },
+      { name: 'Giffords Law Center', url: 'https://giffords.org/lawcenter/resources/scorecard/', desc: 'Annual gun law scorecards, policy effectiveness research, state comparisons.' },
+    ],
+  },
+};
+
+const data = datasets[slug];
+---
+
+{data && (
+  <>
+    <section class="explorer">
+      <div class="container">
+        <h2>Explore the Data</h2>
+        <p class="explorer-intro">{data.intro}</p>
+
+        {'liveLink' in data && (
+          <p class="explorer-live-note">
+            This poem also has a <a href={data.liveLink} class="link-underline">fully animated, interactive version →</a>
+          </p>
+        )}
+
+        <div class="dataset-tabs" role="tablist">
+          {data.tabs.map((tab, i) => (
+            <button
+              class={`tab-btn${i === 0 ? ' active' : ''}`}
+              data-tab={tab.id}
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+            >{tab.label}</button>
+          ))}
+        </div>
+
+        {data.tabs.map((tab, i) => (
+          <div class={`dataset-view${i === 0 ? ' active' : ''}`} id={`tab-${tab.id}`} role="tabpanel">
+            <p class="tab-year">Data year: {tab.year}</p>
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    {tab.columns.map((col) => (
+                      <th class={col === '' ? 'bar-col' : ''}>{col}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tab.rows.map((row) => (
+                    <tr class={row.highlight ? 'row-highlight' : ''}>
+                      <td>{row.label}{row.note && <span class="row-note"> — {row.note}</span>}</td>
+                      <td>{row.value}</td>
+                      {'value2' in row && <td>{row.value2}</td>}
+                      {'value3' in row && <td>{row.value3}</td>}
+                      {tab.columns[tab.columns.length - 1] === '' && (
+                        <td class="bar-col">
+                          {row.bar !== undefined && (
+                            <div class="bar-track">
+                              <div
+                                class={`bar-fill${row.highlight ? ' bar-fill--accent' : ''}`}
+                                style={`--pct:${row.bar}%`}
+                              ></div>
+                            </div>
+                          )}
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p class="source-note">Source: {tab.source}</p>
+            {tab.note && <p class="tab-update-note">{tab.note}</p>}
+          </div>
+        ))}
+
+        <!-- More Resources -->
+        <div class="explorer-resources">
+          <h3>More Resources</h3>
+          <ul class="resource-list">
+            {data.resources.map((r) => (
+              <li>
+                <a href={r.url} target="_blank" rel="noopener noreferrer">{r.name}</a>
+                <span class="resource-desc"> — {r.desc}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Tab switching for data explorer
+      function initExplorer(root: Element) {
+        root.querySelectorAll<HTMLButtonElement>('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            if (!tab) return;
+            root.querySelectorAll('.tab-btn').forEach(b => {
+              b.classList.remove('active');
+              b.setAttribute('aria-selected', 'false');
+            });
+            root.querySelectorAll('.dataset-view').forEach(v => v.classList.remove('active'));
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            const view = root.querySelector(`#tab-${tab}`);
+            if (view) {
+              view.classList.add('active');
+              animateBars(view as HTMLElement);
+            }
+          });
+        });
+
+        // Animate bars when explorer scrolls into view
+        const obs = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting) {
+            const active = root.querySelector('.dataset-view.active') as HTMLElement | null;
+            if (active) animateBars(active);
+            obs.disconnect();
+          }
+        }, { threshold: 0.1 });
+        obs.observe(root);
+      }
+
+      function animateBars(container: HTMLElement) {
+        container.querySelectorAll<HTMLElement>('.bar-fill').forEach(bar => {
+          bar.style.width = '0';
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            const pct = bar.style.getPropertyValue('--pct')
+              || (bar.getAttribute('style') || '').match(/--pct:([^;]+)/)?.[1]
+              || '0';
+            bar.style.width = pct;
+          }));
+        });
+      }
+
+      document.querySelectorAll('.explorer').forEach(initExplorer);
+    </script>
+  </>
+)}
+
+<style>
+  .explorer {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+  .explorer h2 {
+    margin-bottom: 0.5rem;
+  }
+  .explorer-intro {
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+    max-width: 640px;
+    margin-bottom: var(--space-md);
+  }
+  .explorer-live-note {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  /* ── Tabs ──────────────────────────────────────────────── */
+  .dataset-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+  }
+  .tab-btn {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    padding: 6px 14px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .tab-btn:hover {
+    border-color: var(--color-text-secondary);
+    color: var(--color-text);
+  }
+  .tab-btn.active {
+    background: var(--color-text);
+    border-color: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  /* ── Dataset views ─────────────────────────────────────── */
+  .dataset-view {
+    display: none;
+  }
+  .dataset-view.active {
+    display: block;
+  }
+  .tab-year {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* ── Table ─────────────────────────────────────────────── */
+  .data-table-wrap {
+    overflow-x: auto;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .data-table th {
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+    padding: 6px 12px 6px 0;
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 8px 12px 8px 0;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+    color: var(--color-text);
+  }
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+  .data-table tr.row-highlight td {
+    font-weight: 500;
+  }
+  .row-note {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+  .bar-col {
+    width: 140px;
+    min-width: 100px;
+  }
+
+  /* ── Bar fills ─────────────────────────────────────────── */
+  .bar-track {
+    background: var(--color-bg-alt, #f0eeea);
+    border-radius: 2px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    width: 0;
+    background: var(--color-border, #ccc);
+    border-radius: 2px;
+    transition: width 0.7s ease;
+  }
+  .bar-fill--accent {
+    background: #9b7aaa;
+  }
+
+  /* ── Source / notes ────────────────────────────────────── */
+  .source-note {
+    font-size: 0.72rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+    line-height: 1.5;
+  }
+  .tab-update-note {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding: 8px 12px;
+    border-left: 2px solid #9b7aaa;
+    background: rgba(155, 122, 170, 0.06);
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* ── Resources ─────────────────────────────────────────── */
+  .explorer-resources {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+  .explorer-resources h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-secondary);
+  }
+  .resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .resource-list a {
+    font-size: 0.88rem;
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .resource-list a:hover {
+    color: #9b7aaa;
+  }
+  .resource-desc {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 600px) {
+    .bar-col { width: 80px; min-width: 60px; }
+    .dataset-tabs { gap: 0.35rem; }
+    .tab-btn { font-size: 0.72rem; padding: 5px 10px; }
+  }
+</style>

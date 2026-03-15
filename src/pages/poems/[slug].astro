@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Poem from '../../layouts/Poem.astro';
+import ExploreData from '../../components/ExploreData.astro';
 
 export async function getStaticPaths() {
   const poems = await getCollection('poems');
@@ -64,6 +65,9 @@ const { title, description, type, image, imageAlt, image2, image2Alt, illustrati
       )}
     </div>
   </section>
+
+  <!-- ====== Data Explorer ====== -->
+  <ExploreData slug={poem.data.slug} />
 
   <!-- ====== Commentary ====== -->
   <section>
