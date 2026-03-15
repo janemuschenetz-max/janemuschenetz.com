@@ -1,0 +1,764 @@
+---
+import Poem from '../../layouts/Poem.astro';
+---
+<Poem title="Low Point" description="Two companion poems about childhood poverty, the child tax credit, and the hidden costs of growing up with scarcity.">
+  <section>
+    <div class="container">
+      <div class="low-point-chart-wrap">
+        <p class="low-point-epigraph">
+          <em>The rate of US childhood poverty reached its lowest point in 2021 due to the pandemic child tax
+          credit emergency relief program.<sup>1,2</sup></em>
+        </p>
+        <div id="low-point-chart"></div>
+        <div class="low-point-coda">
+          <span class="coda-line">But let's not get emotional,</span>
+          <span class="coda-line coda-line--tilted">let's look at facts.</span>
+        </div>
+      </div>
+
+      <div class="sr-only">
+        <p>LOW POINT. The SPM child poverty rate more than halved, from 12 to 5.2 percent, from 2018 to 2021. The rate of US childhood poverty reached its lowest point in 2021 due to the pandemic child tax credit emergency relief program.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container--narrow">
+      <h3>About This Poem</h3>
+      <p>'Low Point' charts how US childhood poverty reached its lowest point in 2021 when the pandemic child tax credit sent up to $300/kid/month to families in need — then Congress let it expire. The annotated graph turns dry policy data into a visual narrative about what happens when a proven intervention is abandoned.</p>
+      <p class="mt-sm" style="font-size:0.9rem; color:var(--color-text-secondary);">This interactive version animates the data to unfold the story sequentially. Hover over any data point to see the exact poverty rate.</p>
+      <h4 class="mt-md">Explore the Data</h4>
+
+      <div class="explore-card">
+        <h5>Supplemental Poverty Measure: Child Poverty Rate, 2009–2022</h5>
+        <p class="explore-source">Source: <a href="https://www.census.gov/newsroom/stories/poverty-awareness-month.html" target="_blank" rel="noopener">US Census Bureau, Supplemental Poverty Measures 2009–2022</a></p>
+        <p class="explore-desc">The SPM accounts for government programs like the child tax credit, food assistance, and housing subsidies — making it a more accurate measure of economic hardship than the official poverty rate. The dramatic dip in 2021 shows the direct impact of the expanded CTC.</p>
+        <div id="explore-poverty-timeline"></div>
+      </div>
+
+      <div class="explore-card">
+        <h5>The Cost Comparison: What $100B Bought</h5>
+        <p class="explore-source">Sources: <a href="https://www.npr.org/2022/01/27/1075299510/the-expanded-child-tax-credit-briefly-slashed-child-poverty-heres-what-else-it-d" target="_blank" rel="noopener">NPR</a>, <a href="https://www.nytimes.com/2022/11/25/us/politics/child-tax-credit.html" target="_blank" rel="noopener">NY Times</a></p>
+        <p class="explore-desc">Congress approved $1.7 trillion in 2022 discretionary spending. The expanded child tax credit that halved child poverty cost roughly $100 billion per year — about 6% of total discretionary spending. It was not renewed.</p>
+        <div id="explore-spending"></div>
+      </div>
+
+      <div class="explore-card">
+        <h5>What the Credit Meant Per Family</h5>
+        <p class="explore-source">Source: <a href="https://www.npr.org/2022/01/27/1075299510/the-expanded-child-tax-credit-briefly-slashed-child-poverty-heres-what-else-it-d" target="_blank" rel="noopener">NPR</a></p>
+        <p class="explore-desc">The expanded CTC sent monthly payments directly to families — $300/month per child under 6, $250/month per child 6–17. For the first time, the credit was fully refundable, reaching the poorest families who previously earned too little to qualify.</p>
+        <div id="explore-per-child"></div>
+      </div>
+    </div>
+  </section>
+</Poem>
+
+<style>
+  .low-point-chart-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .low-point-epigraph {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.6;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+  }
+
+  #low-point-chart {
+    width: 100%;
+    height: 520px;
+  }
+
+  .low-point-coda {
+    text-align: right;
+    margin-top: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .coda-line {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #1A1A1A;
+    border: 1.5px solid #1A1A1A;
+    padding: 0.3rem 0.7rem;
+    margin-left: 0.25rem;
+    background: #FAF9F6;
+  }
+
+  .coda-line--tilted {
+    transform: rotate(3deg);
+    display: inline-block;
+  }
+
+  .explore-card {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background: #F0EFEB;
+    border-radius: 4px;
+  }
+
+  .explore-card h5 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: #1A1A1A;
+    margin-bottom: 0.35rem;
+  }
+
+  .explore-source {
+    font-size: 0.8rem !important;
+    color: #8B6F4E !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .explore-source a {
+    color: #8B6F4E;
+    text-decoration: underline;
+  }
+
+  .explore-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  #explore-poverty-timeline {
+    width: 100%;
+    height: 400px;
+  }
+
+  #explore-spending {
+    width: 100%;
+    height: 350px;
+  }
+
+  #explore-per-child {
+    width: 100%;
+    height: 300px;
+  }
+
+  @media (max-width: 600px) {
+    #low-point-chart {
+      height: 400px;
+    }
+    #explore-poverty-timeline,
+    #explore-spending,
+    #explore-per-child {
+      height: 300px;
+    }
+    .explore-card {
+      padding: 1.25rem;
+    }
+  }
+</style>
+
+<script is:inline src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script is:inline src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<script is:inline>
+(function () {
+  var root = am5.Root.new("low-point-chart");
+
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  // Colors
+  var BLACK = am5.color(0x1A1A1A);
+  var RED = am5.color(0xD32F2F);
+  var BG = am5.color(0xFAF9F6);
+
+  var chart = root.container.children.push(
+    am5xy.XYChart.new(root, {
+      panX: false,
+      panY: false,
+      wheelX: "none",
+      wheelY: "none",
+      paddingTop: 60,
+      paddingRight: 80,
+      paddingBottom: 10,
+      paddingLeft: 10,
+      maskContent: false,
+    })
+  );
+
+  // Data — SPM child poverty rates (US Census, Supplemental Poverty Measures)
+  // bulletRotation: 0 = pointing up; 90 = pointing right; follows the line direction
+  var data = [
+    { year: 2017, rate: 13.0, annotation: null, bullet: "none", bulletRotation: 0 },
+    { year: 2018, rate: 13.7, annotation: "By sending up to $300 / kid / month\nto families who lack,", bullet: "triangle", bulletRotation: 95 },
+    { year: 2019, rate: 12.6, annotation: null, bullet: "none", bulletRotation: 0 },
+    { year: 2020, rate: 9.7, annotation: "the US Government cut\nchildhood poverty way back.", bullet: "triangle", bulletRotation: 130 },
+    { year: 2021, rate: 5.2, annotation: "Then stopped.", bullet: "circle", bulletRotation: 0 },
+    { year: 2022, rate: 12.4, annotation: null, bullet: "arrow", bulletRotation: 35 },
+  ];
+
+  // X Axis
+  var xAxis = chart.xAxes.push(
+    am5xy.ValueAxis.new(root, {
+      min: 2016,
+      max: 2023,
+      strictMinMax: true,
+      renderer: am5xy.AxisRendererX.new(root, {
+        minGridDistance: 60,
+        strokeOpacity: 1,
+        strokeWidth: 1.5,
+        stroke: BLACK,
+      }),
+      numberFormat: "####",
+    })
+  );
+  xAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, Helvetica Neue, sans-serif",
+    fontSize: 13,
+    fill: BLACK,
+  });
+  xAxis.get("renderer").grid.template.setAll({ visible: false });
+
+  // Y Axis
+  var yAxis = chart.yAxes.push(
+    am5xy.ValueAxis.new(root, {
+      min: 0,
+      max: 20,
+      strictMinMax: true,
+      numberFormat: "#'%'",
+      renderer: am5xy.AxisRendererY.new(root, {
+        strokeOpacity: 1,
+        strokeWidth: 1.5,
+        stroke: BLACK,
+      }),
+    })
+  );
+  yAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, Helvetica Neue, sans-serif",
+    fontSize: 13,
+    fill: BLACK,
+  });
+  yAxis.get("renderer").grid.template.setAll({
+    strokeOpacity: 0.12,
+    stroke: am5.color(0x999999),
+  });
+
+  // Y axis label
+  var yLabel = yAxis.children.unshift(
+    am5.Label.new(root, {
+      text: "US Childhood Poverty Rate",
+      fontFamily: "Inter, Helvetica Neue, sans-serif",
+      fontSize: 12,
+      fontStyle: "italic",
+      fill: am5.color(0x5A5A5A),
+      rotation: -90,
+      y: am5.p50,
+      centerX: am5.p50,
+    })
+  );
+
+  // Series
+  var series = chart.series.push(
+    am5xy.LineSeries.new(root, {
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "rate",
+      valueXField: "year",
+      stroke: BLACK,
+      fill: BLACK,
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{valueX.formatNumber('####')}: {valueY}%",
+        getFillFromSprite: false,
+        autoTextColor: false,
+      }),
+    })
+  );
+
+  series.get("tooltip").get("background").setAll({
+    fill: BG,
+    stroke: BLACK,
+    strokeWidth: 1,
+  });
+  series.get("tooltip").label.setAll({
+    fill: BLACK,
+    fontFamily: "Inter, Helvetica Neue, sans-serif",
+    fontSize: 13,
+  });
+
+  series.strokes.template.setAll({
+    strokeWidth: 2.5,
+  });
+
+  // Custom bullets
+  series.bullets.push(function (root, series, dataItem) {
+    var d = dataItem.dataContext;
+    var container = am5.Container.new(root, {});
+
+    // Bullet shape — triangles rotate to point along the line direction
+    if (d.bullet === "triangle" || d.bullet === "arrow") {
+      var tri = container.children.push(
+        am5.Triangle.new(root, {
+          width: 16,
+          height: 14,
+          fill: RED,
+          stroke: RED,
+          centerX: am5.p50,
+          centerY: am5.p50,
+        })
+      );
+      tri.set("rotation", d.bulletRotation || 0);
+    } else if (d.bullet === "circle") {
+      container.children.push(
+        am5.Circle.new(root, {
+          radius: 7,
+          fill: RED,
+          stroke: RED,
+          centerX: am5.p50,
+          centerY: am5.p50,
+        })
+      );
+    }
+
+    // Annotations
+    if (d.annotation) {
+      var lines = d.annotation.split("\n");
+      var yOff = d.year === 2021 ? 30 : -25 * lines.length - 15;
+      var xOff = 0;
+
+      lines.forEach(function (line, i) {
+        container.children.push(
+          am5.Label.new(root, {
+            text: line,
+            fontFamily: "Inter, Helvetica Neue, sans-serif",
+            fontSize: 14,
+            fill: BLACK,
+            centerX: am5.p50,
+            y: yOff + i * 24,
+            x: xOff,
+            background: am5.RoundedRectangle.new(root, {
+              fill: BG,
+              stroke: BLACK,
+              strokeWidth: 1.5,
+              cornerRadiusTL: 0,
+              cornerRadiusTR: 0,
+              cornerRadiusBL: 0,
+              cornerRadiusBR: 0,
+            }),
+            paddingTop: 4,
+            paddingBottom: 4,
+            paddingLeft: 10,
+            paddingRight: 10,
+          })
+        );
+      });
+    }
+
+    return am5.Bullet.new(root, { sprite: container });
+  });
+
+  // "Spent 16 times more" boxed annotation — positioned above 2022, angled along the upswing
+  chart.plotContainer.children.push(
+    am5.Label.new(root, {
+      text: "Spent 16 times more on\nother (Discretionary) Acts.",
+      fontFamily: "Inter, Helvetica Neue, sans-serif",
+      fontSize: 13,
+      fill: BLACK,
+      rotation: -55,
+      x: am5.percent(90),
+      y: am5.percent(15),
+      dx: 55,
+      dy: 15,
+      centerX: am5.p50,
+      centerY: am5.p100,
+      background: am5.RoundedRectangle.new(root, {
+        fill: BG,
+        stroke: BLACK,
+        strokeWidth: 1.5,
+        cornerRadiusTL: 0,
+        cornerRadiusTR: 0,
+        cornerRadiusBL: 0,
+        cornerRadiusBR: 0,
+      }),
+      paddingTop: 6,
+      paddingBottom: 6,
+      paddingLeft: 12,
+      paddingRight: 12,
+    })
+  );
+
+  // Animate in: start with data at 0, then reveal
+  var animatedData = data.map(function (d) {
+    return { year: d.year, rate: 0, annotation: d.annotation, bullet: d.bullet, bulletRotation: d.bulletRotation };
+  });
+  series.data.setAll(animatedData);
+
+  series.appear(2000);
+  chart.appear(2000, 200);
+
+  // After initial appear, animate each point to real value
+  setTimeout(function () {
+    data.forEach(function (d, i) {
+      setTimeout(function () {
+        series.data.setIndex(i, d);
+      }, i * 600);
+    });
+  }, 1200);
+})();
+
+// ============================================================
+// EXPLORE CHART 1: Extended Poverty Timeline (2009–2022)
+// Source: US Census SPM child poverty rates
+// ============================================================
+(function () {
+  var root = am5.Root.new("explore-poverty-timeline");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var BLACK = am5.color(0x1A1A1A);
+  var RED = am5.color(0xD32F2F);
+  var ACCENT = am5.color(0x8B6F4E);
+
+  var chart = root.container.children.push(
+    am5xy.XYChart.new(root, {
+      panX: false,
+      panY: false,
+      paddingTop: 30,
+      paddingRight: 20,
+      paddingBottom: 20,
+      paddingLeft: 5,
+    })
+  );
+
+  var data = [
+    { year: "2009", rate: 18.7, ctc: false },
+    { year: "2010", rate: 18.0, ctc: false },
+    { year: "2011", rate: 18.1, ctc: false },
+    { year: "2012", rate: 17.3, ctc: false },
+    { year: "2013", rate: 16.4, ctc: false },
+    { year: "2014", rate: 16.7, ctc: false },
+    { year: "2015", rate: 16.1, ctc: false },
+    { year: "2016", rate: 15.2, ctc: false },
+    { year: "2017", rate: 13.0, ctc: false },
+    { year: "2018", rate: 13.7, ctc: false },
+    { year: "2019", rate: 12.6, ctc: false },
+    { year: "2020", rate: 9.7,  ctc: false },
+    { year: "2021", rate: 5.2,  ctc: true },
+    { year: "2022", rate: 12.4, ctc: false },
+  ];
+
+  var xAxis = chart.xAxes.push(
+    am5xy.CategoryAxis.new(root, {
+      categoryField: "year",
+      renderer: am5xy.AxisRendererX.new(root, { minGridDistance: 50 }),
+    })
+  );
+  xAxis.data.setAll(data);
+  xAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 11, fill: BLACK,
+    rotation: -45, centerY: am5.p50, centerX: am5.p100,
+    paddingRight: 5,
+  });
+  xAxis.get("renderer").grid.template.setAll({ visible: false });
+
+  var yAxis = chart.yAxes.push(
+    am5xy.ValueAxis.new(root, {
+      min: 0,
+      max: 22,
+      numberFormat: "#'%'",
+      renderer: am5xy.AxisRendererY.new(root, {}),
+    })
+  );
+  yAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 11, fill: BLACK,
+  });
+  yAxis.get("renderer").grid.template.setAll({ strokeOpacity: 0.1 });
+
+  // Highlight CTC period — fill only, suppress the extra axis label
+  var rangeDataItem = xAxis.makeDataItem({ category: "2021", endCategory: "2021" });
+  var range = xAxis.createAxisRange(rangeDataItem);
+  range.get("axisFill").setAll({
+    fill: RED,
+    fillOpacity: 0.08,
+    visible: true,
+  });
+  range.get("label").setAll({ visible: false });
+
+  var areaSeries = chart.series.push(
+    am5xy.LineSeries.new(root, {
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueYField: "rate",
+      categoryXField: "year",
+      fill: ACCENT,
+      stroke: BLACK,
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{categoryX}: {valueY}%",
+        getFillFromSprite: false,
+        autoTextColor: false,
+      }),
+    })
+  );
+
+  areaSeries.get("tooltip").get("background").setAll({
+    fill: am5.color(0xFFFFFF), stroke: BLACK, strokeWidth: 1,
+  });
+  areaSeries.get("tooltip").label.setAll({
+    fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 13,
+  });
+
+  areaSeries.fills.template.setAll({ visible: true, fillOpacity: 0.08 });
+  areaSeries.strokes.template.setAll({ strokeWidth: 2.5 });
+
+  areaSeries.bullets.push(function (root, series, dataItem) {
+    var d = dataItem.dataContext;
+    var color = d.ctc ? RED : ACCENT;
+    var radius = d.ctc ? 7 : 3.5;
+    return am5.Bullet.new(root, {
+      sprite: am5.Circle.new(root, {
+        radius: radius, fill: color,
+        stroke: am5.color(0xFFFFFF), strokeWidth: 2,
+      }),
+    });
+  });
+
+  // Label for 2021 low point only — offset below the point to avoid overlap
+  areaSeries.bullets.push(function (root, series, dataItem) {
+    var d = dataItem.dataContext;
+    if (!d.ctc) return;
+    return am5.Bullet.new(root, {
+      locationY: 0,
+      sprite: am5.Label.new(root, {
+        text: "5.2% — Expanded CTC",
+        fontFamily: "Inter, sans-serif",
+        fontSize: 11,
+        fontWeight: "500",
+        fill: RED,
+        centerX: am5.p50,
+        centerY: 0,
+        dy: 12,
+      }),
+    });
+  });
+
+  areaSeries.data.setAll(data);
+  areaSeries.appear(1500);
+  chart.appear(1000, 100);
+})();
+
+// ============================================================
+// EXPLORE CHART 2: Spending Comparison (horizontal bars)
+// ============================================================
+(function () {
+  var root = am5.Root.new("explore-spending");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var BLACK = am5.color(0x1A1A1A);
+  var RED = am5.color(0xD32F2F);
+  var GRAY = am5.color(0xD4D0C8);
+
+  var chart = root.container.children.push(
+    am5xy.XYChart.new(root, {
+      panX: false,
+      panY: false,
+      paddingTop: 10,
+      paddingRight: 30,
+      paddingLeft: 5,
+      paddingBottom: 10,
+    })
+  );
+
+  var data = [
+    { category: "Expanded Child Tax Credit", value: 100, color: RED, label: "$100B/year" },
+    { category: "2022 Discretionary Spending", value: 1700, color: GRAY, label: "$1.7 Trillion" },
+  ];
+
+  // Horizontal: categories on Y axis, values on X
+  var yAxis = chart.yAxes.push(
+    am5xy.CategoryAxis.new(root, {
+      categoryField: "category",
+      renderer: am5xy.AxisRendererY.new(root, {
+        cellStartLocation: 0.2,
+        cellEndLocation: 0.8,
+        minGridDistance: 30,
+      }),
+    })
+  );
+  yAxis.data.setAll(data);
+  yAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 12, fill: BLACK,
+    maxWidth: 180, oversizedBehavior: "wrap",
+  });
+  yAxis.get("renderer").grid.template.setAll({ visible: false });
+
+  var xAxis = chart.xAxes.push(
+    am5xy.ValueAxis.new(root, {
+      min: 0,
+      numberFormat: "'$'#'B'",
+      renderer: am5xy.AxisRendererX.new(root, {}),
+    })
+  );
+  xAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 11, fill: BLACK,
+  });
+  xAxis.get("renderer").grid.template.setAll({ strokeOpacity: 0.08 });
+
+  var series = chart.series.push(
+    am5xy.ColumnSeries.new(root, {
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueXField: "value",
+      categoryYField: "category",
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{label}",
+        getFillFromSprite: false,
+        autoTextColor: false,
+      }),
+    })
+  );
+
+  series.get("tooltip").get("background").setAll({
+    fill: am5.color(0xFFFFFF), stroke: BLACK, strokeWidth: 1,
+  });
+  series.get("tooltip").label.setAll({
+    fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 13,
+  });
+
+  series.columns.template.setAll({
+    cornerRadiusTR: 3, cornerRadiusBR: 3, strokeOpacity: 0, height: am5.percent(60),
+  });
+
+  series.columns.template.adapters.add("fill", function (fill, target) {
+    return target.dataItem.dataContext.color;
+  });
+
+  // Value labels at end of bars
+  series.bullets.push(function (root, series, dataItem) {
+    var d = dataItem.dataContext;
+    return am5.Bullet.new(root, {
+      locationX: 1,
+      sprite: am5.Label.new(root, {
+        text: d.label,
+        fontFamily: "Inter, sans-serif",
+        fontSize: 12,
+        fontWeight: "500",
+        fill: BLACK,
+        centerY: am5.p50,
+        dx: 8,
+      }),
+    });
+  });
+
+  series.data.setAll(data);
+  series.appear(1500);
+  chart.appear(1000, 100);
+})();
+
+// ============================================================
+// EXPLORE CHART 3: Monthly Payment Per Child (horizontal bars)
+// ============================================================
+(function () {
+  var root = am5.Root.new("explore-per-child");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var BLACK = am5.color(0x1A1A1A);
+  var RED = am5.color(0xD32F2F);
+  var ACCENT = am5.color(0x8B6F4E);
+  var GRAY = am5.color(0xD4D0C8);
+
+  var chart = root.container.children.push(
+    am5xy.XYChart.new(root, {
+      panX: false,
+      panY: false,
+      paddingTop: 10,
+      paddingRight: 60,
+      paddingLeft: 5,
+      paddingBottom: 10,
+    })
+  );
+
+  var data = [
+    { category: "Before (non-refundable)", value: 167, color: GRAY, label: "$167/mo" },
+    { category: "Expanded CTC: under 6", value: 300, color: RED, label: "$300/mo" },
+    { category: "Expanded CTC: ages 6–17", value: 250, color: ACCENT, label: "$250/mo" },
+    { category: "After expiration", value: 167, color: GRAY, label: "$167/mo" },
+  ];
+
+  var yAxis = chart.yAxes.push(
+    am5xy.CategoryAxis.new(root, {
+      categoryField: "category",
+      renderer: am5xy.AxisRendererY.new(root, {
+        cellStartLocation: 0.15,
+        cellEndLocation: 0.85,
+        minGridDistance: 20,
+        inversed: true,
+      }),
+    })
+  );
+  yAxis.data.setAll(data);
+  yAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 12, fill: BLACK,
+    maxWidth: 180, oversizedBehavior: "wrap",
+  });
+  yAxis.get("renderer").grid.template.setAll({ visible: false });
+
+  var xAxis = chart.xAxes.push(
+    am5xy.ValueAxis.new(root, {
+      min: 0,
+      max: 350,
+      numberFormat: "'$'#",
+      renderer: am5xy.AxisRendererX.new(root, {}),
+    })
+  );
+  xAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 11, fill: BLACK,
+  });
+  xAxis.get("renderer").grid.template.setAll({ strokeOpacity: 0.08 });
+
+  var series = chart.series.push(
+    am5xy.ColumnSeries.new(root, {
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueXField: "value",
+      categoryYField: "category",
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{category}: {label}",
+        getFillFromSprite: false,
+        autoTextColor: false,
+      }),
+    })
+  );
+
+  series.get("tooltip").get("background").setAll({
+    fill: am5.color(0xFFFFFF), stroke: BLACK, strokeWidth: 1,
+  });
+  series.get("tooltip").label.setAll({
+    fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 13,
+  });
+
+  series.columns.template.setAll({
+    cornerRadiusTR: 3, cornerRadiusBR: 3, strokeOpacity: 0, height: am5.percent(55),
+  });
+
+  series.columns.template.adapters.add("fill", function (fill, target) {
+    return target.dataItem.dataContext.color;
+  });
+
+  series.bullets.push(function (root, series, dataItem) {
+    var d = dataItem.dataContext;
+    return am5.Bullet.new(root, {
+      locationX: 1,
+      sprite: am5.Label.new(root, {
+        text: d.label,
+        fontFamily: "Inter, sans-serif",
+        fontSize: 12,
+        fontWeight: "500",
+        fill: BLACK,
+        centerY: am5.p50,
+        dx: 8,
+      }),
+    });
+  });
+
+  series.data.setAll(data);
+  series.appear(1500);
+  chart.appear(1000, 100);
+})();
+</script>
