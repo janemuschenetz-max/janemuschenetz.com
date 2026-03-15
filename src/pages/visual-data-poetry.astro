@@ -20,6 +20,8 @@ const crossPairs: Record<string, string> = {
   'when-always':      'women-safety',
 };
 
+const heroPair = ['100-mom', 'make-belief-600'];
+
 const allPoems = (await getCollection('poems')).sort((a, b) => {
   const ai = slugOrder.indexOf(a.data.slug as string);
   const bi = slugOrder.indexOf(b.data.slug as string);
@@ -30,14 +32,18 @@ type Poem = typeof allPoems[0];
 type GalleryItem =
   | { kind: 'single'; poem: Poem }
   | { kind: 'image-pair'; poem: Poem }
-  | { kind: 'cross-pair'; first: Poem; second: Poem };
+  | { kind: 'cross-pair'; first: Poem; second: Poem }
+  | { kind: 'hero-row'; first: Poem; second: Poem };
 
 const items: GalleryItem[] = [];
 let i = 0;
 while (i < allPoems.length) {
   const p = allPoems[i];
   const slug = p.data.slug as string;
-  if (p.data.type === 'image-pair' && p.data.image2) {
+  if (heroPair[0] === slug && i + 1 < allPoems.length && (allPoems[i + 1].data.slug as string) === heroPair[1]) {
+    items.push({ kind: 'hero-row', first: p, second: allPoems[i + 1] });
+    i += 2;
+  } else if (p.data.type === 'image-pair' && p.data.image2) {
     items.push({ kind: 'image-pair', poem: p });
     i++;
   } else if (
@@ -62,6 +68,9 @@ while (i < allPoems.length) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
+  }
+  .gallery-pair--hero {
+    grid-template-columns: 70fr 30fr;
   }
 </style>
 <Base title="Visual & Data Poetry — Jane Muschenetz" description="Visual, science, and hybrid poetics. Exhibits and installations.">
@@ -89,6 +98,19 @@ while (i < allPoems.length) {
                 </a>
                 <a href={`/poems/${p.data.slug}`} class="gallery-item reveal">
                   <img src={p.data.image2 as string} alt={`${p.data.title} (continued) — ${p.data.description}`}>
+                </a>
+              </div>
+            );
+          }
+          if (item.kind === 'hero-row') {
+            const { first, second } = item;
+            return (
+              <div class="gallery-pair gallery-pair--hero">
+                <a href={`/poems/${first.data.slug}`} class="gallery-item reveal">
+                  <img src={(first.data.image || first.data.illustration) as string} alt={`${first.data.title} — ${first.data.description}`}>
+                </a>
+                <a href={`/poems/${second.data.slug}`} class="gallery-item reveal">
+                  <img src={(second.data.image || second.data.illustration) as string} alt={`${second.data.title} — ${second.data.description}`}>
                 </a>
               </div>
             );
