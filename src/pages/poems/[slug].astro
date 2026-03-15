@@ -80,7 +80,7 @@ const { title, description, type, image, imageAlt, image2, image2Alt, illustrati
           <div class="poem-footnotes">
             <ol>
               {footnotes.map((note) => (
-                <li>{note}</li>
+                <li set:html={note}></li>
               ))}
             </ol>
           </div>
