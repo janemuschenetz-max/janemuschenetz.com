@@ -8,6 +8,12 @@ const poems = await getCollection('poems');
   .page-hero__subtitle { max-width: none; white-space: nowrap; }
   .page-hero { padding-bottom: 2.56rem; }
   .page-hero + section { padding-top: 2.56rem; }
+  .gallery-pair {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
 </style>
 <Base title="Visual & Data Poetry — Jane Muschenetz" description="Visual, science, and hybrid poetics. Exhibits and installations.">
   <section class="page-hero">
@@ -25,16 +31,20 @@ const poems = await getCollection('poems');
       </div>
       <div class="gallery-grid">
         {poems.map((poem) => (
-          <>
-            <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
-              <img src={poem.data.image || poem.data.illustration} alt={`${poem.data.title} — ${poem.data.description}`}>
-            </a>
-            {poem.data.type === 'image-pair' && poem.data.image2 && (
+          poem.data.type === 'image-pair' && poem.data.image2 ? (
+            <div class="gallery-pair">
+              <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
+                <img src={poem.data.image} alt={`${poem.data.title} — ${poem.data.description}`}>
+              </a>
               <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
                 <img src={poem.data.image2} alt={`${poem.data.title} (continued) — ${poem.data.description}`}>
               </a>
-            )}
-          </>
+            </div>
+          ) : (
+            <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
+              <img src={poem.data.image || poem.data.illustration} alt={`${poem.data.title} — ${poem.data.description}`}>
+            </a>
+          )
         ))}
       </div>
     </div>
