@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "/Users/jane/.nvm/versions/node/v22.22.1/bin/node",
+      "runtimeArgs": ["/Users/jane/Documents/GitHub/janemuschenetz.com/.claude/worktrees/naughty-lumiere/node_modules/astro/bin/astro.mjs", "dev"],
+      "port": 4321
+    }
+  ]
+}
