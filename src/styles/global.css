@@ -698,6 +698,7 @@ section {
 .poem-text-layout .poem-illustration img {
   width: 100%;
   height: auto;
+  mix-blend-mode: multiply;
 }
 
 /* Screen reader only */
