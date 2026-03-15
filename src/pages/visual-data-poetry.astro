@@ -4,6 +4,11 @@ import { getCollection } from 'astro:content';
 
 const poems = await getCollection('poems');
 ---
+<style>
+  .page-hero__subtitle { max-width: none; white-space: nowrap; }
+  .page-hero { padding-bottom: 2.56rem; }
+  .page-hero + section { padding-top: 2.56rem; }
+</style>
 <Base title="Visual & Data Poetry — Jane Muschenetz" description="Visual, science, and hybrid poetics. Exhibits and installations.">
   <section class="page-hero">
     <div class="container">
