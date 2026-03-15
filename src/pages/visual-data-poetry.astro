@@ -25,9 +25,16 @@ const poems = await getCollection('poems');
       </div>
       <div class="gallery-grid">
         {poems.map((poem) => (
-          <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
-            <img src={poem.data.image || poem.data.illustration} alt={`${poem.data.title} — ${poem.data.description}`}>
-          </a>
+          <>
+            <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
+              <img src={poem.data.image || poem.data.illustration} alt={`${poem.data.title} — ${poem.data.description}`}>
+            </a>
+            {poem.data.type === 'image-pair' && poem.data.image2 && (
+              <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
+                <img src={poem.data.image2} alt={`${poem.data.title} (continued) — ${poem.data.description}`}>
+              </a>
+            )}
+          </>
         ))}
       </div>
     </div>
