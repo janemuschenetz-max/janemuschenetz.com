@@ -3,6 +3,7 @@ title: "#ME TOO, a Point of Consensus"
 slug: "metoo"
 description: "A two-page data visualization examining sexual violence prevalence, underreporting, and economic burden in America."
 type: "image-pair"
+order: 5
 image: "/images/poem-metoo.png"
 imageAlt: "Data visualization titled '#ME TOO, A POINT OF CONSENSUS — Part 1.' Charts show: Sexual Violence incidents by gender (1 in 4 women, 1 in 26 men experience rape), rate of reporting, age of victim at first rape, familiarity with assailant, and location."
 image2: "/images/poem-metoo-part2.png"
