@@ -833,27 +833,27 @@ section {
 .btn-submit {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--color-border);
   background: transparent;
-  color: var(--color-text);
-  padding: 0.8rem 2rem;
+  color: var(--color-text-secondary);
+  padding: 0.6rem 1.4rem;
   cursor: pointer;
-  transition: background var(--transition), color var(--transition);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
   margin-top: var(--space-sm);
 }
 
 .btn-submit:hover {
-  background: var(--color-text);
-  color: var(--color-bg);
+  border-color: var(--color-text);
+  color: var(--color-text);
 }
 
 /* --- Newsletter --- */
 .newsletter {
   text-align: center;
-  padding: var(--space-xl) 0 var(--space-lg);
+  padding: var(--space-md) 0 var(--space-sm);
   border-top: 1px solid var(--color-border);
 }
 
@@ -873,14 +873,15 @@ section {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
   letter-spacing: 0.04em;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-sm);
 }
 
 .newsletter__cta {
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-sm);
+  margin-top: var(--space-md);
+  margin-bottom: 0;
 }
 
 .newsletter-form {
@@ -923,6 +924,49 @@ section {
 .newsletter-form button:hover {
   border-color: var(--color-text);
   color: var(--color-text);
+}
+
+/* --- Kit form overrides --- */
+[data-uid="3645cb6d09"].formkit-form {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  padding-top: 12px !important;
+  margin: 0 auto !important;
+  max-width: 420px;
+  font-family: var(--font-body) !important;
+}
+[data-uid="3645cb6d09"] .formkit-input {
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  background: var(--color-bg) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+[data-uid="3645cb6d09"] .formkit-submit {
+  font-family: var(--font-body) !important;
+  font-size: 0.7rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+[data-uid="3645cb6d09"] .formkit-submit:hover {
+  color: var(--color-text) !important;
+  border-color: var(--color-text) !important;
+}
+[data-uid="3645cb6d09"] .formkit-powered-by-convertkit-container {
+  opacity: 0.4;
+  transform: scale(0.5);
+  transform-origin: center top;
+  margin-bottom: -1rem;
 }
 
 /* --- Footer --- */
