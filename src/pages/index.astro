@@ -1,5 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const featuredItems = (await getCollection('featured')).filter((f) => f.data.active !== false);
 ---
 <Base title="Jane Yevgenia Muschenetz" showDesktopNav={false}>
   <section class="hero">
@@ -51,25 +54,29 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 
-  <section class="reveal">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <h2 class="section-title">Featured</h2>
-      </div>
-      <div class="featured-banner">
-        <div class="featured-banner__image">
-          <img src="/images/pfs-banner.jpg" alt="Poets for Science Gathering">
+  {featuredItems.map((item) => (
+    <section class="reveal">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Featured</h2>
         </div>
-        <div class="featured-banner__text">
-          <h3>Poets for Science Gathering</h3>
-          <p class="lead">The Poet&rsquo;s Laboratory &mdash; with Katie Manning &amp; Jane Muschenetz</p>
-          <p>November 12&ndash;14, 2026 &middot; Kent State University &middot; With Arthur Sze, Maria Popova, Jane Hirshfield, Tracy K. Smith, and others.</p>
-          <a href="#inquiries" class="btn">Learn More</a>
+        <div class="featured-banner">
+          <div class="featured-banner__image">
+            <img src={item.data.image} alt={item.data.imageAlt} />
+          </div>
+          <div class="featured-banner__text">
+            <h3>{item.data.title}</h3>
+            <p class="lead">{item.data.subtitle}</p>
+            <p>{item.data.description}</p>
+            {item.data.link && (
+              <a href={item.data.link} class="btn">{item.data.linkText || 'Learn More'}</a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
   <section class="reveal">
     <div class="container">

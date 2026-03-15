@@ -1,5 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const publications = (await getCollection('publications')).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const pressItems = (await getCollection('press')).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 ---
 <Base title="Writing & Press — Jane Muschenetz" description="Publications, recognitions, books, and biography of Jane Yevgenia Muschenetz.">
   <section class="page-hero">
@@ -16,26 +21,16 @@ import Base from '../layouts/Base.astro';
         <h2 class="section-title">Poems &amp; Essays</h2>
       </div>
       <div class="pub-list">
-        <div class="pub-item">
-          <span class="pub-item__title">All the Bad Girls Wear Russian Accents</span>
-          <span class="pub-item__meta">Lucky Jefferson, 2022</span>
-        </div>
-        <a href="/poems/make-belief-600" class="pub-item link-underline">
-          <span class="pub-item__title">You are 600% hotter than the Sun</span>
-          <span class="pub-item__meta">Cathexis NW Press, 2024</span>
-        </a>
-        <div class="pub-item">
-          <span class="pub-item__title">For Those of Us Forced to Flee</span>
-          <span class="pub-item__meta">The Good Life Review, 2022</span>
-        </div>
-        <div class="pub-item">
-          <span class="pub-item__title">Why do YOU love Taylor Swift?</span>
-          <span class="pub-item__meta">Whale Road Review, 2025</span>
-        </div>
-        <div class="pub-item">
-          <span class="pub-item__title">Venigret, a recipe for disaster</span>
-          <span class="pub-item__meta">Punctured Lines, 2023</span>
-        </div>
+        {publications.map((pub) => {
+          const Tag = pub.data.link ? 'a' : 'div';
+          const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline' } : { class: 'pub-item' };
+          return (
+            <Tag {...attrs}>
+              <span class="pub-item__title">{pub.data.title}</span>
+              <span class="pub-item__meta">{pub.data.publisher}</span>
+            </Tag>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -47,26 +42,12 @@ import Base from '../layouts/Base.astro';
         <h2 class="section-title">Press &amp; Recognitions</h2>
       </div>
       <div class="pub-list">
-        <div class="pub-item">
-          <span class="pub-item__title">MIT Technology Review &mdash; Data Poetry Feature</span>
-          <span class="pub-item__meta">2025</span>
-        </div>
-        <div class="pub-item">
-          <span class="pub-item__title">KPBS Midday Edition &mdash; On-air Interview</span>
-          <span class="pub-item__meta">2023</span>
-        </div>
-        <div class="pub-item">
-          <span class="pub-item__title">National Federation of Press Women &mdash; First Place (Verse)</span>
-          <span class="pub-item__meta">2025</span>
-        </div>
-        <div class="pub-item">
-          <span class="pub-item__title">San Diego Writers Festival &mdash; Poetry Collection of the Year</span>
-          <span class="pub-item__meta">2024</span>
-        </div>
-        <div class="pub-item">
-          <span class="pub-item__title">Middle West Press &mdash; First Place (War Poetry)</span>
-          <span class="pub-item__meta">2025</span>
-        </div>
+        {pressItems.map((item) => (
+          <div class="pub-item">
+            <span class="pub-item__title">{item.data.title}</span>
+            <span class="pub-item__meta">{item.data.year}</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -78,31 +59,22 @@ import Base from '../layouts/Base.astro';
         <h2 class="section-title">Books</h2>
       </div>
 
-      <div class="book-feature">
-        <div class="book-cover">
-          <img src="/images/bad-girls-cover.png" alt="All the Bad Girls Wear Russian Accents book cover">
+      {books.map((book) => (
+        <div class="book-feature">
+          <div class="book-cover">
+            <img src={book.data.cover} alt={book.data.coverAlt} />
+          </div>
+          <div class="book-info">
+            <h3>{book.data.title}</h3>
+            {book.data.quotes?.map((q) => (
+              <>
+                <blockquote class="book-quote">&ldquo;{q.text}&rdquo;</blockquote>
+                <p class="book-quote-attribution">&mdash; {q.attribution}</p>
+              </>
+            ))}
+          </div>
         </div>
-        <div class="book-info">
-          <h3>All the Bad Girls Wear Russian Accents</h3>
-          <blockquote class="book-quote">"Crackling humor... delightful flavors of childhood, and tender celebration of our common humanity."</blockquote>
-          <p class="book-quote-attribution">&mdash; Ari Honarvar, Nautilus Book Award Winner</p>
-          <blockquote class="book-quote">"For anyone who has fought for the right to love, celebrate, and be themselves."</blockquote>
-          <p class="book-quote-attribution">&mdash; Reader's Favorite, 5 Star Review</p>
-        </div>
-      </div>
-
-      <div class="book-feature">
-        <div class="book-cover">
-          <img src="/images/power-point-cover.jpg" alt="POWER POINT book cover">
-        </div>
-        <div class="book-info">
-          <h3>POWER POINT</h3>
-          <blockquote class="book-quote">"Fascinating... strong and timely collection, worthy of first place in this category! Excellent work."</blockquote>
-          <p class="book-quote-attribution">&mdash; National Federation of Press Women</p>
-          <blockquote class="book-quote">"Astonishing... Muschenetz calls the U.S. to account for injustices against women and girls... while still offering us humor, beauty, and hope for the future."</blockquote>
-          <p class="book-quote-attribution">&mdash; Katie Manning, Whale Road Review</p>
-        </div>
-      </div>
+      ))}
     </div>
   </section>
 

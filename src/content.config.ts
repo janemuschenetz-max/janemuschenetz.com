@@ -23,4 +23,53 @@ const poems = defineCollection({
   }),
 });
 
-export const collections = { poems };
+const publications = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/publications' }),
+  schema: z.object({
+    title: z.string(),
+    publisher: z.string(),
+    year: z.number(),
+    link: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+const press = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/press' }),
+  schema: z.object({
+    title: z.string(),
+    year: z.number(),
+    link: z.string().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+const books = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/books' }),
+  schema: z.object({
+    title: z.string(),
+    cover: z.string(),
+    coverAlt: z.string(),
+    quotes: z.array(z.object({
+      text: z.string(),
+      attribution: z.string(),
+    })).optional(),
+    order: z.number().optional(),
+  }),
+});
+
+const featured = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/featured' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    image: z.string(),
+    imageAlt: z.string(),
+    link: z.string().optional(),
+    linkText: z.string().optional(),
+    active: z.boolean().optional(),
+  }),
+});
+
+export const collections = { poems, publications, press, books, featured };

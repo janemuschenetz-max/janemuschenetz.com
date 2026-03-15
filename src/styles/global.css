@@ -329,6 +329,7 @@ section {
   max-width: 800px;
   font-style: normal;
   font-weight: 400;
+  margin-bottom: var(--space-md);
 }
 
 .hero__subtitle--large .hero-word {
@@ -346,7 +347,7 @@ section {
   color: var(--color-text-secondary);
   max-width: 600px;
   line-height: 1.6;
-  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 .hero__cta {
