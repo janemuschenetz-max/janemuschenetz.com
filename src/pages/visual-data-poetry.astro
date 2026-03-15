@@ -2,12 +2,67 @@
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const poems = await getCollection('poems');
+const slugOrder = [
+  '100-mom',
+  'make-belief-600',
+  'point-blank',
+  'exclamation-point',
+  'metoo',
+  'safety-points',
+  'when-always',
+  'low-point',
+];
+
+const crossPairs: Record<string, string> = {
+  'point-blank':      'gun-violence',
+  'exclamation-point':'gun-violence',
+  'safety-points':    'women-safety',
+  'when-always':      'women-safety',
+};
+
+const heroPair = ['100-mom', 'make-belief-600'];
+
+const allPoems = (await getCollection('poems')).sort((a, b) => {
+  const ai = slugOrder.indexOf(a.data.slug as string);
+  const bi = slugOrder.indexOf(b.data.slug as string);
+  return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+});
+
+type Poem = typeof allPoems[0];
+type GalleryItem =
+  | { kind: 'single'; poem: Poem }
+  | { kind: 'image-pair'; poem: Poem }
+  | { kind: 'cross-pair'; first: Poem; second: Poem }
+  | { kind: 'hero-row'; first: Poem; second: Poem };
+
+const items: GalleryItem[] = [];
+let i = 0;
+while (i < allPoems.length) {
+  const p = allPoems[i];
+  const slug = p.data.slug as string;
+  if (heroPair[0] === slug && i + 1 < allPoems.length && (allPoems[i + 1].data.slug as string) === heroPair[1]) {
+    items.push({ kind: 'hero-row', first: p, second: allPoems[i + 1] });
+    i += 2;
+  } else if (p.data.type === 'image-pair' && p.data.image2) {
+    items.push({ kind: 'image-pair', poem: p });
+    i++;
+  } else if (
+    crossPairs[slug] &&
+    i + 1 < allPoems.length &&
+    crossPairs[allPoems[i + 1].data.slug as string] === crossPairs[slug]
+  ) {
+    items.push({ kind: 'cross-pair', first: p, second: allPoems[i + 1] });
+    i += 2;
+  } else {
+    items.push({ kind: 'single', poem: p });
+    i++;
+  }
+}
 ---
 <style>
   .page-hero__subtitle { max-width: none; white-space: nowrap; }
-  .page-hero { padding-bottom: 2.56rem; }
-  .page-hero + section { padding-top: 2.56rem; }
+  .page-hero { padding-bottom: 1.28rem; }
+  .page-hero + section { padding-top: 1.28rem; }
   .gallery-pair {
     grid-column: 1 / -1;
     display: grid;
@@ -30,22 +85,53 @@ const poems = await getCollection('poems');
         <h2 class="section-title">Selected Samples</h2>
       </div>
       <div class="gallery-grid">
-        {poems.map((poem) => (
-          poem.data.type === 'image-pair' && poem.data.image2 ? (
-            <div class="gallery-pair">
-              <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
-                <img src={poem.data.image} alt={`${poem.data.title} — ${poem.data.description}`}>
-              </a>
-              <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
-                <img src={poem.data.image2} alt={`${poem.data.title} (continued) — ${poem.data.description}`}>
-              </a>
-            </div>
-          ) : (
-            <a href={`/poems/${poem.data.slug}`} class="gallery-item reveal">
-              <img src={poem.data.image || poem.data.illustration} alt={`${poem.data.title} — ${poem.data.description}`}>
+        {items.map((item) => {
+          if (item.kind === 'image-pair') {
+            const p = item.poem;
+            return (
+              <div class="gallery-pair">
+                <a href={`/poems/${p.data.slug}`} class="gallery-item reveal">
+                  <img src={p.data.image as string} alt={`${p.data.title} — ${p.data.description}`}>
+                </a>
+                <a href={`/poems/${p.data.slug}`} class="gallery-item reveal">
+                  <img src={p.data.image2 as string} alt={`${p.data.title} (continued) — ${p.data.description}`}>
+                </a>
+              </div>
+            );
+          }
+          if (item.kind === 'hero-row') {
+            const { first, second } = item;
+            return (
+              <div class="gallery-pair">
+                <a href={`/poems/${first.data.slug}`} class="gallery-item reveal">
+                  <img src={(first.data.image || first.data.illustration) as string} alt={`${first.data.title} — ${first.data.description}`}>
+                </a>
+                <a href={`/poems/${second.data.slug}`} class="gallery-item reveal">
+                  <img src={(second.data.image || second.data.illustration) as string} alt={`${second.data.title} — ${second.data.description}`}>
+                </a>
+              </div>
+            );
+          }
+          if (item.kind === 'cross-pair') {
+            const { first, second } = item;
+            return (
+              <div class="gallery-pair">
+                <a href={`/poems/${first.data.slug}`} class="gallery-item reveal">
+                  <img src={(first.data.image || first.data.illustration) as string} alt={`${first.data.title} — ${first.data.description}`}>
+                </a>
+                <a href={`/poems/${second.data.slug}`} class="gallery-item reveal">
+                  <img src={(second.data.image || second.data.illustration) as string} alt={`${second.data.title} — ${second.data.description}`}>
+                </a>
+              </div>
+            );
+          }
+          const p = item.poem;
+          return (
+            <a href={`/poems/${p.data.slug}`} class="gallery-item reveal">
+              <img src={(p.data.image || p.data.illustration) as string} alt={`${p.data.title} — ${p.data.description}`}>
             </a>
-          )
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>

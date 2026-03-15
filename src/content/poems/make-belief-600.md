@@ -3,6 +3,7 @@ title: "You Are 600% Hotter Than the Sun"
 slug: "make-belief-600"
 description: "A poem about human radiance, physics, and love — inspired by Minute Physics."
 type: "text"
+order: 2
 illustration: "/images/illustration-sun.avif"
 illustrationAlt: "Vintage engraving of a radiant sun with a face, captioned 'Fig. 1 (½th you)'"
 epigraphText: "A cup of the Sun's core produces ~60 milliwatts of thermal energy. By volume, …less than that of a human [350 mW]. In a sense, you are hotter than the Sun — there's just not as much of you."
