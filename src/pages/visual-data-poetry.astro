@@ -137,7 +137,8 @@ while (i < allPoems.length) {
   .sun-gallery-live {
     position: relative;
     width: 100%;
-    aspect-ratio: 640 / 624;
+    height: 100%;
+    min-height: 300px;
     overflow: hidden;
     background: #F5F0E8;
     display: flex;
@@ -324,7 +325,7 @@ while (i < allPoems.length) {
                     <img src="/images/mom2.svg" alt={`${first.data.title} — ${first.data.description}`}>
                   </div>
                 </a>
-                <a href={poemHref(second.data.slug as string)} class="gallery-item reveal">
+                <a href={poemHref(second.data.slug as string)} class="gallery-item reveal" style="display:block;line-height:0;">
                   <div class="sun-gallery-live" aria-label={`${second.data.title} — ${second.data.description}`}>
                     <svg class="sun-gallery-rays" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <g fill="#E8941A" opacity="0.18">
