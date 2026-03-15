@@ -1,6 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
+<style>
+  section:not(.page-hero) {
+    padding: calc(var(--space-lg) * 0.5) 0;
+  }
+</style>
 <Base title="Speaking & Advisory — Jane Muschenetz" description="Keynotes, talks, panels, workshops, readings, and interdisciplinary programs.">
   <section class="page-hero">
     <div class="container">
@@ -21,7 +26,7 @@ import Base from '../layouts/Base.astro';
         <span class="section-number">01</span>
         <h2 class="section-title">Sample Topics</h2>
       </div>
-      <div class="grid grid--2" style="gap: var(--space-xl);">
+      <div class="grid grid--2" style="column-gap: var(--space-md); row-gap: var(--space-xs); margin-top: var(--space-md);">
         <div class="topic-group">
           <h4 class="topic-group__title">Humor &amp; Food</h4>
           <ul class="topic-group__list">
@@ -66,17 +71,18 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 
-  <section class="reveal">
+  <section class="reveal" style="padding-top: 0;">
     <div class="container">
       <div class="section-header">
         <span class="section-number">02</span>
         <h2 class="section-title">Collaboration Highlights</h2>
       </div>
-      <p class="lead mb-md">Jane's program engagements with academic, civic, business, and cultural institutions have included:</p>
+      <p class="mb-md">Program engagements with academic, civic, business, and cultural institutions have included:</p>
       <div class="collab-logos">
-        {Array.from({length: 14}, (_, i) => {
-          const ext = [6, 9, 11, 13, 14].includes(i + 1) ? 'jpg' : 'png';
-          return <img src={`/images/collab-${String(i + 1).padStart(2, '0')}.${ext}`} alt="Partner organization" />;
+        {Array.from({length: 18}, (_, i) => {
+          const n = i + 1;
+          const ext = [6, 9, 11, 13, 14, 18].includes(n) ? 'jpg' : 'png';
+          return <img src={`/images/collab-${String(n).padStart(2, '0')}.${ext}`} alt="Partner organization" />;
         })}
       </div>
     </div>
@@ -90,7 +96,7 @@ import Base from '../layouts/Base.astro';
       </div>
       <div class="inquiries-grid">
         <div>
-          <p class="lead">For invitations, collaborations, or advisory work, please share a short note with your timeline and context.</p>
+          <p>For invitations, collaborations, or advisory work, please share a short note with your timeline and context.</p>
         </div>
         <form class="contact-form" onsubmit="return false;">
           <div class="form-group">

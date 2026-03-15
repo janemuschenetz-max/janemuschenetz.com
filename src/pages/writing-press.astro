@@ -6,6 +6,11 @@ const publications = (await getCollection('publications')).sort((a, b) => (a.dat
 const pressItems = (await getCollection('press')).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 ---
+<style>
+  section:not(.page-hero) {
+    padding: calc(var(--space-lg) * 0.5) 0;
+  }
+</style>
 <Base title="Writing & Press — Jane Muschenetz" description="Publications, recognitions, books, and biography of Jane Yevgenia Muschenetz.">
   <section class="page-hero">
     <div class="container">

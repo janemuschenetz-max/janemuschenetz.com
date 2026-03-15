@@ -110,6 +110,14 @@ section {
   padding: var(--space-lg) 0;
 }
 
+#work {
+  padding-bottom: calc(var(--space-lg) * 0.5);
+}
+
+.featured-section {
+  padding-top: calc(var(--space-lg) * 0.3);
+}
+
 .grid {
   display: grid;
   gap: var(--space-md);
@@ -418,19 +426,22 @@ section {
 /* --- About Section --- */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.4fr;
   gap: var(--space-xl);
-  align-items: start;
+  align-items: center;
 }
 
 .about-image {
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .about-image img {
-  width: 100%;
+  width: 70%;
   aspect-ratio: 3/4;
   object-fit: cover;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
 }
 
 .about-text p {
@@ -464,15 +475,16 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(0.85);
   transition: transform 0.6s ease;
 }
 
 .work-card:hover .work-card__image img {
-  transform: scale(1.02);
+  transform: scale(0.87);
 }
 
 .work-card__info {
-  padding: var(--space-sm) 0;
+  padding: var(--space-sm) 0 calc(var(--space-sm) * 0.6);
 }
 
 .work-card__category {
@@ -865,7 +877,8 @@ section {
 }
 
 .newsletter__cta {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
   color: var(--color-text-secondary);
   margin-bottom: var(--space-sm);
 }
@@ -1062,11 +1075,12 @@ section {
   height: 50px;
   width: auto;
   filter: grayscale(100%);
-  transition: filter var(--transition);
+  transition: filter var(--transition), transform var(--transition);
 }
 
 .collab-logos img:hover {
   filter: grayscale(0%);
+  transform: scale(1.55);
 }
 
 /* ==========================================================================
