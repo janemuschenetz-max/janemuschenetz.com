@@ -379,7 +379,7 @@ section {
 
 /* --- Page Hero (subpages) --- */
 .page-hero {
-  padding: calc(80px + var(--space-xl)) 0 var(--space-lg);
+  padding: calc(80px + var(--space-xl)) 0 calc(var(--space-lg) / 2);
 }
 
 .page-hero__title {
