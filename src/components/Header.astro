@@ -1,0 +1,26 @@
+---
+const { showDesktopNav = true } = Astro.props;
+---
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">Jane Muschenetz</a>
+    {showDesktopNav && (
+      <nav class="nav-desktop">
+        <a href="/">Home</a>
+        <a href="/visual-data-poetry">Visual &amp; Data Poetry</a>
+        <a href="/speaking-advisory">Speaking &amp; Advisory</a>
+        <a href="/writing-press">Writing &amp; Press</a>
+      </nav>
+    )}
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile-overlay" id="mobile-nav">
+  <a href="/">Home</a>
+  <a href="/visual-data-poetry">Visual &amp; Data Poetry</a>
+  <a href="/speaking-advisory">Speaking &amp; Advisory</a>
+  <a href="/writing-press">Writing &amp; Press</a>
+</nav>

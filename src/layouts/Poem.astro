@@ -1,0 +1,22 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  subtitle?: string;
+}
+
+const { title, description, subtitle = 'from <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)' } = Astro.props;
+---
+<Base title={`${title} — Jane Muschenetz`} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero__eyebrow"><a href="/visual-data-poetry" class="link-underline">&larr; Visual &amp; Data Poetry</a></p>
+      <h1 class="page-hero__title">{title}</h1>
+      <p class="page-hero__subtitle" set:html={subtitle} />
+    </div>
+  </section>
+
+  <slot />
+</Base>

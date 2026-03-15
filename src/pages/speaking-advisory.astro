@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Speaking & Advisory — Jane Muschenetz" description="Keynotes, talks, panels, workshops, readings, and interdisciplinary programs.">
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Speaking<br>&amp; Advisory</h1>
+      <p class="page-hero__subtitle">Keynotes, talks, panels, workshops, readings, and interdisciplinary programs.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="container">
+      <img src="/images/speaking.jpg" alt="Jane Muschenetz speaking" style="width:100%; aspect-ratio:16/7; object-fit:cover;">
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2 class="section-title">Sample Topics</h2>
+      </div>
+      <div class="grid grid--2" style="gap: var(--space-xl);">
+        <div class="topic-group">
+          <h4 class="topic-group__title">Humor &amp; Food</h4>
+          <ul class="topic-group__list">
+            <li>Recipe for a good life</li>
+            <li>Poetry as comfort food</li>
+            <li>Laughter and the "odds" of survival</li>
+            <li>Food, culture, and memory</li>
+            <li>The comedy of domestic life</li>
+          </ul>
+        </div>
+        <div class="topic-group">
+          <h4 class="topic-group__title">Art, Science, &amp; Society</h4>
+          <ul class="topic-group__list">
+            <li>The poet's laboratory</li>
+            <li>Impactful scientific communication</li>
+            <li>In good measure: data, poetics, and politics</li>
+            <li>Intersection of art and science</li>
+            <li>Love poems for nerds</li>
+          </ul>
+        </div>
+        <div class="topic-group">
+          <h4 class="topic-group__title">Place &amp; Belonging</h4>
+          <ul class="topic-group__list">
+            <li>Ukraine</li>
+            <li>Identity, migration, and bridging divides</li>
+            <li>Fostering creative ecosystems</li>
+            <li>Public space as shared narrative</li>
+            <li>Everything I learned in the Soviet diaspora</li>
+          </ul>
+        </div>
+        <div class="topic-group">
+          <h4 class="topic-group__title">Gender &amp; Faith</h4>
+          <ul class="topic-group__list">
+            <li>"Bad Girls" of Poetry</li>
+            <li>Motherhood, women, and power</li>
+            <li>Jewish storytelling</li>
+            <li>Hope in difficult times</li>
+            <li>Our common humanity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Collaboration Highlights</h2>
+      </div>
+      <p class="lead mb-md">Jane's program engagements with academic, civic, business, and cultural institutions have included:</p>
+      <div class="collab-logos">
+        {Array.from({length: 14}, (_, i) => {
+          const ext = [6, 9, 11, 13, 14].includes(i + 1) ? 'jpg' : 'png';
+          return <img src={`/images/collab-${String(i + 1).padStart(2, '0')}.${ext}`} alt="Partner organization" />;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="inquiries-section reveal" id="inquiries">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Inquiries</h2>
+      </div>
+      <div class="inquiries-grid">
+        <div>
+          <p class="lead">For invitations, collaborations, or advisory work, please share a short note with your timeline and context.</p>
+        </div>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" required>
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Poem from '../../layouts/Poem.astro';
+
+export async function getStaticPaths() {
+  const poems = await getCollection('poems');
+  return poems.map((poem) => ({
+    params: { slug: poem.data.slug },
+    props: { poem },
+  }));
+}
+
+const { poem } = Astro.props;
+const { title, description, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes } = poem.data;
+---
+<Poem title={title} description={description}>
+  <!-- ====== Poem ====== -->
+  <section>
+    <div class="container">
+      {type === 'image' && (
+        <div class="poem-page-single">
+          <img src={image} alt={imageAlt}>
+        </div>
+      )}
+
+      {type === 'image-pair' && (
+        <>
+          <div class="poem-page-single">
+            <img src={image} alt={imageAlt}>
+          </div>
+          <div class="poem-page-single mt-md">
+            <img src={image2} alt={image2Alt}>
+          </div>
+        </>
+      )}
+
+      {type === 'text' && (
+        <div class="poem-text-layout">
+          <div>
+            {epigraphText && (
+              <div class="poem-epigraph">
+                &ldquo;{epigraphText}&rdquo;
+                {epigraphAttribution && (
+                  <span style="display:block; margin-top:0.5rem;">&mdash; {epigraphAttribution}</span>
+                )}
+              </div>
+            )}
+            {poemText && (
+              <div class="poem-text" aria-label={`Poem: ${title}`} set:html={poemText.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')} />
+            )}
+          </div>
+          {illustration && (
+            <div class="poem-illustration">
+              <img src={illustration} alt={illustrationAlt}>
+            </div>
+          )}
+        </div>
+      )}
+
+      {srOnly && (
+        <div class="sr-only">
+          <p>{srOnly}</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ====== Commentary ====== -->
+  <section>
+    <div class="container--narrow">
+      <h3>About This Poem</h3>
+      <p>{about}</p>
+      {footnotes.length > 0 && (
+        <>
+          <h4 class="mt-md">Data Sources</h4>
+          <div class="poem-footnotes">
+            <ol>
+              {footnotes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ol>
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</Poem>
