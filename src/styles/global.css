@@ -156,7 +156,7 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 110;
   padding: var(--space-sm) 0;
   background: var(--color-bg);
   transition: background var(--transition), box-shadow var(--transition), transform 0.3s ease;
@@ -552,6 +552,17 @@ section {
   font-family: var(--font-heading);
   font-size: 1.1rem;
   flex: 1;
+}
+
+a.pub-item .pub-item__title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border);
+  transition: text-decoration-color 0.2s ease;
+}
+
+a.pub-item:hover .pub-item__title {
+  text-decoration-color: var(--color-text);
 }
 
 .pub-item__meta {

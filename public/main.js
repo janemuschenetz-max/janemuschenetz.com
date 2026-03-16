@@ -18,11 +18,26 @@ if (hamburger && mobileNav) {
   });
 }
 
-// === Header scroll shadow ===
+// === Header scroll shadow + mobile auto-hide ===
 const header = document.getElementById('site-header');
 if (header) {
+  let lastScrollY = window.scrollY;
+  const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
   window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
+    const currentScrollY = window.scrollY;
+    header.classList.toggle('scrolled', currentScrollY > 20);
+
+    if (isMobile() && !mobileNav?.classList.contains('open')) {
+      // Hide when scrolling down past 60px, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        header.classList.add('nav-hidden');
+      } else {
+        header.classList.remove('nav-hidden');
+      }
+    }
+
+    lastScrollY = currentScrollY;
   }, { passive: true });
 }
 
