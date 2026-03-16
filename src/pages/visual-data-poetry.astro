@@ -489,6 +489,7 @@ while (i < allPoems.length) {
           if (item.kind === 'cross-pair') {
             const { first, second } = item;
             const firstIsPointBlank = (first.data.slug as string) === 'point-blank';
+            const firstIsSafetyPoints = (first.data.slug as string) === 'safety-points';
             const secondIsExclamation = (second.data.slug as string) === 'exclamation-point';
             const secondIsSafetyPoints = (second.data.slug as string) === 'safety-points';
             return (
@@ -510,7 +511,7 @@ while (i < allPoems.length) {
                     <img src={(second.data.image || second.data.illustration) as string} alt={`${second.data.title} — ${second.data.description}`}>
                   )}
                 </a>
-                <a href={poemHref(first.data.slug as string)} class="gallery-item reveal" style={firstIsPointBlank ? "display:block;line-height:0;" : ""}>
+                <a href={poemHref(first.data.slug as string)} class="gallery-item reveal" style={(firstIsPointBlank || firstIsSafetyPoints) ? "display:block;line-height:0;" : ""}>
                   {firstIsPointBlank ? (
                     <div class="pb-gallery-live" aria-label={`${first.data.title} — ${first.data.description}`}>
                       <img src="/images/gun.svg" class="pb-ghost" alt="" aria-hidden="true">
@@ -523,6 +524,11 @@ while (i < allPoems.length) {
                       <div class="pb-center">
                         <div style="text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(1.4rem,3.5vw,3rem);letter-spacing:-0.01em;color:var(--color-text);line-height:1.15;">Point<br/>Blank</div>
                       </div>
+                    </div>
+                  ) : firstIsSafetyPoints ? (
+                    <div class="pb-gallery-live" style="background:#fff;" aria-label={`${first.data.title} — ${first.data.description}`}>
+                      <div class="sp-gallery-svg" aria-hidden="true"><Fragment set:html={safetyPointsSvg} /></div>
+                      <div style="position:relative;z-index:2;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(1.4rem,3.5vw,3rem);letter-spacing:-0.01em;color:var(--color-text);line-height:1.15;">Safety<br/>Points</div>
                     </div>
                   ) : (
                     <img src={(first.data.image || first.data.illustration) as string} alt={`${first.data.title} — ${first.data.description}`}>
