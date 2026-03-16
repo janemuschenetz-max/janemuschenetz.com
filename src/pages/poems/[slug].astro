@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { poem } = Astro.props;
-const { title, description, subtitle, backHref, backText, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes } = poem.data;
+const { title, description, subtitle, backHref, backText, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes, resources } = poem.data;
 ---
 <Poem title={title} description={description} subtitle={subtitle} backHref={backHref} backText={backText}>
   <!-- ====== Poem ====== -->
@@ -83,6 +83,18 @@ const { title, description, subtitle, backHref, backText, type, image, imageAlt,
                 <li set:html={note}></li>
               ))}
             </ol>
+          </div>
+        </>
+      )}
+      {resources && resources.length > 0 && (
+        <>
+          <h4 class="mt-md">Additional Resources</h4>
+          <div class="poem-footnotes">
+            <ul>
+              {resources.map((r) => (
+                <li set:html={r}></li>
+              ))}
+            </ul>
           </div>
         </>
       )}
