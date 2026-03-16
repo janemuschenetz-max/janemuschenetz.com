@@ -23,6 +23,7 @@ const poems = defineCollection({
     srOnly: z.string().optional(),
     about: z.string(),
     footnotes: z.array(z.string()),
+    resources: z.array(z.string()).optional(),
   }),
 });
 
