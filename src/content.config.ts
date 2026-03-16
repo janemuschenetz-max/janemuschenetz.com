@@ -8,6 +8,8 @@ const poems = defineCollection({
     slug: z.string(),
     description: z.string(),
     subtitle: z.string().optional(),
+    backHref: z.string().optional(),
+    backText: z.string().optional(),
     type: z.enum(['image', 'image-pair', 'text']),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
