@@ -11,6 +11,10 @@ function loadSvg(file: string) {
     .trim();
 }
 const momSmallSvg = loadSvg('public/images/mom_small.svg');
+const safetyPointsSvg = loadSvg('public/images/safety_points_1.svg')
+  .replace(/style="fill:#ff0;"/g, 'style="fill:#ff0;" class="sp-highlight"');
+const meSmallSvg = loadSvg('public/images/me_small.svg');
+const tooSmallSvg = loadSvg('public/images/too_small.svg');
 
 const slugOrder = [
   '100-mom',
@@ -132,6 +136,29 @@ while (i < allPoems.length) {
     display: block;
   }
 
+  /* ── Safety Points inline SVG ───────────────────────────── */
+  .sp-gallery-svg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.25;
+  }
+  .sp-gallery-svg svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  :global(.sp-highlight) {
+    animation: sp-pulse 2.8s ease-in-out infinite;
+  }
+  :global(.sp-highlight:nth-child(2n))   { animation-delay: 0.4s; }
+  :global(.sp-highlight:nth-child(3n))   { animation-delay: 0.9s; }
+  :global(.sp-highlight:nth-child(4n))   { animation-delay: 1.5s; }
+  :global(.sp-highlight:nth-child(5n))   { animation-delay: 2.1s; }
+  @keyframes sp-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.05; }
+  }
+
   /* ── SVG gallery tiles ───────────────────────────────────── */
   .gallery-svg-wrap {
     width: 100%;
@@ -175,11 +202,16 @@ while (i < allPoems.length) {
     width: 85%;
     height: 85%;
   }
-  .gallery-svg-wrap img.gallery-svg-sm-top {
+  .gallery-svg-wrap img.gallery-svg-sm-top,
+  .gallery-svg-wrap div.gallery-svg-sm-top {
     width: 85%;
     height: 85%;
-    object-position: center 60%;
     animation: none;
+  }
+  .gallery-svg-wrap div.gallery-svg-sm-top svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
   /* Safety Points — zoom in so text fills the frame */
   .gallery-img-fill {
@@ -269,6 +301,11 @@ while (i < allPoems.length) {
   @keyframes lp-fall {
     0%   { top: -40px; }
     100% { top: calc(100% + 10px); }
+  }
+
+  /* ── Override global hover scale for the ghost gun ────────── */
+  :global(.gallery-item:hover .pb-ghost) {
+    transform: translateY(30px);
   }
 
   /* ── Live bullet animation (point-blank gallery card) ────── */
@@ -370,7 +407,7 @@ while (i < allPoems.length) {
                 <a href={poemHref(p.data.slug as string)} class="gallery-item reveal">
                   {isMetoo ? (
                     <div class="gallery-svg-wrap">
-                      <img src="/images/me_small.svg" class="gallery-svg-sm-top" alt={`${p.data.title} — ${p.data.description}`}>
+                      <div id="panel-me-gallery" class="gallery-svg-sm-top" style="width:85%;height:85%;overflow:hidden;transform:translateY(12%);" aria-label={`${p.data.title} — ${p.data.description}`}><Fragment set:html={meSmallSvg} /></div>
                       <span style="position:absolute;top:22%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;z-index:2;font-family:'Playfair Display',Georgia,serif;font-style:normal;font-weight:400;font-size:clamp(1.4rem,3.5vw,3rem);letter-spacing:-0.01em;color:var(--color-text);">#ME TOO</span>
                     </div>
                   ) : (
@@ -380,7 +417,7 @@ while (i < allPoems.length) {
                 <a href={poemHref(p.data.slug as string)} class="gallery-item reveal">
                   {isMetoo ? (
                     <div class="gallery-svg-wrap">
-                      <img src="/images/too_small.svg" class="gallery-svg-sm-top" style="object-position:center 62%;" alt={`${p.data.title} (continued) — ${p.data.description}`}>
+                      <div id="panel-too-gallery" class="gallery-svg-sm-top" style="width:85%;height:85%;overflow:hidden;transform:translateY(12%);" aria-label={`${p.data.title} (continued) — ${p.data.description}`}><Fragment set:html={tooSmallSvg} /></div>
                     </div>
                   ) : (
                     <img src={p.data.image2 as string} alt={`${p.data.title} (continued) — ${p.data.description}`}>
@@ -398,7 +435,7 @@ while (i < allPoems.length) {
                     <div class="mom-gallery-svg" id="panel-mom-gallery" aria-label={`${first.data.title} — ${first.data.description}`}>
                       <Fragment set:html={momSmallSvg} />
                     </div>
-                    <span class="pb-title" style="position:absolute;top:28%;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:2;font-size:clamp(2rem,3vw,4.5rem);font-style:normal;">100%</span>
+                    <span class="pb-title" style="position:absolute;top:18%;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:2;font-size:clamp(1.4rem,3.5vw,3rem);font-style:normal;">100%</span>
                   </div>
                 </a>
                 <a href={poemHref(second.data.slug as string)} class="gallery-item reveal" style="display:block;line-height:0;">
@@ -482,7 +519,7 @@ while (i < allPoems.length) {
                     </div>
                   ) : firstIsSafetyPoints ? (
                     <div class="pb-gallery-live" style="background:#fff;" aria-label={`${first.data.title} — ${first.data.description}`}>
-                      <div style={`position:absolute;inset:0;background-image:url('${first.data.image || first.data.illustration}');background-size:100% 100%;opacity:0.25;z-index:0;`} aria-hidden="true"></div>
+                      <div class="sp-gallery-svg" aria-hidden="true"><Fragment set:html={safetyPointsSvg} /></div>
                       <div style="position:relative;z-index:2;text-align:center;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(1.4rem,3.5vw,3rem);letter-spacing:-0.01em;color:var(--color-text);line-height:1.15;">Safety<br/>Points</div>
                     </div>
                   ) : (
@@ -496,7 +533,7 @@ while (i < allPoems.length) {
           if ((p.data.slug as string) === 'low-point') {
             return (
               <div class="gallery-single">
-                <a href="/poems/low-point-live" class="gallery-item" aria-label="Low Point — US childhood poverty rate">
+                <a href="/poems/low-point-live" class="gallery-item reveal" aria-label="Low Point — US childhood poverty rate">
                   <div class="lp-gallery-live">
                     <span class="lp-rain" style="left:6%;  width:13px; height:21px; animation-duration:3.8s; animation-delay:0s;"></span>
                     <span class="lp-rain" style="left:18%; width:9px;  height:14px; animation-duration:5.3s; animation-delay:1.6s;"></span>
@@ -531,6 +568,54 @@ while (i < allPoems.length) {
   </section>
 
 <script is:inline>
+// ── ME / TOO bar animation ────────────────────────────────────
+(function () {
+  ['#panel-me-gallery', '#panel-too-gallery'].forEach(function (sel) {
+    var panel = document.querySelector(sel);
+    if (!panel) return;
+    var bars = Array.from(panel.querySelectorAll('rect')).filter(function (r) {
+      var s = r.getAttribute('style') || '';
+      return s.includes('fill:#e9bad7') || s.includes('fill:#b4c7e7');
+    });
+    if (!bars.length) return;
+    var items = bars.map(function (rect) {
+      var h = parseFloat(rect.getAttribute('height'));
+      var y = parseFloat(rect.getAttribute('y'));
+      return { el: rect, targetH: h, bottom: y + h };
+    });
+    items.forEach(function (item) {
+      item.el.setAttribute('height', 0);
+      item.el.setAttribute('y', item.bottom);
+    });
+    function animate() {
+      var t0 = null;
+      var dur = 2800;
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var elapsed = ts - t0;
+        var done = true;
+        items.forEach(function (item) {
+          var p = Math.min(elapsed / dur, 1);
+          if (p < 1) done = false;
+          var e = 1 - Math.pow(1 - p, 3);
+          item.el.setAttribute('height', item.targetH * e);
+          item.el.setAttribute('y', item.bottom - item.targetH * e);
+        });
+        if (!done) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    var svg = panel.querySelector('svg');
+    if (!svg) return;
+    var obs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { obs.disconnect(); animate(); }
+    }, { threshold: 0.15 });
+    obs.observe(svg);
+  });
+})();
+</script>
+
+<script is:inline>
 (function () {
   var panel = document.querySelector('#panel-mom-gallery');
   if (!panel) return;
@@ -553,7 +638,7 @@ while (i < allPoems.length) {
 
   function animate() {
     var t0 = null;
-    var dur = 1400;
+    var dur = 2800;
     function step(ts) {
       if (!t0) t0 = ts;
       var elapsed = ts - t0;

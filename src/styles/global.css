@@ -159,11 +159,17 @@ section {
   z-index: 100;
   padding: var(--space-sm) 0;
   background: var(--color-bg);
-  transition: background var(--transition), box-shadow var(--transition);
+  transition: background var(--transition), box-shadow var(--transition), transform 0.3s ease;
 }
 
 .site-header.scrolled {
   box-shadow: 0 1px 0 var(--color-border);
+}
+
+@media (max-width: 768px) {
+  .site-header.nav-hidden {
+    transform: translateY(-100%);
+  }
 }
 
 .site-header .container {

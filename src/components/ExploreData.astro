@@ -336,6 +336,177 @@ const datasets = {
       { name: 'Giffords Law Center', url: 'https://giffords.org/lawcenter/resources/scorecard/', desc: 'Annual gun law scorecards, policy effectiveness research, state comparisons.' },
     ],
   },
+  // ── Exclamation Point ────────────────────────────────────────────────────
+  'exclamation-point': {
+    intro: 'The poem traces the exclamation point from emoji overuse to active shooter drill instructions. These are the numbers behind America\'s school shooting epidemic.',
+    liveLink: '/poems/exclamation-point-live',
+    tabs: [
+      {
+        id: 'incidents',
+        label: 'School Shootings by Year',
+        year: '2018–2023',
+        columns: ['Year', 'Incidents at K-12 schools', ''],
+        rows: [
+          { label: '2018', value: '94',  bar: 27 },
+          { label: '2019', value: '45',  bar: 13 },
+          { label: '2020', value: '23',  bar: 7, note: 'COVID — schools largely closed' },
+          { label: '2021', value: '136', bar: 39 },
+          { label: '2022', value: '188', bar: 54 },
+          { label: '2023', value: '348', bar: 100, highlight: true },
+        ],
+        source: 'Everytown for Gun Safety, "Gunfire on School Grounds," 2024. Includes any instance of a gun being fired on K-12 school grounds, whether or not classes were in session.',
+        note: 'Everytown\'s definition is broader than FBI\'s — it includes all gunfire on school grounds, intentional and unintentional.',
+      },
+      {
+        id: 'drills',
+        label: 'Active Shooter Drills',
+        year: '2019–2023',
+        columns: ['Statistic', 'Figure', ''],
+        rows: [
+          { label: 'Public schools conducting lockdown drills', value: '95%', bar: 95, highlight: true },
+          { label: 'Students who felt scared/upset after a drill', value: '42%', bar: 42 },
+          { label: 'Students who had trouble sleeping after a drill', value: '22%', bar: 22 },
+          { label: 'Teachers who felt drills increased student anxiety', value: '60%', bar: 60 },
+        ],
+        source: 'NCES, "School Survey on Crime and Safety," 2019–20; Everytown, "Dangerous Drills," 2023.',
+        note: 'The US is the only country in the world where active shooter drills in elementary schools are standard practice.',
+      },
+      {
+        id: 'global',
+        label: 'US vs. Peer Countries',
+        year: '2009–2023',
+        columns: ['Country', 'School mass shootings (4+ killed)', ''],
+        rows: [
+          { label: 'UK',            value: '0', bar: 0 },
+          { label: 'Australia',     value: '0', bar: 0 },
+          { label: 'Germany',       value: '1', bar: 0.4 },
+          { label: 'Canada',        value: '2', bar: 0.7 },
+          { label: 'France',        value: '2', bar: 0.7 },
+          { label: 'United States', value: '~288', bar: 100, highlight: true },
+        ],
+        source: 'Adam Lankford, "Public Mass Shooters and Firearms: A Cross-National Study of 171 Countries," Violence and Victims, 2016; Everytown database. Definition: 4+ killed, not including perpetrator.',
+        note: 'Since 2000, more than 74 million US children have participated in at least one active shooter drill (Everytown, 2022).',
+      },
+    ],
+    resources: [
+      { name: 'Everytown — Gunfire on School Grounds', url: 'https://everytown.org/gunfire-on-school-grounds/', desc: 'Database of every shooting incident on K-12 school property in the US.' },
+      { name: 'Sandy Hook Promise', url: 'https://www.sandyhookpromise.org/', desc: 'Evidence-based programs and data on preventing school violence.' },
+      { name: 'CDC — School Violence Prevention', url: 'https://www.cdc.gov/violenceprevention/youthviolence/schoolviolence/', desc: 'Federal data and prevention resources.' },
+      { name: 'The Washington Post — School Shootings Database', url: 'https://www.washingtonpost.com/education/interactive/school-shootings-database/', desc: 'Continuously updated database of school shootings since Columbine.' },
+    ],
+  },
+
+  // ── Safety Points ────────────────────────────────────────────────────────
+  'safety-points': {
+    intro: 'The poem rearranges safety advice aimed at women to reveal its premise: that women, not perpetrators, are responsible for preventing assault. These numbers tell a different story.',
+    tabs: [
+      {
+        id: 'perpetrators',
+        label: 'Who Commits Assault',
+        year: '2018–2022',
+        columns: ['Relationship to victim', 'Share of sexual assaults', ''],
+        rows: [
+          { label: 'Intimate partner (current or former)', value: '33%', bar: 33, highlight: true },
+          { label: 'Acquaintance, friend, or family member', value: '59%', bar: 59, highlight: true },
+          { label: 'Stranger',                             value: '8%',  bar: 8  },
+        ],
+        source: 'RAINN, citing DOJ, National Crime Victimization Survey, 2022.',
+        note: '92% of sexual assaults are committed by someone the victim knows. Safety tips focused on strangers address fewer than 1 in 12 assaults.',
+      },
+      {
+        id: 'location',
+        label: 'Where Assaults Happen',
+        year: '2015–2019',
+        columns: ['Location', 'Share of sexual assaults', ''],
+        rows: [
+          { label: 'Victim\'s own home',                          value: '55%', bar: 55, highlight: true },
+          { label: 'Offender\'s home',                           value: '15%', bar: 15 },
+          { label: 'Another private residence',                   value: '12%', bar: 12 },
+          { label: 'Public space (street, parking lot, transit)', value: '8%',  bar: 8  },
+          { label: 'Other / unknown',                             value: '10%', bar: 10 },
+        ],
+        source: 'DOJ, Bureau of Justice Statistics, "Female Victims of Sexual Violence," 2015; RAINN analysis.',
+        note: 'Tips advising women to avoid dark parking lots and carry keys as a weapon address spaces where fewer than 1 in 12 assaults occur.',
+      },
+      {
+        id: 'justice',
+        label: 'Reporting & Accountability',
+        year: '2022',
+        columns: ['Stage in justice process', 'Percentage', ''],
+        rows: [
+          { label: 'Assaults reported to police',   value: '~21%', bar: 21 },
+          { label: 'Reports leading to arrest',     value: '~12%', bar: 12 },
+          { label: 'Cases prosecuted',              value: '~7%',  bar: 7  },
+          { label: 'Resulting in felony conviction', value: '~5%', bar: 5, highlight: true },
+        ],
+        source: 'RAINN, citing DOJ Bureau of Justice Statistics, 2022.',
+        note: 'Prevention advice directed at potential victims has not been shown to reduce assault rates at a population level. Accountability for perpetrators remains rare.',
+      },
+    ],
+    resources: [
+      { name: 'RAINN — Statistics', url: 'https://www.rainn.org/statistics', desc: 'Comprehensive data on sexual violence prevalence, reporting, and justice outcomes.' },
+      { name: 'CDC — Sexual Violence Prevention', url: 'https://www.cdc.gov/violenceprevention/sexualviolence/', desc: 'Federal data and evidence-based prevention approaches.' },
+      { name: 'National Sexual Violence Resource Center', url: 'https://www.nsvrc.org/', desc: 'Research, resources, and tools for advocates and survivors.' },
+      { name: 'DOJ — Female Victims of Sexual Violence', url: 'https://bjs.ojp.gov/content/pub/pdf/fvsv9410.pdf', desc: 'Federal report on location and perpetrator data.' },
+    ],
+  },
+
+  // ── When? Always. ────────────────────────────────────────────────────────
+  'when-always': {
+    intro: '"When? Always." documents the unending inventory of safety modifications women make — not as a choice, but as a precondition of moving through the world. These numbers quantify that calculus.',
+    tabs: [
+      {
+        id: 'modifications',
+        label: 'Daily Modifications',
+        year: '2018',
+        columns: ['Behavior women adopt for safety', '% who do this', ''],
+        rows: [
+          { label: 'Avoid walking alone at night',           value: '81%', bar: 81, highlight: true },
+          { label: 'Cross the street to avoid a man',        value: '71%', bar: 71 },
+          { label: 'Check back seat before entering car',    value: '68%', bar: 68 },
+          { label: 'Text someone when meeting a stranger',   value: '61%', bar: 61 },
+          { label: 'Hold keys as improvised weapon',         value: '54%', bar: 54 },
+          { label: 'Share live location when out alone',     value: '53%', bar: 53 },
+        ],
+        source: 'Stop Street Harassment, "The Facts Behind the #MeToo Movement," 2018; YouGov/Plan International survey on street harassment, 2018.',
+        note: 'By comparison, 18% of men report similar behavioral modifications due to safety concerns.',
+      },
+      {
+        id: 'harassment',
+        label: 'Harassment Rates',
+        year: '2018',
+        columns: ['Type of harassment experienced (lifetime)', '% of US women', ''],
+        rows: [
+          { label: 'Any form of sexual harassment',          value: '81%', bar: 81, highlight: true },
+          { label: 'Verbal harassment in public',            value: '77%', bar: 77 },
+          { label: 'Unwelcome physical contact',             value: '51%', bar: 51 },
+          { label: 'Followed by a stranger',                 value: '34%', bar: 34 },
+          { label: 'Prevented from using public spaces',     value: '38%', bar: 38 },
+        ],
+        source: 'Stop Street Harassment, "Unsafe and Harassed in Public Spaces: A National Street Harassment Report," 2018.',
+        note: '38% of women say fear of sexual harassment or violence prevents them from using public spaces they would otherwise use.',
+      },
+      {
+        id: 'fear-gap',
+        label: 'The Fear Gap',
+        year: '2022',
+        columns: ['Group', '% feel unsafe walking alone at night near home', ''],
+        rows: [
+          { label: 'Men',               value: '19%', bar: 19 },
+          { label: 'Women',             value: '45%', bar: 45, highlight: true },
+          { label: 'Women ages 18–34',  value: '58%', bar: 58, highlight: true },
+        ],
+        source: 'Gallup, "Crime," annual poll, 2022.',
+        note: 'The "fear gap" — women\'s significantly higher fear of crime — is documented across cultures and decades, regardless of whether women\'s victimization rates match that fear.',
+      },
+    ],
+    resources: [
+      { name: 'Stop Street Harassment', url: 'https://stopstreetharassment.org/', desc: 'Research, data, and advocacy on sexual harassment in public spaces.' },
+      { name: 'UN Women — Safe Cities', url: 'https://www.unwomen.org/en/what-we-do/ending-violence-against-women/creating-safe-public-spaces', desc: 'Global data on women\'s safety in public spaces.' },
+      { name: 'Gallup — Crime Poll', url: 'https://news.gallup.com/poll/1603/crime.aspx', desc: 'Annual US polling on crime perceptions and personal safety by gender.' },
+      { name: 'RAINN — Statistics', url: 'https://www.rainn.org/statistics', desc: 'Comprehensive data on sexual violence prevalence, reporting, and justice outcomes.' },
+    ],
+  },
 };
 
 const data = datasets[slug];
@@ -345,7 +516,7 @@ const data = datasets[slug];
   <>
     <section class="explorer">
       <div class="container">
-        <h2>Explore the Data</h2>
+        <h3>Explore the Data</h3>
         <p class="explorer-intro">{data.intro}</p>
 
         {'liveLink' in data && (

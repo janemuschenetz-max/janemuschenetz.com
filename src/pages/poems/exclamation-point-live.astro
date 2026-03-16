@@ -58,6 +58,66 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
     border-top: 1px solid var(--color-border);
     padding: var(--space-lg) 0;
   }
+
+  /* ── Explore ─────────────────────────────────────────────── */
+  .explore {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+  .explore-intro {
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+    max-width: 560px;
+    margin-bottom: var(--space-lg);
+  }
+  .chart-panel {
+    background: var(--color-bg-alt);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .chart-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    margin-bottom: var(--space-sm);
+  }
+  .chart-note {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  .stat-block { padding: var(--space-md) 0 var(--space-sm); }
+  .stat-total {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+  .stat-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-top: 0.4rem;
+    margin-bottom: var(--space-md);
+  }
+  .stat-bars { max-width: 560px; }
+  .stat-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 80px;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--color-text); }
+  .stat-track { height: 10px; background: var(--color-border); border-radius: 2px; overflow: hidden; }
+  .stat-fill  { height: 100%; border-radius: 2px; }
+  .stat-pct   { font-size: 0.78rem; color: var(--color-text-secondary); }
 </style>
 
 <Base title="Exclamation Point (Live) — Jane Muschenetz" description="An interactive poem on the exclamation point — from emoji overuse to active shooter drill instructions.">
@@ -68,9 +128,6 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
       <p class="eyebrow"><a href="/visual-data-poetry">&larr; Visual &amp; Data Poetry</a></p>
       <h1 class="page-hero__title">Exclamation Point <span class="live-badge">Interactive</span></h1>
       <p class="page-hero__subtitle" style="max-width:none;font-style:italic;">from <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</p>
-      <p style="margin-top:var(--space-sm);font-size:0.85rem;color:var(--color-text-secondary);">
-        <a href="/poems/exclamation-point" class="link-underline">View original static version &rarr;</a>
-      </p>
     </div>
   </section>
 
@@ -84,8 +141,43 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   <!-- About -->
   <section class="poem-about">
     <div class="container">
-      <h2>About This Poem</h2>
+      <h3>About This Poem</h3>
       <p>'Exclamation Point' asks what we consider to be an emergency and/or effective protection in an age of constant alarm. The visual poem skewers societal norms, short-sighted generational divides and woefully inadequate approaches to school safety. The shape of the poem embodies the title and a warning sign, while the erratic font suggests a ransom note. The aesthetic and content create the feeling of being held hostage, literally and figuratively, in the face of escalating gun violence.</p>
+    </div>
+  </section>
+
+  <!-- Explore the Data -->
+  <section class="explore">
+    <div class="container">
+      <h3>Explore the Data</h3>
+      <p class="explore-intro">The numbers behind America's school shooting epidemic — incidents, drills, and how the US compares to every other country.</p>
+
+      <div class="chart-panel">
+        <p class="chart-label">School Shooting Incidents, US K-12 Schools — 2018–2023</p>
+        <div class="stat-bars">
+          <div class="stat-row"><span class="stat-label">2018</span><div class="stat-track"><div class="stat-fill" style="width:27%;background:#B5342A;"></div></div><span class="stat-pct">94</span></div>
+          <div class="stat-row"><span class="stat-label">2019</span><div class="stat-track"><div class="stat-fill" style="width:13%;background:#B5342A;"></div></div><span class="stat-pct">45</span></div>
+          <div class="stat-row"><span class="stat-label">2020</span><div class="stat-track"><div class="stat-fill" style="width:7%;background:#aaa;"></div></div><span class="stat-pct">23 <em>(schools closed)</em></span></div>
+          <div class="stat-row"><span class="stat-label">2021</span><div class="stat-track"><div class="stat-fill" style="width:39%;background:#B5342A;"></div></div><span class="stat-pct">136</span></div>
+          <div class="stat-row"><span class="stat-label">2022</span><div class="stat-track"><div class="stat-fill" style="width:54%;background:#B5342A;"></div></div><span class="stat-pct">188</span></div>
+          <div class="stat-row"><span class="stat-label">2023</span><div class="stat-track"><div class="stat-fill" style="width:100%;background:#B5342A;"></div></div><span class="stat-pct">348</span></div>
+        </div>
+        <p class="chart-note">Source: <a href="https://everytown.org/gunfire-on-school-grounds/" target="_blank" rel="noopener">Everytown for Gun Safety, "Gunfire on School Grounds," 2024</a>. Includes all instances of a gun being fired on K-12 school grounds.</p>
+      </div>
+
+      <div class="chart-panel">
+        <p class="chart-label">Active Shooter Drills — Impact on Students</p>
+        <div class="stat-block">
+          <div class="stat-total">95%</div>
+          <div class="stat-subtitle">of US public schools conduct lockdown drills</div>
+          <div class="stat-bars" style="margin-top:1rem;">
+            <div class="stat-row"><span class="stat-label">Students scared/upset after a drill</span><div class="stat-track"><div class="stat-fill" style="width:42%;background:#B5342A;"></div></div><span class="stat-pct">42%</span></div>
+            <div class="stat-row"><span class="stat-label">Students with trouble sleeping after drill</span><div class="stat-track"><div class="stat-fill" style="width:22%;background:#64748b;"></div></div><span class="stat-pct">22%</span></div>
+            <div class="stat-row"><span class="stat-label">Teachers who felt drills increased anxiety</span><div class="stat-track"><div class="stat-fill" style="width:60%;background:#64748b;"></div></div><span class="stat-pct">60%</span></div>
+          </div>
+        </div>
+        <p class="chart-note">Source: <a href="https://nces.ed.gov/" target="_blank" rel="noopener">NCES, "School Survey on Crime and Safety," 2019–20</a>; <a href="https://everytown.org/" target="_blank" rel="noopener">Everytown, "Dangerous Drills," 2023</a>. Since 2000, more than 74 million US children have participated in at least one active shooter drill.</p>
+      </div>
     </div>
   </section>
 
