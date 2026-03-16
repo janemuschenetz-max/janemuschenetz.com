@@ -294,7 +294,7 @@ section {
   right: -5%;
   width: 70%;
   height: 100%;
-  background-image: url('/images/hero.jpg');
+  background-image: url('/images/news.jpg');
   background-size: cover;
   background-position: center;
   opacity: 0.35;
@@ -600,7 +600,7 @@ section {
 /* --- Gallery (Visual Poetry) --- */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-md);
 }
 
@@ -608,16 +608,26 @@ section {
   overflow: hidden;
   background: var(--color-white);
   cursor: pointer;
-  transition: transform var(--transition);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  aspect-ratio: 1;
 }
 
 .gallery-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.10);
 }
 
 .gallery-item img {
   width: 100%;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.02);
 }
 
 /* --- Lightbox --- */
@@ -1147,7 +1157,7 @@ section {
 
 @media (max-width: 600px) {
   .work-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   section { padding: var(--space-lg) 0; }
   .hero { min-height: 80vh; }
 }
