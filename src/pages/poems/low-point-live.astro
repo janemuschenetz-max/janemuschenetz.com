@@ -55,6 +55,13 @@ import Poem from '../../layouts/Poem.astro';
         <div id="explore-per-child"></div>
       </div>
 
+      <div class="explore-card">
+        <h5>What Families Spent It On</h5>
+        <p class="explore-source">Source: <a href="https://www.census.gov/library/stories/2021/08/economic-hardship-declined-in-households-with-children-as-child-tax-credit-payments-arrived.html" target="_blank" rel="noopener">US Census Bureau, Household Pulse Survey, 2021</a></p>
+        <p class="explore-desc">Families consistently used the credit for basic needs. Households already struggling with expenses were even more likely to spend it on food and housing — 72% of struggling households put it toward rent, mortgage, or utilities.</p>
+        <div id="explore-spent-on"></div>
+      </div>
+
       <!-- Additional Resources -->
       <div class="additional-resources">
         <h3>Additional Resources</h3>
@@ -174,13 +181,19 @@ import Poem from '../../layouts/Poem.astro';
     height: 300px;
   }
 
+  #explore-spent-on {
+    width: 100%;
+    height: 300px;
+  }
+
   @media (max-width: 600px) {
     #low-point-chart {
       height: 400px;
     }
     #explore-poverty-timeline,
     #explore-spending,
-    #explore-per-child {
+    #explore-per-child,
+    #explore-spent-on {
       height: 300px;
     }
     .explore-card {
@@ -825,6 +838,113 @@ import Poem from '../../layouts/Poem.astro';
 
   series.columns.template.adapters.add("fill", function (fill, target) {
     return target.dataItem.dataContext.color;
+  });
+
+  series.bullets.push(function (root, series, dataItem) {
+    var d = dataItem.dataContext;
+    return am5.Bullet.new(root, {
+      locationX: 1,
+      sprite: am5.Label.new(root, {
+        text: d.label,
+        fontFamily: "Inter, sans-serif",
+        fontSize: 12,
+        fontWeight: "500",
+        fill: BLACK,
+        centerY: am5.p50,
+        dx: 8,
+      }),
+    });
+  });
+
+  series.data.setAll(data);
+  series.appear(1500);
+  chart.appear(1000, 100);
+})();
+
+// ============================================================
+// EXPLORE CHART 4: What Families Spent the CTC On
+// Source: US Census Bureau, Household Pulse Survey, 2021
+// ============================================================
+(function () {
+  var root = am5.Root.new("explore-spent-on");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var BLACK = am5.color(0x1A1A1A);
+  var ACCENT = am5.color(0x8B6F4E);
+
+  var chart = root.container.children.push(
+    am5xy.XYChart.new(root, {
+      panX: false,
+      panY: false,
+      paddingTop: 10,
+      paddingRight: 60,
+      paddingLeft: 5,
+      paddingBottom: 10,
+    })
+  );
+
+  var data = [
+    { category: "Food", value: 47, label: "47%" },
+    { category: "Rent, mortgage & utilities", value: 40, label: "~40%" },
+    { category: "School expenses", value: 30, label: "~30%" },
+    { category: "Child care", value: 10, label: "~10%" },
+  ];
+
+  var yAxis = chart.yAxes.push(
+    am5xy.CategoryAxis.new(root, {
+      categoryField: "category",
+      renderer: am5xy.AxisRendererY.new(root, {
+        cellStartLocation: 0.15,
+        cellEndLocation: 0.85,
+        minGridDistance: 20,
+        inversed: true,
+      }),
+    })
+  );
+  yAxis.data.setAll(data);
+  yAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 12, fill: BLACK,
+    maxWidth: 185, oversizedBehavior: "wrap",
+  });
+  yAxis.get("renderer").grid.template.setAll({ visible: false });
+
+  var xAxis = chart.xAxes.push(
+    am5xy.ValueAxis.new(root, {
+      min: 0,
+      max: 60,
+      numberFormat: "#'%'",
+      renderer: am5xy.AxisRendererX.new(root, {}),
+    })
+  );
+  xAxis.get("renderer").labels.template.setAll({
+    fontFamily: "Inter, sans-serif", fontSize: 11, fill: BLACK,
+  });
+  xAxis.get("renderer").grid.template.setAll({ strokeOpacity: 0.08 });
+
+  var series = chart.series.push(
+    am5xy.ColumnSeries.new(root, {
+      xAxis: xAxis,
+      yAxis: yAxis,
+      valueXField: "value",
+      categoryYField: "category",
+      tooltip: am5.Tooltip.new(root, {
+        labelText: "{category}: {label}",
+        getFillFromSprite: false,
+        autoTextColor: false,
+      }),
+    })
+  );
+
+  series.get("tooltip").get("background").setAll({
+    fill: am5.color(0xFFFFFF), stroke: BLACK, strokeWidth: 1,
+  });
+  series.get("tooltip").label.setAll({
+    fill: BLACK, fontFamily: "Inter, sans-serif", fontSize: 13,
+  });
+
+  series.columns.template.setAll({
+    cornerRadiusTR: 3, cornerRadiusBR: 3, strokeOpacity: 0,
+    height: am5.percent(55), fill: ACCENT,
   });
 
   series.bullets.push(function (root, series, dataItem) {
