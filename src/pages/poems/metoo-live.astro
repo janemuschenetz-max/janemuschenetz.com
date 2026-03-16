@@ -79,9 +79,9 @@ const tooSvg = loadSvg('src/assets/too2.svg');
   /* ── Explore section ─────────────────────────────────────── */
   .explore {
     border-top: 1px solid var(--color-border);
-    padding: var(--space-lg) 0 var(--space-xl);
+    padding: var(--space-lg) 0 var(--space-md);
   }
-  .explore h2 { margin-bottom: 0.25rem; }
+  .explore h3 { margin-bottom: 0.25rem; }
   .explore-intro {
     color: var(--color-text-secondary);
     font-size: 0.92rem;
@@ -208,7 +208,7 @@ const tooSvg = loadSvg('src/assets/too2.svg');
   <!-- About -->
   <section class="poem-about">
     <div class="container">
-      <h2>About This Poem</h2>
+      <h3>About This Poem</h3>
       <p>#ME TOO renders real-world statistics on sexual violence and prevention into letters through data charts created in Microsoft PowerPoint. The poem is an homage to the ME TOO movement to end SA complicity and victim shaming, which became popularized on social media. The title, a statement of inherent solidarity and consensus, is belied by the poem&rsquo;s subtext, acknowledging SA as a politicized and polarizing issue.</p>
     </div>
   </section>
@@ -216,7 +216,7 @@ const tooSvg = loadSvg('src/assets/too2.svg');
   <!-- Explore the Data -->
   <section class="explore">
     <div class="container">
-      <h2>Explore the Data</h2>
+      <h3>Explore the Data</h3>
       <p class="explore-intro">The data behind the five charts of #METOO &mdash; prevalence, reporting rates, and the shared economic burden.</p>
 
       <div class="chart-panel" id="panel-mt-prevalence">
@@ -500,5 +500,20 @@ const tooSvg = loadSvg('src/assets/too2.svg');
 
   })();
   </script>
+
+  <!-- Additional Resources -->
+  <section style="border-top: 1px solid var(--color-border); padding: var(--space-lg) 0;">
+    <div class="container">
+      <h3>Additional Resources</h3>
+      <div class="poem-footnotes" style="border-top: none; padding-top: 0;">
+        <ul>
+          <li><a href="https://bjs.ojp.gov/document/cv22.pdf" target="_blank" rel="noopener noreferrer">Criminal Victimization Report</a>, US Dept of Justice, Bureau of Justice Statistics, 2022</li>
+          <li><a href="https://pubmed.ncbi.nlm.nih.gov/28153649/" target="_blank" rel="noopener noreferrer">&ldquo;Lifetime Economic Burden of Rape Among US Adults,&rdquo;</a> Estimated economic cost applied the CDC 2014 lifetime cost of $122.5K per victim to all rape victims (adult and minor) based on 2022 estimates from Dept of Justice.</li>
+          <li><a href="https://www.cdc.gov/sexual-violence/site.html#gen" target="_blank" rel="noopener noreferrer">&ldquo;Preventing Sexual Violence,&rdquo;</a> Fast Facts, CDC, 2023</li>
+          <li>Pilot program effectiveness sourced from the <a href="https://www.cdc.gov/violence-prevention/media/pdf/resources-for-action/SV-Prevention-Resource_508.pdf" target="_blank" rel="noopener noreferrer">&ldquo;Sexual Violence Prevention Resource for Action Report,&rdquo;</a> CDC, 2016</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
 </Base>

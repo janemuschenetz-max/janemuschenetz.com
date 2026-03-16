@@ -39,11 +39,13 @@ const heroPair = ['100-mom', 'make-belief-600'];
 const liveVersions = new Set(['100-mom', 'make-belief-600', 'point-blank', 'exclamation-point', 'metoo', 'low-point']);
 const poemHref = (slug: string) => liveVersions.has(slug) ? `/poems/${slug}-live` : `/poems/${slug}`;
 
-const allPoems = (await getCollection('poems')).sort((a, b) => {
-  const ai = slugOrder.indexOf(a.data.slug as string);
-  const bi = slugOrder.indexOf(b.data.slug as string);
-  return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-});
+const allPoems = (await getCollection('poems'))
+  .filter((p) => slugOrder.includes(p.data.slug as string))
+  .sort((a, b) => {
+    const ai = slugOrder.indexOf(a.data.slug as string);
+    const bi = slugOrder.indexOf(b.data.slug as string);
+    return ai - bi;
+  });
 
 type Poem = typeof allPoems[0];
 type GalleryItem =
@@ -140,7 +142,7 @@ while (i < allPoems.length) {
   .sp-gallery-svg {
     position: absolute;
     inset: 0;
-    opacity: 0.25;
+    opacity: 0.55;
   }
   .sp-gallery-svg svg {
     width: 100%;

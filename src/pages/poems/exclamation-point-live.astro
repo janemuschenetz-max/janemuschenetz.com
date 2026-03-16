@@ -44,7 +44,7 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   /* ── SVG poem ───────────────────────────────────────────── */
   .poem-section { padding: 0; }
   .ex-svg-panel { width: 100%; background: rgb(237, 30, 36); }
-  .ex-svg-panel svg { width: 75%; height: auto; display: block; margin: 0 auto; }
+  :global(.ex-svg-panel svg) { width: 80% !important; height: auto !important; display: block; margin: 0 auto; }
 
   /* Text lines start hidden; scroll-driven JS reveals them.
      :global() because these live inside an inlined SVG Fragment. */
@@ -128,9 +128,6 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
       <p class="eyebrow"><a href="/visual-data-poetry">&larr; Visual &amp; Data Poetry</a></p>
       <h1 class="page-hero__title">Exclamation Point <span class="live-badge">Interactive</span></h1>
       <p class="page-hero__subtitle" style="max-width:none;font-style:italic;">from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</a></p>
-      <p style="margin-top:var(--space-sm);font-size:0.85rem;color:var(--color-text-secondary);">
-        <a href="/poems/exclamation-point" class="link-underline">View original static version &rarr;</a>
-      </p>
     </div>
   </section>
 

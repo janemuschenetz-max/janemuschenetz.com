@@ -68,7 +68,7 @@ const { title, description, subtitle, backHref, backText, type, image, imageAlt,
 
   <!-- ====== Commentary ====== -->
   <section>
-    <div class="container--narrow">
+    <div class="container">
       <h3>About This Poem</h3>
       <p>{about}</p>
       {footnotes.length > 0 && (
@@ -83,21 +83,25 @@ const { title, description, subtitle, backHref, backText, type, image, imageAlt,
           </div>
         </>
       )}
-      {resources && resources.length > 0 && (
-        <>
-          <h4 class="mt-md">Additional Resources</h4>
-          <div class="poem-footnotes">
-            <ul>
-              {resources.map((r) => (
-                <li set:html={r}></li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
     </div>
   </section>
 
   <!-- ====== Data Explorer ====== -->
   <ExploreData slug={poem.data.slug} />
+
+  <!-- ====== Additional Resources ====== -->
+  {resources && resources.length > 0 && (
+    <section style="border-top: 1px solid var(--color-border); padding: var(--space-lg) 0;">
+      <div class="container">
+        <h3>Additional Resources</h3>
+        <div class="poem-footnotes" style="border-top: none; padding-top: 0;">
+          <ul>
+            {resources.map((r) => (
+              <li set:html={r}></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
 </Poem>
