@@ -7,7 +7,7 @@ interface Props {
   subtitle?: string;
 }
 
-const { title, description, subtitle = 'from <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)' } = Astro.props;
+const { title, description, subtitle = 'from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</a>' } = Astro.props;
 ---
 <Base title={`${title} — Jane Muschenetz`} description={description}>
   <section class="page-hero">
