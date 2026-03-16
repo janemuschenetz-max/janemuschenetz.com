@@ -721,7 +721,13 @@ a.pub-item:hover .pub-item__title {
   height: auto;
 }
 
-.poem-commentary p + p {
+.poem-commentary h3,
+.poem-about h3 {
+  margin-bottom: 1rem;
+}
+
+.poem-commentary p + p,
+.poem-about p + p {
   margin-top: 1rem;
 }
 
