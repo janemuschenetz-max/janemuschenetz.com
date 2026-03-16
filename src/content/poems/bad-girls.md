@@ -2,7 +2,7 @@
 title: "All the Bad Girls Wear Russian Accents"
 slug: "bad-girls"
 description: "A poem about accent, identity, and the quiet power of withholding — originally published in Lucky Jefferson."
-subtitle: "from <em>All the Bad Girls Wear Russian Accents</em> (Lucky Jefferson, 2022)"
+subtitle: "from <em>All the Bad Girls Wear Russian Accents</em> (Kelsay Books, 2022)"
 type: "text"
 order: 8
 about: "This poem plays with the Hollywood trope of the Russian-accented villain, turning it into a meditation on identity, language, and power. By teaching the boys a word that sounds dangerous but means 'Gorgeous Woman,' the speaker reclaims the narrative — choosing beauty over ugliness in a world that expects the latter."
