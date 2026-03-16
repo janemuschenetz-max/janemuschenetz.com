@@ -44,13 +44,13 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   /* ── SVG poem ───────────────────────────────────────────── */
   .poem-section { padding: 0; }
   .ex-svg-panel { width: 100%; background: rgb(237, 30, 36); }
-  .ex-svg-panel svg { width: 50%; height: auto; display: block; margin: 0 auto; }
+  .ex-svg-panel svg { width: 75%; height: auto; display: block; margin: 0 auto; }
 
   /* Text lines start hidden; scroll-driven JS reveals them.
      :global() because these live inside an inlined SVG Fragment. */
   :global(.ex-line) {
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.9s ease;
   }
 
   /* ── About ──────────────────────────────────────────────── */
@@ -85,7 +85,7 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   <section class="poem-about">
     <div class="container">
       <h2>About This Poem</h2>
-      <p>'Exclamation Point' moves from the punctuation mark's overuse in digital culture to its most urgent application — active shooter drill instructions given to children. The poem's shape enacts its subject: the exclamation point itself, from emphatic emoji to "RUN. HIDE. FIGHT."</p>
+      <p>'Exclamation Point' asks what we consider to be an emergency and/or effective protection in an age of constant alarm. The visual poem skewers societal norms, short-sighted generational divides and woefully inadequate approaches to school safety. The shape of the poem embodies the title and a warning sign, while the erratic font suggests a ransom note. The aesthetic and content create the feeling of being held hostage, literally and figuratively, in the face of escalating gun violence.</p>
     </div>
   </section>
 
@@ -99,7 +99,7 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   if (!svgEl) return;
 
   var TOTAL = 21;
-  var DELAY = 840; // ms between each line
+  var DELAY = 1400; // ms between each line
 
   var lineEls = [];
   for (var n = 1; n <= TOTAL; n++) {
