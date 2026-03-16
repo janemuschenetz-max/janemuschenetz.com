@@ -67,6 +67,7 @@ import Poem from '../../layouts/Poem.astro';
         <h3>Additional Resources</h3>
         <ul class="resource-list">
           <li>"The SPM child poverty rate more than doubled, from 5.2 to 12.4 percent from 2021 to 2022," <a href="https://www.census.gov/library/publications/2023/demo/p60-280.html" target="_blank" rel="noopener noreferrer"><em>Poverty in the United States: 2022</em></a>, US Census, 2023</li>
+          <li><a href="https://www.census.gov/library/stories/2021/08/economic-hardship-declined-in-households-with-children-as-child-tax-credit-payments-arrived.html" target="_blank" rel="noopener noreferrer"><em>"Families Saw Less Economic Hardship as Child Tax Credit Payments Came,"</em></a> US Census Bureau, Household Pulse Survey, 2021</li>
           <li>C. Turner, <a href="https://www.npr.org/2022/01/27/1075299510/the-expanded-child-tax-credit-briefly-slashed-child-poverty-heres-what-else-it-d" target="_blank" rel="noopener noreferrer"><em>"The Expanded Child Tax Credit Briefly Slashed Child Poverty,"</em></a> NPR, 2022</li>
           <li>J. DeParle, <a href="https://www.nytimes.com/2022/11/25/us/politics/child-tax-credit.html" target="_blank" rel="noopener noreferrer"><em>"The Expanded Child Tax Credit Is Gone. The Battle Over It Remains,"</em></a> NY Times, 2022</li>
         </ul>
@@ -137,8 +138,10 @@ import Poem from '../../layouts/Poem.astro';
   .explore-card {
     margin-top: 2.5rem;
     padding: 2rem;
+    padding-bottom: 2.5rem;
     background: #F0EFEB;
     border-radius: 4px;
+    overflow: hidden;
   }
 
   .explore-card h5 {
@@ -173,7 +176,7 @@ import Poem from '../../layouts/Poem.astro';
 
   #explore-spending {
     width: 100%;
-    height: 350px;
+    height: 175px;
   }
 
   #explore-per-child {
@@ -191,10 +194,12 @@ import Poem from '../../layouts/Poem.astro';
       height: 400px;
     }
     #explore-poverty-timeline,
-    #explore-spending,
     #explore-per-child,
     #explore-spent-on {
       height: 300px;
+    }
+    #explore-spending {
+      height: 175px;
     }
     .explore-card {
       padding: 1.25rem;
