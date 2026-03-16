@@ -28,7 +28,7 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
       <div class="pub-list">
         {publications.map((pub) => {
           const Tag = pub.data.link ? 'a' : 'div';
-          const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline' } : { class: 'pub-item' };
+          const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
           return (
             <Tag {...attrs}>
               <span class="pub-item__title">{pub.data.title}</span>
@@ -47,12 +47,16 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
         <h2 class="section-title">Press &amp; Recognitions</h2>
       </div>
       <div class="pub-list">
-        {pressItems.map((item) => (
-          <div class="pub-item">
-            <span class="pub-item__title">{item.data.title}</span>
-            <span class="pub-item__meta">{item.data.year}</span>
-          </div>
-        ))}
+        {pressItems.map((item) => {
+          const Tag = item.data.link ? 'a' : 'div';
+          const attrs = item.data.link ? { href: item.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
+          return (
+            <Tag {...attrs}>
+              <span class="pub-item__title">{item.data.title}</span>
+              <span class="pub-item__meta">{item.data.year}</span>
+            </Tag>
+          );
+        })}
       </div>
     </div>
   </section>
