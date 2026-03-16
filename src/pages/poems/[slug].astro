@@ -12,9 +12,9 @@ export async function getStaticPaths() {
 }
 
 const { poem } = Astro.props;
-const { title, description, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes } = poem.data;
+const { title, description, subtitle, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes } = poem.data;
 ---
-<Poem title={title} description={description}>
+<Poem title={title} description={description} subtitle={subtitle}>
   <!-- ====== Poem ====== -->
   <section>
     <div class="container">
