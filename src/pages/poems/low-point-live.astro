@@ -465,29 +465,30 @@ import Poem from '../../layouts/Poem.astro';
   });
   series.data.setAll(animatedData);
 
-  series.appear(2000);
-  chart.appear(2000, 200);
+  series.appear(4000);
+  chart.appear(4000, 400);
 
   // After initial appear, animate each point to real value
+  // Gap between points: 1200ms (2× the original 600ms)
   setTimeout(function () {
     data.forEach(function (d, i) {
       setTimeout(function () {
         series.data.setIndex(i, d);
-      }, i * 600);
+      }, i * 1200);
     });
-  }, 1200);
+  }, 2400);
 
-  // Reveal "Spent 16 times more" label with the 2022 arrow (index 5 fires at 4200ms)
+  // Reveal "Spent 16 times more" label with the 2022 arrow
+  // Last point (index 5) fires at 2400 + 5*1200 = 8400ms
   setTimeout(function () {
     spentLabel.set("opacity", 1);
-  }, 1200 + 5 * 600);
+  }, 2400 + 5 * 1200);
 
-  // Reveal coda after all data points have settled
-  // Last point fires at 1200 + 5*600 = 4200ms; allow 800ms for amCharts to finish rendering
+  // Reveal coda after all data points have settled (8400ms + 1600ms buffer)
   setTimeout(function () {
     var coda = document.querySelector('.low-point-coda');
     if (coda) coda.style.opacity = '1';
-  }, 5000);
+  }, 10000);
 })();
 
 // ============================================================
