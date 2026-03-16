@@ -140,6 +140,45 @@ const momSvg = loadSvg('src/assets/mom2.svg');
     line-height: 1.5;
   }
 
+  /* ── Additional Resources ───────────────────────────────────── */
+  .additional-resources {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+  }
+  .additional-resources h3 {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+  .resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .resource-list li {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+  }
+  .resource-list li a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .resource-list li a:hover {
+    color: var(--color-text);
+  }
+  .resource-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--space-sm) 0;
+  }
+
   /* ── About ──────────────────────────────────────────────── */
   .poem-about {
     border-top: 1px solid var(--color-border);
@@ -265,6 +304,26 @@ const momSvg = loadSvg('src/assets/mom2.svg');
           </table>
         </div>
         <p class="source-note">Source: <a href="https://www.ilo.org/resource/news/women-work-more-are-still-paid-less" target="_blank" rel="noopener noreferrer">ILO, "Women Work More, But are Still Paid Less"</a>; <a href="https://unstats.un.org/unsd/demographic-social/products/worldswomen/" target="_blank" rel="noopener noreferrer">UN, "The World's Women 2020 Trends and Statistics"</a>.</p>
+      </div>
+
+      <!-- Additional Resources -->
+      <div class="additional-resources">
+        <h3>Additional Resources</h3>
+        <ul class="resource-list">
+          <li><a href="https://www.cdc.gov/nchs/maternal-mortality/index.htm?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fnchs%2Ffastats%2Fmaternal-mortality.htm" target="_blank" rel="noopener noreferrer"><em>Women's Health</em> Fast Facts</a>, CDC/National Center for Health Statistics, December 2023</li>
+          <li>M.Z. Gunja, E.D. Gumas, R.D. Williams II, <a href="https://www.commonwealthfund.org/blog/2022/us-maternal-mortality-crisis-continues-worsen-international-comparison" target="_blank" rel="noopener noreferrer"><em>The U.S. Maternal Mortality Crisis Continues to Worsen: An International Comparison</em></a>, Commonwealth Fund, December 2022</li>
+          <li>A. Rosenberg, <a href="https://www.washingtonpost.com/opinions/2023/06/20/tori-bowie-maternal-mortality-fixes/" target="_blank" rel="noopener noreferrer"><em>"Opinion: How many dead moms will it take to stop America's maternal mortality epidemic?"</em></a>, Washington Post, June 2023</li>
+          <li><a href="https://unstats.un.org/unsd/demographic-social/products/worldswomen/" target="_blank" rel="noopener noreferrer"><em>"The World's Women 2020 Trends and Statistics,"</em></a> United Nations, October 2020</li>
+          <li>C. Clifford, <a href="https://www.cnbc.com/2020/01/17/global-wealth-inequality-is-founded-on-sexism-oxfam-international.html" target="_blank" rel="noopener noreferrer"><em>"Global wealth inequality is 'founded on sexism,' says Oxfam International,"</em></a> CNBC, January 2020</li>
+          <li>Oxfam International Inequality Reports: <a href="https://www.oxfam.org/en/research/time-care" target="_blank" rel="noopener noreferrer"><em>2020</em></a>, <a href="https://www.oxfam.org/en/research/inequality-virus" target="_blank" rel="noopener noreferrer"><em>2021</em></a></li>
+        </ul>
+        <hr class="resource-divider" />
+        <ul class="resource-list">
+          <li><a href="https://nwlc.org/resource/when-hard-work-is-not-enough-women-in-low-paid-jobs/" target="_blank" rel="noopener noreferrer"><em>Hard Work is not Enough: Women in Low-Paid Jobs</em></a>, National Women's Law Center, July 2023</li>
+          <li><a href="https://www.ilo.org/resource/news/women-work-more-are-still-paid-less" target="_blank" rel="noopener noreferrer"><em>"Women Work More, But are Still Paid Less,"</em></a> International Labor Organization, 1995</li>
+          <li><a href="https://www.statista.com/statistics/1259478/women-in-managerial-positions-worldwide/" target="_blank" rel="noopener noreferrer"><em>E. H. Dyvik, Proportion of women in managerial positions worldwide 1991–2021</em></a>, Statista</li>
+          <li><a href="https://www.weforum.org/publications/global-gender-gap-report-2023/" target="_blank" rel="noopener noreferrer"><em>Global Gender Gap Report 2023</em></a>, World Economic Forum, 2023</li>
+        </ul>
       </div>
 
     </div>
