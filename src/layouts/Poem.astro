@@ -5,14 +5,16 @@ interface Props {
   title: string;
   description: string;
   subtitle?: string;
+  backHref?: string;
+  backText?: string;
 }
 
-const { title, description, subtitle = 'from <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)' } = Astro.props;
+const { title, description, subtitle = 'from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</a>', backHref = '/visual-data-poetry', backText = 'Visual &amp; Data Poetry' } = Astro.props;
 ---
 <Base title={`${title} — Jane Muschenetz`} description={description}>
   <section class="page-hero">
     <div class="container">
-      <p class="hero__eyebrow"><a href="/visual-data-poetry" class="link-underline">&larr; Visual &amp; Data Poetry</a></p>
+      <p class="hero__eyebrow"><a href={backHref} class="link-underline">&larr; <span set:html={backText} /></a></p>
       <h1 class="page-hero__title">{title}</h1>
       <p class="page-hero__subtitle" set:html={subtitle} />
     </div>
@@ -24,5 +26,9 @@ const { title, description, subtitle = 'from <em>POWER POINT</em> (Sheila-Na-Gig
 <style>
   :global(.page-hero) {
     padding-bottom: 0.8rem;
+  }
+  :global(.page-hero__subtitle) {
+    max-width: none;
+    white-space: nowrap;
   }
 </style>
