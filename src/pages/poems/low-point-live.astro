@@ -108,6 +108,8 @@ import Poem from '../../layouts/Poem.astro';
     text-align: right;
     margin-top: 1.5rem;
     padding-right: 1rem;
+    opacity: 0;
+    transition: opacity 0.8s ease;
   }
 
   .coda-line {
@@ -473,6 +475,13 @@ import Poem from '../../layouts/Poem.astro';
       }, i * 600);
     });
   }, 1200);
+
+  // Reveal coda after all data points have settled
+  // Last point fires at 1200 + 5*600 = 4200ms; allow 800ms for amCharts to finish rendering
+  setTimeout(function () {
+    var coda = document.querySelector('.low-point-coda');
+    if (coda) coda.style.opacity = '1';
+  }, 5000);
 })();
 
 // ============================================================
