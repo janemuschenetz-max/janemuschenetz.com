@@ -74,7 +74,7 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
             <img src={book.data.cover} alt={book.data.coverAlt} />
           </div>
           <div class="book-info">
-            <h3>{book.data.title}</h3>
+            <h3>{book.data.link ? <a href={book.data.link} class="link-underline" target="_blank" rel="noopener noreferrer">{book.data.title}</a> : book.data.title}</h3>
             {book.data.quotes?.map((q) => (
               <>
                 <blockquote class="book-quote">&ldquo;{q.text}&rdquo;</blockquote>

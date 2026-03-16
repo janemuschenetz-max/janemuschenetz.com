@@ -7,5 +7,6 @@ quotes:
     attribution: National Federation of Press Women
   - text: 'Astonishing... Muschenetz calls the U.S. to account for injustices against women and girls... while still offering us humor, beauty, and hope for the future.'
     attribution: 'Katie Manning, Whale Road Review'
+link: 'https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/'
 order: 2
 ---

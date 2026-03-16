@@ -50,6 +50,7 @@ const books = defineCollection({
     title: z.string(),
     cover: z.string(),
     coverAlt: z.string(),
+    link: z.string().optional(),
     quotes: z.array(z.object({
       text: z.string(),
       attribution: z.string(),
