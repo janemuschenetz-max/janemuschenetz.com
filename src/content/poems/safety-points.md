@@ -1,5 +1,5 @@
 ---
-title: "Safety Points, or 'Tips for Women Staying Safe'"
+title: "Safety Points, or 'tips for women staying safe'"
 slug: "safety-points"
 description: "A devastating litany of maternal vigilance paired with a found poem from a sheriff's office safety tips for women."
 type: "image"
