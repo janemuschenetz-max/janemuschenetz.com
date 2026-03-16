@@ -721,6 +721,10 @@ a.pub-item:hover .pub-item__title {
   height: auto;
 }
 
+.poem-commentary p + p {
+  margin-top: 1rem;
+}
+
 /* Text poem beside illustration */
 .poem-text-layout {
   display: grid;
