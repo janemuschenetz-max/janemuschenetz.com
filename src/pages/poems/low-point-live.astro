@@ -54,6 +54,22 @@ import Poem from '../../layouts/Poem.astro';
         <p class="explore-desc">The expanded CTC sent monthly payments directly to families — $300/month per child under 6, $250/month per child 6–17. For the first time, the credit was fully refundable, reaching the poorest families who previously earned too little to qualify.</p>
         <div id="explore-per-child"></div>
       </div>
+
+      <!-- Additional Resources -->
+      <div class="additional-resources">
+        <h3>Additional Resources</h3>
+        <ul class="resource-list">
+          <li>"The SPM child poverty rate more than doubled, from 5.2 to 12.4 percent from 2021 to 2022," <a href="https://www.census.gov/library/publications/2023/demo/p60-280.html" target="_blank" rel="noopener noreferrer"><em>Poverty in the United States: 2022</em></a>, US Census, 2023</li>
+          <li>C. Turner, <a href="https://www.npr.org/2022/01/27/1075299510/the-expanded-child-tax-credit-briefly-slashed-child-poverty-heres-what-else-it-d" target="_blank" rel="noopener noreferrer"><em>"The Expanded Child Tax Credit Briefly Slashed Child Poverty,"</em></a> NPR, 2022</li>
+          <li>J. DeParle, <a href="https://www.nytimes.com/2022/11/25/us/politics/child-tax-credit.html" target="_blank" rel="noopener noreferrer"><em>"The Expanded Child Tax Credit Is Gone. The Battle Over It Remains,"</em></a> NY Times, 2022</li>
+          <li>Congress appropriated <a href="https://www.congress.gov/bill/117th-congress/house-bill/2617" target="_blank" rel="noopener noreferrer"><strong>$1.7T in 2022 discretionary spending</strong></a>. The pandemic <a href="https://www.npr.org/2022/01/27/1075299510/the-expanded-child-tax-credit-briefly-slashed-child-poverty-heres-what-else-it-d" target="_blank" rel="noopener noreferrer"><strong>child tax credit expansion cost was ~$100B per year</strong></a></li>
+        </ul>
+        <hr class="resource-divider" />
+        <ul class="resource-list">
+          <li><a href="https://povertycenter.columbia.edu/publication/2022/child-allowance/benefit-cost-analysis" target="_blank" rel="noopener noreferrer"><em>"The Benefits and Costs of a U.S. Child Allowance,"</em></a> Columbia University Center on Poverty and Social Policy, 2022</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 </Poem>
@@ -169,6 +185,45 @@ import Poem from '../../layouts/Poem.astro';
     .explore-card {
       padding: 1.25rem;
     }
+  }
+
+  /* ── Additional Resources ───────────────────────────────────── */
+  .additional-resources {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+  }
+  .additional-resources h3 {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+  .resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .resource-list li {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+  }
+  .resource-list li a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .resource-list li a:hover {
+    color: var(--color-text);
+  }
+  .resource-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--space-sm) 0;
   }
 </style>
 
