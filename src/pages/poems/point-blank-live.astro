@@ -109,6 +109,7 @@ import Base from '../../layouts/Base.astro';
     margin-top: 0.5rem;
     line-height: 1.5;
   }
+  #explore-pb-homicide { width: 100%; height: 520px; }
   #explore-pb-intl  { width: 100%; height: 520px; }
   #explore-pb-child { width: 100%; height: 240px; }
 
@@ -406,7 +407,13 @@ import Base from '../../layouts/Base.astro';
   <section class="explore">
     <div class="container">
       <h3>Explore the Data</h3>
-      <p class="explore-intro">The three datasets behind 'Point Blank' — international firearm mortality, child deaths, and breakdown by type.</p>
+      <p class="explore-intro">The data behind 'Point Blank' — from firearm homicides (the metric in the poem) to comprehensive mortality, child deaths, and breakdown by type.</p>
+
+      <div class="chart-panel" id="panel-pb-homicide">
+        <p class="chart-label">Firearm Homicides per 100K — US vs. Peer Countries, 2021</p>
+        <div id="explore-pb-homicide"></div>
+        <p class="chart-note">Source: <a href="https://www.healthdata.org/news-events/insights-blog/acting-data/gun-violence-united-states-outlier" target="_blank" rel="noopener">IHME, Global Burden of Disease, 2021</a>. Firearm homicide deaths only (excludes suicide and unintentional). This is the metric visualized in the poem above — the US recorded 4.52 firearm homicides per 100,000 people, the highest rate among high-income peer nations.</p>
+      </div>
 
       <div class="chart-panel" id="panel-pb-intl">
         <p class="chart-label">International Comparison — All Firearm Deaths per 100K, 2021</p>
@@ -449,6 +456,19 @@ import Base from '../../layouts/Base.astro';
           </div>
         </div>
         <p class="chart-note">Source: <a href="https://www.cdc.gov/injury/wisqars/" target="_blank" rel="noopener">CDC, WISQARS, 2021</a>. More than half of all gun deaths are suicides — a fact often absent from the public debate about gun violence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Resources -->
+  <section style="border-top: 1px solid var(--color-border); padding: var(--space-lg) 0;">
+    <div class="container">
+      <h3>Additional Resources</h3>
+      <div class="poem-footnotes" style="border-top: none; padding-top: 0;">
+        <ul>
+          <li><a href="https://www.healthdata.org/news-events/insights-blog/acting-data/gun-violence-united-states-outlier" target="_blank" rel="noopener noreferrer">"Gun Violence in the United States: An Outlier,"</a> IHME Acting on Data Blog, 2023</li>
+          <li><a href="https://www.kff.org/mental-health/child-and-teen-firearm-mortality-in-the-u-s-and-peer-countries/" target="_blank" rel="noopener noreferrer">"Child and Teen Firearm Mortality in the U.S. and Peer Countries,"</a> KFF, 2023</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -505,6 +525,7 @@ import Base from '../../layouts/Base.astro';
 // ── Scroll-triggered explore chart initialization ──────────────────────
 (function () {
   var panels = {
+    "panel-pb-homicide": initHomicide,
     "panel-pb-intl":  initIntl,
     "panel-pb-child": initChild,
   };
@@ -525,6 +546,82 @@ import Base from '../../layouts/Base.astro';
     var el = document.getElementById(id);
     if (el) observer.observe(el);
   });
+
+  // ── EXPLORE CHART 0: Firearm Homicides Only (matches poem) ────────────
+  function initHomicide() {
+  var root = am5.Root.new("explore-pb-homicide");
+  root.setThemes([am5themes_Animated.new(root)]);
+
+  var chart = root.container.children.push(am5xy.XYChart.new(root, {
+    panX: false, panY: false,
+    paddingLeft: 0, paddingRight: 65, paddingTop: 10, paddingBottom: 10,
+  }));
+
+  var yRenderer = am5xy.AxisRendererY.new(root, { inversed: true, minGridDistance: 20 });
+  yRenderer.labels.template.setAll({ fontSize: 11, fill: am5.color(0x555555) });
+  yRenderer.grid.template.setAll({ visible: false });
+
+  var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+    categoryField: "country", renderer: yRenderer,
+  }));
+
+  var xRenderer = am5xy.AxisRendererX.new(root, {});
+  xRenderer.labels.template.setAll({ fontSize: 11, fill: am5.color(0x666666) });
+  xRenderer.grid.template.setAll({ stroke: am5.color(0xdddddd), strokeWidth: 1, strokeDasharray: [3, 3] });
+
+  var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+    min: 0, renderer: xRenderer,
+  }));
+  xAxis.children.push(am5.Label.new(root, {
+    text: "Firearm homicide deaths per 100,000 population",
+    x: am5.p50, centerX: am5.p50, fontSize: 11, fill: am5.color(0x999999), dy: 8,
+  }));
+
+  var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+    xAxis, yAxis, valueXField: "value", categoryYField: "country",
+    tooltip: am5.Tooltip.new(root, { labelText: "{country}: {valueX} per 100K" }),
+  }));
+  series.columns.template.setAll({
+    cornerRadiusTR: 2, cornerRadiusBR: 2, strokeOpacity: 0, height: am5.percent(60),
+  });
+  series.columns.template.adapters.add("fill", function (fill, target) {
+    var dc = target.dataItem && target.dataItem.dataContext;
+    return (dc && dc.colorHex) ? am5.color(dc.colorHex) : fill;
+  });
+  series.bullets.push(function () {
+    return am5.Bullet.new(root, { locationX: 1, sprite: am5.Label.new(root, {
+      text: "{valueX}", centerY: am5.p50, centerX: 0, dx: 6, fontSize: 10, populateText: true,
+    }) });
+  });
+
+  var data = [
+    { country: "US",           value: 4.52, colorHex: 0xD32F2F },
+    { country: "Chile",        value: 2.50, colorHex: 0xcbd5e1 },
+    { country: "Canada",       value: 0.64, colorHex: 0xcbd5e1 },
+    { country: "Saudi Arabia", value: 0.57, colorHex: 0xcbd5e1 },
+    { country: "Sweden",       value: 0.27, colorHex: 0xcbd5e1 },
+    { country: "Belgium",      value: 0.23, colorHex: 0xcbd5e1 },
+    { country: "Greece",       value: 0.22, colorHex: 0xcbd5e1 },
+    { country: "Italy",        value: 0.20, colorHex: 0xcbd5e1 },
+    { country: "Netherlands",  value: 0.15, colorHex: 0xcbd5e1 },
+    { country: "France",       value: 0.12, colorHex: 0xcbd5e1 },
+    { country: "Australia",    value: 0.09, colorHex: 0xcbd5e1 },
+    { country: "Romania",      value: 0.07, colorHex: 0xcbd5e1 },
+    { country: "Spain",        value: 0.06, colorHex: 0xcbd5e1 },
+    { country: "Germany",      value: 0.05, colorHex: 0xcbd5e1 },
+    { country: "Portugal",     value: 0.05, colorHex: 0xcbd5e1 },
+    { country: "Taiwan",       value: 0.04, colorHex: 0xcbd5e1 },
+    { country: "Czechia",      value: 0.04, colorHex: 0xcbd5e1 },
+    { country: "Poland",       value: 0.04, colorHex: 0xcbd5e1 },
+    { country: "UK",           value: 0.03, colorHex: 0xcbd5e1 },
+    { country: "Korea",        value: 0.02, colorHex: 0xcbd5e1 },
+    { country: "Japan",        value: 0.01, colorHex: 0xcbd5e1 },
+  ];
+  yAxis.data.setAll(data);
+  series.data.setAll(data);
+  series.appear(1000);
+  chart.appear(1000, 100);
+  } // end initHomicide
 
   // ── EXPLORE CHART 1: International Comparison ─────────────────────────
   function initIntl() {
