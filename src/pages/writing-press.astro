@@ -28,7 +28,8 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
       <div class="pub-list">
         {publications.map((pub) => {
           const Tag = pub.data.link ? 'a' : 'div';
-          const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
+          const isExternal = pub.data.link && !pub.data.link.startsWith('/');
+          const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
           return (
             <Tag {...attrs}>
               <span class="pub-item__title">{pub.data.title}</span>
