@@ -556,7 +556,7 @@ section {
   }
   /* Headers: poems first (order 0), press after all poems (order 2) */
   .pub-col-header:first-child { order: 0; }
-  .pub-col-header:nth-child(2) { order: 2; }
+  .pub-col-header:nth-child(2) { order: 2; margin-top: var(--space-lg); }
   /* Poem items are odd children (3,5,7…): group before press header */
   .pub-items-grid > *:nth-child(n+3):nth-child(odd) { order: 1; }
   /* Press items are even children (4,6,8…): group after press header */
