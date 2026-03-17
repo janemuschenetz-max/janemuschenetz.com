@@ -113,18 +113,25 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
         <span class="section-number">04</span>
         <h2 class="section-title">Projects</h2>
       </div>
-      <div class="project-item">
-        <img src="/images/palm-frond-zoo.jpg" alt="Mandrill painting by Jane Muschenetz for Palm Frond Zoo" class="project-item__thumb" />
-        <div class="project-item__text">
-          <h4><a href="https://www.palmfrondzoo.com/animalart" class="link-underline" target="_blank" rel="noopener noreferrer">Palm Frond Zoo</a></h4>
-          <p>Folk and Family Art Initiative focused on sparking delight and creativity in unexpected ways and places.</p>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-card__images">
+            <img src="/images/palm-frond-zoo.jpg" alt="Mandrill painting by Jane Muschenetz for Palm Frond Zoo" class="project-card__img" />
+          </div>
+          <div class="project-card__body">
+            <h4><a href="https://www.palmfrondzoo.com/animalart" class="link-underline" target="_blank" rel="noopener noreferrer">Palm Frond Zoo</a></h4>
+            <p>Folk and Family Art Initiative focused on sparking delight and creativity in unexpected ways and places.</p>
+          </div>
         </div>
-      </div>
-      <div class="project-item">
-        <img src="/images/table-m.jpg" alt="Chocolate sorbet in a teacup from Table M food blog" class="project-item__thumb" />
-        <div class="project-item__text">
-          <h4><a href="https://muschenetz.com" class="link-underline" target="_blank" rel="noopener noreferrer">Table M</a></h4>
-          <p>Food and travel blog featuring recipes and stories reflecting the cultural heritage (Ukraine, Germany, America, etc.) and travels of Ingo and Jane Muschenetz.</p>
+        <div class="project-card">
+          <div class="project-card__images project-card__images--pair">
+            <img src="/images/table-m.jpg" alt="Chocolate sorbet in a teacup" class="project-card__img" />
+            <img src="/images/table-m-2.jpg" alt="Chicken blintzes from Table M food blog" class="project-card__img" />
+          </div>
+          <div class="project-card__body">
+            <h4><a href="https://muschenetz.com" class="link-underline" target="_blank" rel="noopener noreferrer">Table M</a></h4>
+            <p>Food and travel blog featuring recipes and stories reflecting the cultural heritage (Ukraine, Germany, America, etc.) and travels of Ingo and Jane Muschenetz.</p>
+          </div>
         </div>
       </div>
     </div>
