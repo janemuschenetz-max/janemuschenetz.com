@@ -173,6 +173,9 @@ section {
   .hide-mobile {
     display: none;
   }
+  .lp-gallery-item {
+    display: none;
+  }
 }
 
 .site-header .container {
