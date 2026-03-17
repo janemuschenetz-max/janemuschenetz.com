@@ -542,13 +542,6 @@ section {
 }
 
 /* --- Publication List --- */
-.pub-sections-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 var(--space-xl);
-  align-items: start;
-}
-
 .pub-items-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -557,11 +550,17 @@ section {
 }
 
 @media (max-width: 640px) {
-  .pub-sections-grid,
   .pub-items-grid {
-    grid-template-columns: 1fr;
-    gap: 0;
+    display: flex;
+    flex-direction: column;
   }
+  /* Headers: poems first (order 0), press after all poems (order 2) */
+  .pub-col-header:first-child { order: 0; }
+  .pub-col-header:nth-child(2) { order: 2; }
+  /* Poem items are odd children (3,5,7…): group before press header */
+  .pub-items-grid > *:nth-child(n+3):nth-child(odd) { order: 1; }
+  /* Press items are even children (4,6,8…): group after press header */
+  .pub-items-grid > *:nth-child(n+3):nth-child(even) { order: 3; }
 }
 
 .pub-item {
