@@ -543,14 +543,21 @@ section {
 
 /* --- Publication List --- */
 .pub-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pub-sections-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 var(--space-lg);
+  gap: 0 var(--space-xl);
+  align-items: start;
 }
 
 @media (max-width: 640px) {
-  .pub-list {
+  .pub-sections-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 }
 

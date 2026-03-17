@@ -24,43 +24,44 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
 
   <section class="reveal">
     <div class="container">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <h2 class="section-title">Poems &amp; Essays</h2>
-      </div>
-      <div class="pub-list">
-        {publications.map((pub) => {
-          const Tag = pub.data.link ? 'a' : 'div';
-          const isExternal = pub.data.link && !pub.data.link.startsWith('/');
-          const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
-          return (
-            <Tag {...attrs}>
-              <span class="pub-item__title">{pub.data.title}</span>
-              <span class="pub-item__meta">{pub.data.publisher}</span>
-            </Tag>
-          );
-        })}
-      </div>
-    </div>
-  </section>
-
-  <section class="reveal">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <h2 class="section-title">Press &amp; Recognitions</h2>
-      </div>
-      <div class="pub-list">
-        {pressItems.map((item) => {
-          const Tag = item.data.link ? 'a' : 'div';
-          const attrs = item.data.link ? { href: item.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
-          return (
-            <Tag {...attrs}>
-              <span class={`pub-item__title${['National Federation of Press Women — First Place (Verse)', 'San Diego Writers Festival — Poetry Collection of the Year', 'Middle West Press — First Place (War Poetry)'].includes(item.data.title) ? ' pub-item__title--award' : ''}`}>{item.data.title}</span>
-              <span class="pub-item__meta">{item.data.year}</span>
-            </Tag>
-          );
-        })}
+      <div class="pub-sections-grid">
+        <div>
+          <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Poems &amp; Essays</h2>
+          </div>
+          <div class="pub-list">
+            {publications.map((pub) => {
+              const Tag = pub.data.link ? 'a' : 'div';
+              const isExternal = pub.data.link && !pub.data.link.startsWith('/');
+              const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
+              return (
+                <Tag {...attrs}>
+                  <span class="pub-item__title">{pub.data.title}</span>
+                  <span class="pub-item__meta">{pub.data.publisher}</span>
+                </Tag>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Press &amp; Recognitions</h2>
+          </div>
+          <div class="pub-list">
+            {pressItems.map((item) => {
+              const Tag = item.data.link ? 'a' : 'div';
+              const attrs = item.data.link ? { href: item.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
+              return (
+                <Tag {...attrs}>
+                  <span class={`pub-item__title${['National Federation of Press Women — First Place (Verse)', 'San Diego Writers Festival — Poetry Collection of the Year', 'Middle West Press — First Place (War Poetry)'].includes(item.data.title) ? ' pub-item__title--award' : ''}`}>{item.data.title}</span>
+                  <span class="pub-item__meta">{item.data.year}</span>
+                </Tag>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   </section>
