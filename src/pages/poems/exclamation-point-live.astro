@@ -50,7 +50,7 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
      :global() because these live inside an inlined SVG Fragment. */
   :global(.ex-line) {
     opacity: 0;
-    transition: opacity 0.9s ease;
+    transition: opacity 0.72s ease;
   }
 
   /* ── About ──────────────────────────────────────────────── */
@@ -191,22 +191,36 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   if (!svgEl) return;
 
   var TOTAL = 21;
-  var DELAY = 1400; // ms between each line
+  var DELAY = 1120; // ms between each line
 
   var lineEls = [];
   for (var n = 1; n <= TOTAL; n++) {
     lineEls.push(panel.querySelectorAll('.ex-line-' + n));
   }
 
+  var timers = [];
+
+  function showAll() {
+    timers.forEach(function(t) { clearTimeout(t); });
+    timers = [];
+    lineEls.forEach(function(els) {
+      for (var j = 0; j < els.length; j++) {
+        els[j].style.opacity = '1';
+      }
+    });
+  }
+
   function revealAll() {
     lineEls.forEach(function(els, i) {
-      setTimeout(function() {
+      timers.push(setTimeout(function() {
         for (var j = 0; j < els.length; j++) {
           els[j].style.opacity = '1';
         }
-      }, i * DELAY);
+      }, i * DELAY));
     });
   }
+
+  panel.addEventListener('click', showAll);
 
   var obs = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) {
