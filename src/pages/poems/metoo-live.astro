@@ -296,6 +296,7 @@ const tooSvg = loadSvg('src/assets/too2.svg');
   <script is:inline>
   (function () {
     var DUR = 3200; // 2× slower
+    var done = false;
 
     // ── Collect vertical bar targets ──────────────────────────────────────
     function collectV(selector) {
@@ -325,6 +326,7 @@ const tooSvg = loadSvg('src/assets/too2.svg');
     function animate(targets, onDone) {
       var t0 = null;
       function step(ts) {
+        if (done) return;
         if (!t0) t0 = ts;
         var p = Math.min((ts - t0) / DUR, 1);
         var e = 1 - Math.pow(1 - p, 3); // ease-out cubic
@@ -353,6 +355,23 @@ const tooSvg = loadSvg('src/assets/too2.svg');
       });
     }
 
+    // ── Skip to end: complete all bars and reveal all stanzas ────────────
+    function skipToEnd() {
+      if (done) return;
+      done = true;
+      [mTargets, eTargets, tooTargets].forEach(function (targets) {
+        targets.forEach(function (item) {
+          if (item.kind === 'v') {
+            item.el.setAttribute('height', item.targetH);
+            item.el.setAttribute('y', item.bottom - item.targetH);
+          } else if (item.kind === 'h') {
+            item.el.setAttribute('width', item.targetW);
+          }
+        });
+      });
+      ['mt-stanza-m', 'mt-stanza-e', 'mt-stanza-final', 'mt-stanza-isnt'].forEach(fadeInStanza);
+    }
+
     // ── Collect targets upfront ───────────────────────────────────────────
     var mTargets   = collectV('#panel-me .mt-bar');
     var eTargets   = collectH('#panel-me .mt-bar-h');
@@ -361,6 +380,7 @@ const tooSvg = loadSvg('src/assets/too2.svg');
     // ── panel-me: M bars + M text → E bars + E text ───────────────────────
     var mePanel = document.getElementById('panel-me');
     if (mePanel) {
+      mePanel.addEventListener('click', skipToEnd);
       var meObs = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) {
           meObs.disconnect();
@@ -377,6 +397,7 @@ const tooSvg = loadSvg('src/assets/too2.svg');
     // ── panel-too: T bars + first stanza → T done → final stanza ─────────
     var tooPanel = document.getElementById('panel-too');
     if (tooPanel) {
+      tooPanel.addEventListener('click', skipToEnd);
       var tooObs = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) {
           tooObs.disconnect();
