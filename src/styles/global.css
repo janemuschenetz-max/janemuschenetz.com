@@ -623,6 +623,12 @@ a.pub-item:hover .pub-item__title {
   margin-bottom: var(--space-sm);
 }
 
+.book-buy-links {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-sm);
+}
+
 /* --- Gallery (Visual Poetry) --- */
 .gallery-grid {
   display: grid;
