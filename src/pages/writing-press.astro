@@ -55,7 +55,15 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
               </PubTag>
               {item ? (
                 <PressTag {...pressAttrs}>
-                  <span class={`pub-item__title${['National Federation of Press Women — First Place (Verse)', 'San Diego Writers Festival — Poetry Collection of the Year', 'Middle West Press — First Place (War Poetry)'].includes(item.data.title) ? ' pub-item__title--award' : ''}`}>{item.data.title}</span>
+                  {(() => {
+                    const isAward = ['National Federation of Press Women — First Place (Verse)', 'San Diego Writers Festival — Poetry Collection of the Year', 'Middle West Press — First Place (War Poetry)'].includes(item.data.title);
+                    const parenIdx = item.data.title.indexOf(' (');
+                    return (
+                      <span class={`pub-item__title${isAward ? ' pub-item__title--award' : ''}`}>
+                        {isAward && parenIdx > -1 ? <>{item.data.title.slice(0, parenIdx)}<span style="font-weight:400;">{item.data.title.slice(parenIdx)}</span></> : item.data.title}
+                      </span>
+                    );
+                  })()}
                   <span class="pub-item__meta">{item.data.year}</span>
                 </PressTag>
               ) : <div class="pub-item pub-item--empty" />}
