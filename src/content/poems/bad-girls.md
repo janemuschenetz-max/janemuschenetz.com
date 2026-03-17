@@ -5,6 +5,10 @@ description: "A poem about accent, identity, and the quiet power of withholding 
 subtitle: 'from <a href="https://kelsaybooks.com/products/all-the-bad-girls-wear-russian-accents?_pos=2&_sid=1df27cb79&_ss=r" target="_blank" rel="noopener noreferrer"><em>All the Bad Girls Wear Russian Accents</em> (Kelsay Books, 2022)</a>'
 backHref: '/writing-press'
 backText: 'back to writing &amp; press'
+showAward: false
+amazonLink: 'https://www.amazon.com/All-Girls-Wear-Russian-Accents/dp/1639802533/ref=sr_1_2?crid=GCKRJXP4AAPK&dib=eyJ2IjoiMSJ9.D5VuMTeV0OLUxn7L0cIHYrSnbrahVWtvaNEgwMsp5Go.8hBn07mxqiHgYFXJhV1L51QiirTsXjRmdG91xX8ZoT8&dib_tag=se&keywords=jane+muschenetz&qid=1773765718&sprefix=muschene%2Caps%2C262&sr=8-2'
+publisherLink: 'https://kelsaybooks.com/products/all-the-bad-girls-wear-russian-accents?_pos=2&_sid=1df27cb79&_ss=r'
+publisherName: 'Kelsay Books'
 type: "text"
 order: 8
 about: "'All the Bad Girls Wear Russian Accents' plays with the Hollywood trope of the Russian-accented villain, turning the tables on preconceived notions of identity, language, and power. An earlier version of this poem first appeared in <em>Lucky Jefferson</em>."
