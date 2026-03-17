@@ -82,15 +82,19 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
                 <p class="book-quote-attribution">&mdash; {q.attribution}</p>
               </>
             ))}
-            {book.data.buyLinks && (
+            {book.data.title === 'POWER POINT' && (
               <p class="book-buy-links">
                 <span style="font-weight:500;color:var(--color-text);">Buy→</span>{' '}
-                {book.data.buyLinks.map((bl: {label: string; url: string}, i: number) => (
-                  <>
-                    {i > 0 && ' · '}
-                    <a href={bl.url} target="_blank" rel="noopener noreferrer">{bl.label}</a>
-                  </>
-                ))}
+                <a href="https://www.amazon.com/Power-Point-Jane-Muschenetz/dp/1962405028/ref=sr_1_1?crid=GCKRJXP4AAPK&dib=eyJ2IjoiMSJ9.D5VuMTeV0OLUxn7L0cIHYrSnbrahVWtvaNEgwMsp5Go.8hBn07mxqiHgYFXJhV1L51QiirTsXjRmdG91xX8ZoT8&dib_tag=se&keywords=jane+muschenetz&qid=1773765718&sprefix=muschene%2Caps%2C262&sr=8-1" target="_blank" rel="noopener noreferrer">Amazon</a>{' · '}
+                <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer">Sheila-Na-Gig</a>{' · '}
+                <a href="https://thepoetryshop.com/products/power-point?_pos=1&_sid=27f225e2f&_ss=r" target="_blank" rel="noopener noreferrer">The Poetry Shop</a>
+              </p>
+            )}
+            {book.data.title === 'All the Bad Girls Wear Russian Accents' && (
+              <p class="book-buy-links">
+                <span style="font-weight:500;color:var(--color-text);">Buy→</span>{' '}
+                <a href="https://www.amazon.com/All-Girls-Wear-Russian-Accents/dp/1639802533/ref=sr_1_2?crid=GCKRJXP4AAPK&dib=eyJ2IjoiMSJ9.D5VuMTeV0OLUxn7L0cIHYrSnbrahVWtvaNEgwMsp5Go.8hBn07mxqiHgYFXJhV1L51QiirTsXjRmdG91xX8ZoT8&dib_tag=se&keywords=jane+muschenetz&qid=1773765718&sprefix=muschene%2Caps%2C262&sr=8-2" target="_blank" rel="noopener noreferrer">Amazon</a>{' · '}
+                <a href="https://kelsaybooks.com/products/all-the-bad-girls-wear-russian-accents?_pos=2&_sid=1df27cb79&_ss=r" target="_blank" rel="noopener noreferrer">Kelsay Books</a>
               </p>
             )}
           </div>
