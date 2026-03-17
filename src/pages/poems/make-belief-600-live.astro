@@ -520,7 +520,7 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
       var chart = root.container.children.push(am5xy.XYChart.new(root, {
         panX: false, panY: false,
         wheelX: "none", wheelY: "none",
-        paddingLeft: 0, paddingRight: 110,
+        paddingLeft: 0, paddingRight: 130,
         paddingTop: 10, paddingBottom: 10,
       }));
 
@@ -547,10 +547,23 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
       }));
       yAxis.data.setAll(data);
 
-      var xRenderer = am5xy.AxisRendererX.new(root, {});
+      var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 70 });
       xRenderer.labels.template.setAll({
         fontSize: 11, fill: am5.color(0x888888),
         fontFamily: "Inter, sans-serif",
+      });
+      xRenderer.labels.template.adapters.add("text", function(text, target) {
+        var value = target.dataItem ? target.dataItem.get("value") : null;
+        if (!value) return text;
+        if (value >= 1e24) return (value / 1e24).toPrecision(2) + " YW";
+        if (value >= 1e21) return (value / 1e21).toPrecision(2) + " ZW";
+        if (value >= 1e18) return (value / 1e18).toPrecision(2) + " EW";
+        if (value >= 1e15) return (value / 1e15).toPrecision(2) + " PW";
+        if (value >= 1e12) return (value / 1e12).toPrecision(2) + " TW";
+        if (value >= 1e9)  return (value / 1e9).toPrecision(2) + " GW";
+        if (value >= 1e6)  return (value / 1e6).toPrecision(2) + " MW";
+        if (value >= 1e3)  return (value / 1e3).toPrecision(2) + " kW";
+        return Math.round(value) + " W";
       });
       xRenderer.grid.template.setAll({ strokeOpacity: 0.08 });
 
