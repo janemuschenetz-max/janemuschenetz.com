@@ -10,8 +10,8 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
   section:not(.page-hero) {
     padding: calc(var(--space-lg) * 0.5) 0;
   }
-  .section--tight-top {
-    padding-top: calc(var(--space-sm));
+  section.section--tight-top {
+    padding-top: var(--space-xs);
   }
   .pub-item__title--award {
     font-weight: 600;
