@@ -5,6 +5,9 @@ import Base from '../layouts/Base.astro';
   section:not(.page-hero) {
     padding: calc(var(--space-lg) * 0.5) 0;
   }
+  .page-hero__subtitle {
+    max-width: 100%;
+  }
   @media (max-width: 768px) {
     .grid.grid--2 {
       grid-template-columns: 1fr;
@@ -49,7 +52,7 @@ import Base from '../layouts/Base.astro';
 
   <section class="reveal">
     <div class="container">
-      <p style="max-width:680px;font-size:1.05rem;line-height:1.7;">Jane Yevgenia Muschenetz works at a rare intersection: trained as a quantitative analyst (MIT Sloan, Bain &amp; Company), with the lived experience of a refugee from Soviet Ukraine, a mother, and a visual artist. She writes poetry that translates data, culture, and geopolitical force into literary and visual form — guided by the conviction that art, at its best, opens us to possibility. Her talks bring rigorous empirical thinking and lifelong reverence for different points of view into literary and cultural spaces, and lyric intelligence into academic, civic, and policy contexts. She crosses disciplinary and cultural divides with empathy and intellectual honesty. Author of <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024), winner of the 2025 National Press Women Communications Prize. Available for keynotes, panels, readings, workshops, and interdisciplinary programming — in person and virtually.</p>
+      <p style="font-size:1.05rem;line-height:1.7;">Jane Yevgenia Muschenetz works at a rare intersection: trained as a quantitative analyst (MIT Sloan, Bain &amp; Company), with the lived experience of a refugee from Soviet Ukraine, a mother, and a visual artist. She writes poetry that translates data, culture, and geopolitical force into literary and visual form — guided by the conviction that art, at its best, opens us to possibility. Her talks bring rigorous empirical thinking and lifelong reverence for different points of view into literary and cultural spaces, and lyric intelligence into academic, civic, and policy contexts. She crosses disciplinary and cultural divides with empathy and intellectual honesty. Author of <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024), winner of the 2025 National Press Women Communications Prize. Available for keynotes, panels, readings, workshops, and interdisciplinary programming — in person and virtually.</p>
     </div>
   </section>
 
@@ -119,7 +122,7 @@ import Base from '../layouts/Base.astro';
         <li><strong>Jewish Federation of San Diego</strong> <span class="collab-role"> — Keynote, <em>Immigrant Impact</em></span></li>
       </ul>
       <div class="collab-logos">
-        {[1,2,3,6,7,4,5,10,11,12,14].map((n) => {
+        {[1,2,3,6,7,14,5,10,11,12,4].map((n) => {
           const ext = [6, 11, 14].includes(n) ? 'jpg' : 'png';
           return <img src={`/images/collab-${String(n).padStart(2, '0')}.${ext}`} alt="Partner organization" />;
         })}
