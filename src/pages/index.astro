@@ -5,6 +5,13 @@ import { getCollection } from 'astro:content';
 const featuredItems = (await getCollection('featured')).filter((f) => f.data.active !== false);
 ---
 <style>
+  .press-img {
+    transform: scale(1) !important;
+    transition: transform 0.6s ease;
+  }
+  :global(.work-card:hover) .press-img {
+    transform: scale(1.08) !important;
+  }
   @media (min-width: 1200px) {
     .hero__subhead br { display: none; }
     .hero__subhead {
@@ -60,7 +67,7 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
           </div>
         </a>
         <a href="/writing-press" class="work-card">
-          <div class="work-card__image" style="background:#fff;"><img src="/images/mit-review.jpg" alt="Writing & Press" style="object-fit:contain;object-position:left bottom;"></div>
+          <div class="work-card__image" style="background:#fff;"><img src="/images/mit-review.jpg" alt="Writing & Press" class="press-img" style="object-fit:contain;object-position:center center;"></div>
           <div class="work-card__info">
             <h3 class="work-card__title">Writing &amp; Press</h3>
             <p style="margin-top:0.4rem; font-size:0.9rem;">Publications and recognitions.<br>Author bio and media inquiries.</p>
