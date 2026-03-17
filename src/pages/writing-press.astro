@@ -92,11 +92,11 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
                 </span>
               )}
             </h3>
-            {book.data.quotes?.map((q) => (
-              <>
+            {book.data.quotes?.map((q, i) => (
+              <div class={book.data.title === 'All the Bad Girls Wear Russian Accents' && i === 2 ? 'hide-mobile' : ''}>
                 <blockquote class="book-quote">&ldquo;{q.text}&rdquo;</blockquote>
                 <p class="book-quote-attribution">&mdash; {q.attribution}</p>
-              </>
+              </div>
             ))}
           </div>
         </div>
