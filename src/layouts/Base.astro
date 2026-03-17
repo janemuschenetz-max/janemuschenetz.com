@@ -47,6 +47,27 @@ const ogImageURL = new URL(ogImage, SITE).href;
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={ogImageURL}>
 
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jane Yevgenia Muschenetz",
+    "url": "https://www.janemuschenetz.com",
+    "sameAs": [],
+    "jobTitle": "Poet, Speaker, and Data Storyteller",
+    "description": "Poet and speaker whose work sits at the intersection of economics, science, and belonging. Author of POWER POINT (Sheila-Na-Gig Editions, 2024).",
+    "author": {
+      "@type": "Book",
+      "name": "POWER POINT",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Sheila-Na-Gig Editions"
+      },
+      "datePublished": "2024",
+      "image": "https://www.janemuschenetz.com/images/power-point-cover.jpg"
+    }
+  })} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
