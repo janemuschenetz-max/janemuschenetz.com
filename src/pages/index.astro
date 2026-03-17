@@ -17,6 +17,12 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
     }
   }
 </style>
+<script>
+  document.querySelector('.hero__cta[href="#work"]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
 <Base title="Jane Yevgenia Muschenetz" description="Poet, data storyteller, and translator between quantitative systems and human experience. Author of POWER POINT. Visual poetry, data visualization art, speaking and workshops." showDesktopNav={false}>
   <section class="hero">
     <div class="hero__bg" aria-hidden="true"></div>
