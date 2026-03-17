@@ -116,7 +116,7 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
       <div class="project-grid">
         <div class="project-card">
           <div class="project-card__images">
-            <img src="/images/palm-frond-zoo.jpg" alt="Mandrill painting by Jane Muschenetz for Palm Frond Zoo" class="project-card__img" />
+            <img src="/images/palm-frond-zoo.jpg" alt="Mandrill painting by Jane Muschenetz for Palm Frond Zoo" class="project-card__img" style="object-fit:contain;background:#FAF9F6;" />
           </div>
           <div class="project-card__body">
             <h4><a href="https://www.palmfrondzoo.com/animalart" class="link-underline" target="_blank" rel="noopener noreferrer">Palm Frond Zoo</a></h4>
@@ -124,8 +124,7 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
           </div>
         </div>
         <div class="project-card">
-          <div class="project-card__images project-card__images--pair">
-            <img src="/images/table-m.jpg" alt="Chocolate sorbet in a teacup" class="project-card__img" />
+          <div class="project-card__images">
             <img src="/images/table-m-2.jpg" alt="Chicken blintzes from Table M food blog" class="project-card__img" />
           </div>
           <div class="project-card__body">
