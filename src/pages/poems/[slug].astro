@@ -12,9 +12,21 @@ export async function getStaticPaths() {
 }
 
 const { poem } = Astro.props;
-const { title, description, subtitle, backHref, backText, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes, resources, showAward, amazonLink, publisherLink, publisherName } = poem.data;
+const { title, description, subtitle, backHref, backText, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes, resources } = poem.data;
+
+const isBadGirls = poem.data.slug === 'bad-girls';
+const awardText = isBadGirls
+  ? '2024 San Diego Writers Festival Poetry Collection of the Year'
+  : 'Winner, 2025 National Press Women Communications Prize';
+const amazonLink = isBadGirls
+  ? 'https://www.amazon.com/All-Girls-Wear-Russian-Accents/dp/1639802533/ref=sr_1_2?crid=GCKRJXP4AAPK&dib=eyJ2IjoiMSJ9.D5VuMTeV0OLUxn7L0cIHYrSnbrahVWtvaNEgwMsp5Go.8hBn07mxqiHgYFXJhV1L51QiirTsXjRmdG91xX8ZoT8&dib_tag=se&keywords=jane+muschenetz&qid=1773765718&sprefix=muschene%2Caps%2C262&sr=8-2'
+  : undefined;
+const publisherLink = isBadGirls
+  ? 'https://kelsaybooks.com/products/all-the-bad-girls-wear-russian-accents?_pos=2&_sid=1df27cb79&_ss=r'
+  : undefined;
+const publisherName = isBadGirls ? 'Kelsay Books' : undefined;
 ---
-<Poem title={title} description={description} subtitle={subtitle} backHref={backHref} backText={backText} showAward={showAward !== false} amazonLink={amazonLink} publisherLink={publisherLink} publisherName={publisherName}>
+<Poem title={title} description={description} subtitle={subtitle} backHref={backHref} backText={backText} awardText={awardText} amazonLink={amazonLink} publisherLink={publisherLink} publisherName={publisherName}>
   <!-- ====== Poem ====== -->
   <section>
     <div class="container">

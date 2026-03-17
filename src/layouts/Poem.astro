@@ -8,7 +8,7 @@ interface Props {
   backHref?: string;
   backText?: string;
   staticHref?: string;
-  showAward?: boolean;
+  awardText?: string;
   amazonLink?: string;
   publisherLink?: string;
   publisherName?: string;
@@ -21,7 +21,7 @@ const {
   backHref = '/visual-data-poetry',
   backText = 'Visual &amp; Data Poetry',
   staticHref,
-  showAward = true,
+  awardText = 'Winner, 2025 National Press Women Communications Prize',
   amazonLink = 'https://www.amazon.com/Power-Point-Jane-Muschenetz/dp/1962405028/ref=sr_1_1?crid=GCKRJXP4AAPK&dib=eyJ2IjoiMSJ9.D5VuMTeV0OLUxn7L0cIHYrSnbrahVWtvaNEgwMsp5Go.8hBn07mxqiHgYFXJhV1L51QiirTsXjRmdG91xX8ZoT8&dib_tag=se&keywords=jane+muschenetz&qid=1773765718&sprefix=muschene%2Caps%2C262&sr=8-1',
   publisherLink = 'https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/',
   publisherName = 'Sheila-Na-Gig',
@@ -33,14 +33,14 @@ const {
       <p class="hero__eyebrow"><a href={backHref} class="link-underline">&larr; <span set:html={backText} /></a></p>
       <h1 class="page-hero__title">{title}</h1>
       <p class="page-hero__subtitle" set:html={subtitle} />
-      {showAward && (
-        <p class="page-hero__award"><em>Winner, 2025 National Press Women Communications Prize</em></p>
+      {awardText && (
+        <p class="page-hero__award"><em>{awardText}</em></p>
       )}
       <p style="margin-top:var(--space-sm);font-size:0.85rem;color:var(--color-text-secondary);">
         {staticHref && (
           <><a href={staticHref} class="link-underline">View original static version →</a>&nbsp;·&nbsp;</>
         )}
-        Buy: <a href={amazonLink} target="_blank" rel="noopener noreferrer">Amazon</a> · <a href={publisherLink} target="_blank" rel="noopener noreferrer">{publisherName}</a>
+        <span style="font-weight:500;color:var(--color-text);">Buy→</span> <a href={amazonLink} target="_blank" rel="noopener noreferrer">Amazon</a> · <a href={publisherLink} target="_blank" rel="noopener noreferrer">{publisherName}</a>
       </p>
     </div>
   </section>
