@@ -731,7 +731,9 @@ a.pub-item:hover .pub-item__title {
 }
 
 .poem-commentary h3,
-.poem-about h3 {
+.poem-about h3,
+.explore h3,
+.explorer h3 {
   margin-bottom: 1rem;
 }
 
