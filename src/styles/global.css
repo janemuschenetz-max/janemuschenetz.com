@@ -176,6 +176,9 @@ section {
   .lp-gallery-item {
     display: none;
   }
+  .page-hero__subtitle {
+    white-space: normal;
+  }
 }
 
 .site-header .container {
