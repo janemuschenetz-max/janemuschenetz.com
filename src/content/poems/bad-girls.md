@@ -7,7 +7,7 @@ backHref: '/writing-press'
 backText: 'back to writing &amp; press'
 type: "text"
 order: 8
-about: "This poem plays with the Hollywood trope of the Russian-accented villain, turning it into a meditation on identity, language, and power. An earlier version of this poem first appeared in Lucky Jefferson."
+about: "'All the Bad Girls Wear Russian Accents' plays with the Hollywood trope of the Russian-accented villain, turning the tables on preconceived notions of identity, language, and power. An earlier version of this poem first appeared in <em>Lucky Jefferson</em>."
 footnotes: []
 poemText: |
   In the movies, villains have accents
