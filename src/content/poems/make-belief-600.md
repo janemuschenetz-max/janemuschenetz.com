@@ -13,28 +13,24 @@ poemText: |
   Speaking roughly, in terms of heat
   generated per every human inch, you give
   off more milliwatts — surge/energy. Only
-  the Sun is bigger . . . it matters.
-
+  the Sun is bigger . . . <em>it matters.</em>
   We are all blinded
   by love, the endlessly expanding/contracting
   universe is just another metaphor
   for longing, and life — its own purpose.
-
   How dazzling, this science!
-
   Consider falling for a physicist —
   the painstakingly slow way they undress
   mathematical mysteries,
-  talk about bodies in motion
+  talk about <em>bodies in motion</em>
   gets me every time — space
    — continuum, part, particle —
-
   Atomic. Incandescent! You
   are, pound-for-pound, more Life-Source,
   more Bomb, more Season-Spinning Searing Center
   Heart/Engine/Radiating Nuclear Dynamic
   than the Sun. Can't look directly
-  in the mirror? Small Wonder! Imagine —
+  in the mirror? <em>Small Wonder!</em> Imagine —
 
   none of us powerless.
 footnotes: []
