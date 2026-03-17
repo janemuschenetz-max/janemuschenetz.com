@@ -42,9 +42,9 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
           const item = pressItems[i];
           const PubTag = pub.data.link ? 'a' : 'div';
           const isExternal = pub.data.link && !pub.data.link.startsWith('/');
-          const pubAttrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
+          const pubAttrs = pub.data.link ? { href: pub.data.link, class: 'pub-item', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
           const PressTag = item?.data.link ? 'a' : 'div';
-          const pressAttrs = item?.data.link ? { href: item.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
+          const pressAttrs = item?.data.link ? { href: item.data.link, class: 'pub-item', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
           return (
             <>
               <PubTag {...pubAttrs}>
