@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 const featuredItems = (await getCollection('featured')).filter((f) => f.data.active !== false);
 ---
-<Base title="Jane Yevgenia Muschenetz" showDesktopNav={false}>
+<Base title="Jane Yevgenia Muschenetz" description="Poet, speaker, and data storyteller. Author of POWER POINT (Sheila-Na-Gig Editions, 2024). Poetic practice at the intersection of economics, science, and belonging." showDesktopNav={false}>
   <section class="hero">
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="container">
