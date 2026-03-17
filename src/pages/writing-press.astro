@@ -10,6 +10,9 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
   section:not(.page-hero) {
     padding: calc(var(--space-lg) * 0.5) 0;
   }
+  .section--tight-top {
+    padding-top: calc(var(--space-sm));
+  }
   .pub-item__title--award {
     font-weight: 600;
   }
@@ -108,7 +111,7 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
     </div>
   </section>
 
-  <section class="reveal">
+  <section class="reveal section--tight-top">
     <div class="container">
       <div class="section-header">
         <span class="section-number">04</span>
