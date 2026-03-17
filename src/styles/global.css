@@ -542,11 +542,6 @@ section {
 }
 
 /* --- Publication List --- */
-.pub-list {
-  display: flex;
-  flex-direction: column;
-}
-
 .pub-sections-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -554,10 +549,18 @@ section {
   align-items: start;
 }
 
+.pub-items-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--space-xl);
+  align-items: stretch;
+}
+
 @media (max-width: 640px) {
-  .pub-sections-grid {
+  .pub-sections-grid,
+  .pub-items-grid {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: 0;
   }
 }
 

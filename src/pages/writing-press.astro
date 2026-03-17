@@ -28,45 +28,40 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
   <section class="reveal">
     <div class="container">
       <div class="pub-sections-grid">
-        <div>
-          <div class="section-header">
-            <span class="section-number">01</span>
-            <h2 class="section-title">Poems &amp; Essays</h2>
-          </div>
-          <div class="pub-list">
-            {publications.map((pub) => {
-              const Tag = pub.data.link ? 'a' : 'div';
-              const isExternal = pub.data.link && !pub.data.link.startsWith('/');
-              const attrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
-              return (
-                <Tag {...attrs}>
-                  <span class="pub-item__title">{pub.data.title}</span>
-                  <span class="pub-item__meta">{pub.data.publisher}</span>
-                  {pub.data.publisher === 'The Good Life Review, 2022' && <span class="pub-item__note">Honeybee Poetry Prize Winner</span>}
-                  {pub.data.publisher === 'Cathexis NW Press, 2024' && <span class="pub-item__note">Best of the Net Nominee</span>}
-                </Tag>
-              );
-            })}
-          </div>
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 class="section-title">Poems &amp; Essays</h2>
         </div>
-        <div>
-          <div class="section-header">
-            <span class="section-number">02</span>
-            <h2 class="section-title">Press &amp; Recognitions</h2>
-          </div>
-          <div class="pub-list">
-            {pressItems.map((item) => {
-              const Tag = item.data.link ? 'a' : 'div';
-              const attrs = item.data.link ? { href: item.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
-              return (
-                <Tag {...attrs}>
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Press &amp; Recognitions</h2>
+        </div>
+      </div>
+      <div class="pub-items-grid">
+        {publications.map((pub, i) => {
+          const item = pressItems[i];
+          const PubTag = pub.data.link ? 'a' : 'div';
+          const isExternal = pub.data.link && !pub.data.link.startsWith('/');
+          const pubAttrs = pub.data.link ? { href: pub.data.link, class: 'pub-item link-underline', ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}) } : { class: 'pub-item' };
+          const PressTag = item?.data.link ? 'a' : 'div';
+          const pressAttrs = item?.data.link ? { href: item.data.link, class: 'pub-item link-underline', target: '_blank', rel: 'noopener noreferrer' } : { class: 'pub-item' };
+          return (
+            <>
+              <PubTag {...pubAttrs}>
+                <span class="pub-item__title">{pub.data.title}</span>
+                <span class="pub-item__meta">{pub.data.publisher}</span>
+                {pub.data.publisher === 'The Good Life Review, 2022' && <span class="pub-item__note">Honeybee Poetry Prize Winner</span>}
+                {pub.data.publisher === 'Cathexis NW Press, 2024' && <span class="pub-item__note">Best of the Net Nominee</span>}
+              </PubTag>
+              {item ? (
+                <PressTag {...pressAttrs}>
                   <span class={`pub-item__title${['National Federation of Press Women — First Place (Verse)', 'San Diego Writers Festival — Poetry Collection of the Year', 'Middle West Press — First Place (War Poetry)'].includes(item.data.title) ? ' pub-item__title--award' : ''}`}>{item.data.title}</span>
                   <span class="pub-item__meta">{item.data.year}</span>
-                </Tag>
-              );
-            })}
-          </div>
-        </div>
+                </PressTag>
+              ) : <div class="pub-item pub-item--empty" />}
+            </>
+          );
+        })}
       </div>
     </div>
   </section>
