@@ -14,7 +14,7 @@ poemText: |
   sometimes German, but mostly Russian—
   hard-edged lyrics of something forbidden,
   severe haircuts, steel-blue eyes, and an appreciation for
-  Tchaikovsky! for a Black Swan kind of life,
+  Tchaikovsky! for a <em>Black Swan</em> kind of life,
   for fairy tales built from curses.
 
   "Say something in Russian," the boys beg me in school,
@@ -24,7 +24,7 @@ poemText: |
   a bullet through every consonant,
   bare my teeth on the "V"
   exhale over that last "AH!"
-  imply Red lipstick.
+  imply <em>Red</em> lipstick.
 
   "What does it mean?" I don't tell them,
   only smile as they try to shape the unfamiliar
