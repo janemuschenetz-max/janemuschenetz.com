@@ -1198,3 +1198,9 @@ a.pub-item:hover .pub-item__title {
   section { padding: var(--space-lg) 0; }
   .hero { min-height: 80vh; }
 }
+
+@media (min-width: 1200px) {
+  section:not(.hero) { padding: 3rem 0; }
+  .hero__subtitle--large { font-size: clamp(1.5rem, 2.8vw, 2.2rem); }
+  .section-title { font-size: clamp(1.3rem, 2vw, 1.6rem); }
+}
