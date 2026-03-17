@@ -30,6 +30,7 @@ const {
 <Base title={`${title} — Jane Muschenetz`} description={description}>
   <section class="page-hero">
     <div class="container">
+      <p class="poem-eyebrow"><a href={backHref}>← <span set:html={backText} /></a></p>
       <h1 class="page-hero__title">{title}</h1>
       <p class="page-hero__subtitle" set:html={subtitle} />
       {awardText && (
@@ -48,6 +49,19 @@ const {
 </Base>
 
 <style>
+  .poem-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+  .poem-eyebrow a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .poem-eyebrow a:hover {
+    text-decoration: underline;
+  }
   :global(.page-hero) {
     padding-bottom: 0.8rem;
   }
