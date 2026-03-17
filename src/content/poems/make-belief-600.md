@@ -8,7 +8,7 @@ illustration: "/images/illustration-sun.avif"
 illustrationAlt: "Vintage engraving of a radiant sun with a face, captioned 'Fig. 1 (½th you)'"
 epigraphText: "A cup of the Sun's core produces ~60 mW of thermal energy. By volume…less than that of a human [350 mW]. In a sense, you are hotter than the Sun — there's just not as much of you."
 epigraphAttribution: "Minute Physics"
-about: "Inspired by an online video about thermal energy per unit volume, this poem celebrates human radiance and desire for love and knowledge. It was nominated for Best of the Net and first published by Cathexis Northwest Press."
+about: "Inspired by an online video about thermal energy per unit volume, this poem celebrates human radiance and desire for love and knowledge. It was nominated for Best of the Net and first published by <em>Cathexis Northwest Press</em>."
 poemText: |
   Speaking roughly, in terms of heat
   generated per every human inch, you give
