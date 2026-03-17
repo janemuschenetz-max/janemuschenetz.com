@@ -222,7 +222,7 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
     <div class="container">
       <h3>About This Poem</h3>
       <p>Inspired by an online video about thermal energy per unit volume, this poem celebrates human radiance and desire for love and knowledge. It was nominated for Best of the Net and first published by Cathexis Northwest Press.</p>
-      <p class="mt-sm" style="font-size:0.85rem;color:var(--color-text-secondary);">Data: Henry Reich, Minute Physics; standard solar model; NIH/WHO human metabolic data. Hover any chart element to see exact values.</p>
+      <p class="mt-sm hide-mobile" style="font-size:0.85rem;color:var(--color-text-secondary);">Data: Henry Reich, Minute Physics; standard solar model; NIH/WHO human metabolic data. Hover any chart element to see exact values.</p>
     </div>
   </section>
 
@@ -241,7 +241,7 @@ const { poemText, epigraphText, epigraphAttribution } = poem.data;
       <div class="chart-panel" id="panel-density">
         <p class="chart-label">Energy Density &mdash; Power per Liter of Volume (Sun&rsquo;s Core = 1&times; baseline)</p>
         <div id="chart-density"></div>
-        <p class="chart-note">Log scale. A resting human produces ~6&times; the thermal energy per unit volume as the Sun&rsquo;s core. Hover any bar for the exact value.</p>
+        <p class="chart-note">Log scale. A resting human produces ~6&times; the thermal energy per unit volume as the Sun&rsquo;s core.<span class="hide-mobile"> Hover any bar for the exact value.</span></p>
       </div>
 
       <div class="chart-panel" id="panel-total">
