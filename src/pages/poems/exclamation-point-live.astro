@@ -45,6 +45,9 @@ const exSvg = loadSvg('src/assets/exclamation.svg');
   .poem-section { padding: 0; }
   .ex-svg-panel { width: 100%; background: rgb(237, 30, 36); }
   :global(.ex-svg-panel svg) { width: 80% !important; height: auto !important; display: block; margin: 0 auto; }
+  @media (min-width: 768px) {
+    :global(.ex-svg-panel svg) { width: 60% !important; }
+  }
 
   /* Text lines start hidden; scroll-driven JS reveals them.
      :global() because these live inside an inlined SVG Fragment. */
