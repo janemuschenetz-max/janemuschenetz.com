@@ -2,7 +2,7 @@
 title: "All the Bad Girls Wear Russian Accents"
 slug: "bad-girls"
 description: "A poem about accent, identity, and the quiet power of withholding — originally published in Lucky Jefferson."
-subtitle: 'from <em>All the Bad Girls Wear Russian Accents</em>, 2024 San Diego Writers Festival Poetry Collection of the Year'
+subtitle: 'from <em>All the Bad Girls Wear Russian Accents</em>, <span class="gleam-prize">2024 San Diego Writers Festival Poetry Collection of the Year</span>'
 backHref: '/writing-press'
 backText: 'back to writing &amp; press'
 showAward: false

@@ -1261,3 +1261,27 @@ a.pub-item:hover .pub-item__title {
   .hero__subtitle--large { font-size: clamp(1.5rem, 2.8vw, 2.2rem); }
   .section-title { font-size: clamp(1.3rem, 2vw, 1.6rem); }
 }
+
+/* ── Award gleam animation ─────────────────────────────────────────── */
+@keyframes poem-prize-gleam {
+  from { background-position: right center; }
+  to   { background-position: left center; }
+}
+.gleam-prize {
+  background: linear-gradient(
+    90deg,
+    var(--color-text) 0%,
+    var(--color-text) 30%,
+    rgba(180, 148, 80, 0.85) 43%,
+    rgba(225, 195, 120, 1)   50%,
+    rgba(180, 148, 80, 0.85) 57%,
+    var(--color-text) 70%,
+    var(--color-text) 100%
+  );
+  background-size: 300% 100%;
+  background-position: right center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: poem-prize-gleam 1.8s ease-in-out 0.8s 1 both;
+}

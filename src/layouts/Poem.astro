@@ -75,26 +75,5 @@ const {
     color: var(--color-text-secondary);
     margin-top: 0.25rem;
   }
-  @keyframes poem-prize-gleam {
-    from { background-position: right center; }
-    to   { background-position: left center; }
-  }
-  :global(.gleam-prize) {
-    background: linear-gradient(
-      90deg,
-      var(--color-text) 0%,
-      var(--color-text) 30%,
-      rgba(180, 148, 80, 0.85) 43%,
-      rgba(225, 195, 120, 1)   50%,
-      rgba(180, 148, 80, 0.85) 57%,
-      var(--color-text) 70%,
-      var(--color-text) 100%
-    );
-    background-size: 300% 100%;
-    background-position: right center;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: poem-prize-gleam 1.8s ease-in-out 0.8s 1 both;
-  }
+
 </style>
