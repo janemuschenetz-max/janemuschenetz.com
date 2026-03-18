@@ -2,7 +2,7 @@
 title: "Safety Points, or 'tips for women staying safe'"
 slug: "safety-points"
 description: "A devastating litany of maternal vigilance paired with a found poem from a sheriff's office safety tips for women."
-crossLink: 'Also on women''s safety: <a href="/poems/when-always">When? Always. →</a>'
+crossLink: 'Also on women''s safety: <a href="/poems/when-always" style="color:var(--color-text);">When? Always. →</a>'
 type: "image"
 order: 6
 pairGroup: "women-safety"

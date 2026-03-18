@@ -2,7 +2,7 @@
 title: "When? Always."
 slug: "when-always"
 description: "A found poem extracted from sheriff's office safety tips for women, distilled into a spiraling visual form."
-crossLink: 'Also on women''s safety: <a href="/poems/safety-points">Safety Points →</a>'
+crossLink: 'Also on women''s safety: <a href="/poems/safety-points" style="color:var(--color-text);">Safety Points →</a>'
 type: "image"
 order: 7
 pairGroup: "women-safety"
