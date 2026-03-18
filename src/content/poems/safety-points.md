@@ -2,7 +2,6 @@
 title: "Safety Points, or 'tips for women staying safe'"
 slug: "safety-points"
 description: "A devastating litany of maternal vigilance paired with a found poem from a sheriff's office safety tips for women."
-subtitle: 'from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</a>, winner of the 2025 National Press Women Communications Prize'
 crossLink: 'Also on women''s safety: <a href="/poems/when-always">When? Always. →</a>'
 type: "image"
 order: 6

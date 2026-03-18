@@ -2,7 +2,6 @@
 title: "When? Always."
 slug: "when-always"
 description: "A found poem extracted from sheriff's office safety tips for women, distilled into a spiraling visual form."
-subtitle: 'from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</a>, winner of the 2025 National Press Women Communications Prize'
 crossLink: 'Also on women''s safety: <a href="/poems/safety-points">Safety Points →</a>'
 type: "image"
 order: 7
