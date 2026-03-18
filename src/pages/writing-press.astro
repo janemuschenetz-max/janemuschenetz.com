@@ -47,6 +47,7 @@ const books = (await getCollection('books')).sort((a, b) => (a.data.order ?? 99)
                 <span class="pub-item__meta">{pub.data.publisher}</span>
                 {pub.data.publisher === 'The Good Life Review, 2022' && <span class="pub-item__note">Honeybee Poetry Prize Winner · Pushcart Nominee</span>}
                 {pub.data.publisher === 'Cathexis NW Press, 2024' && <span class="pub-item__note">First Place, 2025 NFPW Contest · Best of the Net Nominee</span>}
+                {pub.data.publisher === 'Middle West Press, 2025' && <span class="pub-item__note">2025 War Poetry Postcard Prize Winner</span>}
               </PubTag>
               {item ? (
                 <PressTag {...pressAttrs}>
