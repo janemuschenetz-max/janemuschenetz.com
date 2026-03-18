@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { poem } = Astro.props;
-const { title, description, subtitle, backHref, backText, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes, resources } = poem.data;
+const { title, description, subtitle, backHref, backText, type, image, imageAlt, image2, image2Alt, illustration, illustrationAlt, epigraphText, epigraphAttribution, poemText, srOnly, about, footnotes, resources, crossLink } = poem.data;
 
 const isBadGirls = poem.data.slug === 'bad-girls';
 const awardText = isBadGirls ? null : undefined;
@@ -111,6 +111,15 @@ const publisherName = isBadGirls ? 'Kelsay Books' : undefined;
             ))}
           </ul>
         </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ====== Crosslink ====== -->
+  {crossLink && (
+    <section style="border-top: 1px solid var(--color-border); padding: var(--space-lg) 0;">
+      <div class="container">
+        <p style="font-size:0.85rem;color:var(--color-text-secondary);" set:html={crossLink}></p>
       </div>
     </section>
   )}
