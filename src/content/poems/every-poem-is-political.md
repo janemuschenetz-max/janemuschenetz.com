@@ -1,5 +1,5 @@
 ---
-title: "every poem is political,"
+title: "every poem is political—"
 slug: "every-poem-is-political"
 description: "A poem about beauty, resistance, and the politics of the natural world — winner of the 2025 War Poetry Postcard Prize."
 subtitle: 'Winner of the <span class="gleam-prize">2025 War Poetry Postcard Prize</span>'

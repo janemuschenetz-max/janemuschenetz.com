@@ -1,5 +1,5 @@
 ---
-title: "every poem is political,"
+title: "every poem is political—"
 publisher: 'War Poetry Postcards, 2025'
 year: 2025
 order: 4
