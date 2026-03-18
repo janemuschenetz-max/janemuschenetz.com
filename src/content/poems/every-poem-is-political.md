@@ -7,7 +7,7 @@ backHref: '/writing-press'
 backText: 'back to writing &amp; press'
 type: "text"
 order: 9
-about: "Winner of the 2025 War Poetry Postcard Prize. Published in <em>War Poetry Postcards</em>, 2025."
+about: "'Every poem is political' was selected by editors of Collateral Journal and Middle West Press as the winner of the 2025 War Poetry Postcard Prize. The poem was first published in <em>Mukoli, The Magazine for Peace</em>."
 footnotes: []
 poemText: |
   in the sense that everything is political
