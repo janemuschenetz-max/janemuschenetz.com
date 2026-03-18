@@ -12,7 +12,12 @@ import Base from '../layouts/Base.astro';
     display: grid;
     grid-template-columns: 210px 1fr;
     gap: var(--space-lg);
-    align-items: start;
+    align-items: stretch;
+  }
+  .bio-layout__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .bio-layout__photo-wrap {
     border-radius: 4px;
