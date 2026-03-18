@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
   }
   .bio-layout {
     display: grid;
-    grid-template-columns: 1fr 210px;
+    grid-template-columns: 210px 1fr;
     gap: var(--space-lg);
     align-items: start;
   }
@@ -33,9 +33,8 @@ import Base from '../layouts/Base.astro';
     .bio-layout {
       grid-template-columns: 1fr;
     }
-    .bio-layout__photo {
+    .bio-layout__photo-wrap {
       aspect-ratio: 4/3;
-      order: -1;
     }
   }
   @media (max-width: 768px) {
@@ -77,14 +76,14 @@ import Base from '../layouts/Base.astro';
   <section class="reveal" style="padding-top:0;">
     <div class="container">
       <div class="bio-layout">
-        <div class="bio-layout__text">
-          <p style="font-size:1.05rem;line-height:1.7;">Jane Yevgenia Muschenetz works at a rare intersection: trained as a quantitative analyst (MIT Sloan, Bain &amp; Company), with the lived experience of a refugee from Soviet Ukraine, a mother, and a visual artist. She writes poetry that translates data, culture, and geopolitical force into literary and visual form — guided by the conviction that art, at its best, opens us to possibility.</p>
-          <p style="font-size:1.05rem;line-height:1.7;margin-top:1em;">She crosses disciplinary and cultural divides with empathy and intellectual honesty. Author of <em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024) and <em>All the Bad Girls Wear Russian Accents</em> (Kelsay Books, 2022), winner of the 2025 National Press Women Communications Prize. Available for keynotes, panels, readings, workshops, and interdisciplinary programming — in person and virtually.</p>
-        </div>
         <div>
           <div class="bio-layout__photo-wrap">
             <img src="/images/jane-book-fest.jpg" alt="Jane Muschenetz speaking" class="bio-layout__photo">
           </div>
+        </div>
+        <div class="bio-layout__text">
+          <p style="font-size:1.05rem;line-height:1.7;">Jane Yevgenia Muschenetz works at a rare intersection: trained as a quantitative analyst (MIT Sloan, Bain &amp; Company), with the lived experience of a refugee from Soviet Ukraine, a mother, and a visual artist. She writes poetry that translates data, values, and geopolitical force into literary and visual form — bridging disciplinary and cultural divides with empathy and intellectual honesty.</p>
+          <p style="font-size:1.05rem;line-height:1.7;margin-top:1em;">Author of <em>POWER POINT</em> (2025 National Press Women Communications Prize) and <em>All the Bad Girls Wear Russian Accents</em> (San Diego Writers Festival 2024 Poetry Collection of the Year). Available for keynotes, panels, readings, workshops, and interdisciplinary programming — in person and virtually.</p>
         </div>
       </div>
     </div>
