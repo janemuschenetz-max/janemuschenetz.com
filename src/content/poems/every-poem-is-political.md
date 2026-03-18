@@ -7,6 +7,7 @@ backHref: '/writing-press'
 backText: 'back to writing &amp; press'
 type: "text"
 order: 9
+about: "Winner of the 2025 War Poetry Postcard Prize. Published in <em>War Poetry Postcards</em>, 2025."
 footnotes: []
 poemText: |
   in the sense that everything is political
