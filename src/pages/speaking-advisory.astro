@@ -46,6 +46,9 @@ import Base from '../layouts/Base.astro';
     .grid.grid--2 {
       grid-template-columns: 1fr;
     }
+    .hide-mobile {
+      display: none;
+    }
   }
   .collab-list {
     list-style: none;
@@ -162,7 +165,7 @@ import Base from '../layouts/Base.astro';
       <div class="collab-logos">
         {[1,2,3,6,7,14,5,10,11,12,4].map((n) => {
           const ext = [6, 11, 14].includes(n) ? 'jpg' : 'png';
-          return <img src={`/images/collab-${String(n).padStart(2, '0')}.${ext}`} alt="Partner organization" />;
+          return <img src={`/images/collab-${String(n).padStart(2, '0')}.${ext}`} alt="Partner organization" class={n === 4 ? 'hide-mobile' : ''} />;
         })}
       </div>
     </div>
