@@ -17,11 +17,11 @@ interface Props {
 const {
   title,
   description,
-  subtitle = 'from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em> (Sheila-Na-Gig Editions, 2024)</a>',
+  subtitle = 'from <a href="https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/" target="_blank" rel="noopener noreferrer"><em>POWER POINT</em></a>, winner of the 2025 National Press Women Communications Prize',
   backHref = '/visual-data-poetry',
   backText = 'Visual &amp; Data Poetry',
   staticHref,
-  awardText = 'winner, 2025 National Press Women Communications Prize',
+  awardText = '',
   amazonLink = 'https://www.amazon.com/Power-Point-Jane-Muschenetz/dp/1962405028/ref=sr_1_1?crid=GCKRJXP4AAPK&dib=eyJ2IjoiMSJ9.D5VuMTeV0OLUxn7L0cIHYrSnbrahVWtvaNEgwMsp5Go.8hBn07mxqiHgYFXJhV1L51QiirTsXjRmdG91xX8ZoT8&dib_tag=se&keywords=jane+muschenetz&qid=1773765718&sprefix=muschene%2Caps%2C262&sr=8-1',
   publisherLink = 'https://sheilanagigblog.com/shop-sheila-na-gig-editions/jane-muschenetz-powerpoint/',
   publisherName = 'Sheila-Na-Gig',
@@ -63,12 +63,11 @@ const {
     text-decoration: underline;
   }
   :global(.page-hero) {
-    padding-top: calc(80px + 3.5rem);
+    padding-top: calc(80px + var(--space-xl));
     padding-bottom: 0.8rem;
   }
   :global(.page-hero__subtitle) {
     max-width: none;
-    white-space: nowrap;
   }
   :global(.page-hero__award) {
     font-size: 0.85rem;
