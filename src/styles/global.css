@@ -1240,11 +1240,10 @@ a.pub-item:hover .pub-item__title {
 }
 
 .collab-logo-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
-  max-width: 120px;
   margin: 0;
   padding: 0;
 }
@@ -1264,21 +1263,24 @@ a.pub-item:hover .pub-item__title {
 }
 
 .collab-logo-item figcaption {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
   font-size: 0.65rem;
   text-align: center;
   color: var(--color-text-secondary);
-  line-height: 1.35;
+  line-height: 1.4;
   letter-spacing: 0.01em;
-  max-height: 0;
-  overflow: hidden;
   opacity: 0;
-  transition: opacity var(--transition), max-height var(--transition), margin-top var(--transition);
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity var(--transition);
 }
 
 .collab-logo-item:hover figcaption {
-  max-height: 4em;
   opacity: 1;
-  margin-top: 0.55rem;
 }
 
 /* ==========================================================================
