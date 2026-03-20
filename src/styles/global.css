@@ -1012,7 +1012,7 @@ a.pub-item:hover .pub-item__title {
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
-  padding-top: 12px !important;
+  padding-top: 4px !important;
   margin: 0 auto !important;
   max-width: 420px;
   font-family: var(--font-body) !important;
