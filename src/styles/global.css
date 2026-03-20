@@ -954,7 +954,9 @@ a.pub-item:hover .pub-item__title {
 }
 
 .newsletter__cta {
-  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
   letter-spacing: 0.06em;
   line-height: 1.8;
   color: var(--color-text-secondary);
