@@ -4,7 +4,7 @@
     {
       "name": "dev",
       "runtimeExecutable": "/Users/jane/.nvm/versions/node/v22.22.1/bin/node",
-      "runtimeArgs": ["/Users/jane/Documents/GitHub/janemuschenetz.com/node_modules/astro/bin/astro.mjs", "dev"],
+      "runtimeArgs": ["/Users/jane/Documents/GitHub/janemuschenetz.com/.claude/worktrees/eloquent-goodall/node_modules/astro/bin/astro.mjs", "dev"],
       "port": 4321
     }
   ]
