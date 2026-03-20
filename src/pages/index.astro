@@ -9,7 +9,8 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
     transform: scale(1) !important;
     transition: transform 0.6s ease;
   }
-  :global(.work-card:hover) .press-img {
+  :global(.work-card:hover) .press-img,
+  :global(.work-card__image:hover) .press-img {
     transform: scale(1.08) !important;
   }
   @media (min-width: 1200px) {
@@ -66,13 +67,13 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
             <p style="margin-top:0.4rem; font-size:0.9rem;">Keynotes and community conversations.<br>Institutional workshops.</p>
           </div>
         </a>
-        <a href="/writing-press" class="work-card">
-          <div class="work-card__image"><img src="/images/mit-card.jpg" alt="Writing & Press" class="press-img" style="object-fit:cover;object-position:center top;"></div>
+        <div class="work-card">
+          <a href="https://www.technologyreview.com/2025/02/25/1111037/the-poetry-of-data/" target="_blank" rel="noopener" class="work-card__image"><img src="/images/mit-card.jpg" alt="Writing & Press" class="press-img" style="object-fit:cover;object-position:center top;"></a>
           <div class="work-card__info">
-            <h3 class="work-card__title">Writing &amp; Press</h3>
+            <h3 class="work-card__title"><a href="/writing-press" style="color:inherit;text-decoration:none;">Writing &amp; Press</a></h3>
             <p style="margin-top:0.4rem; font-size:0.9rem;">Publications and recognitions.<br>Author bio and media inquiries.</p>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
