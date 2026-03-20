@@ -113,10 +113,24 @@ import Base from '../layouts/Base.astro';
         <li><strong>Jewish Federation of San Diego</strong> <span class="collab-role"> — Keynote, <em>Immigrant Impact</em></span></li>
       </ul>
       <div class="collab-logos">
-        {[1,2,3,6,7,14,5,10,11,12,4].map((n) => {
-          const ext = [6, 11, 14].includes(n) ? 'jpg' : 'png';
-          return <img src={`/images/collab-${String(n).padStart(2, '0')}.${ext}`} alt="Partner organization" class={n === 4 ? 'hide-mobile' : ''} />;
-        })}
+        {[
+          { n: 1,  ext: 'png', caption: 'Featured Speaker, Poetry Stage' },
+          { n: 2,  ext: 'png', caption: 'Grant Recipient, Poetry to the People' },
+          { n: 3,  ext: 'png', caption: 'Session Host & Performer, CODA Festival' },
+          { n: 6,  ext: 'jpg', caption: 'Featured Performer, Born in the USSR' },
+          { n: 7,  ext: 'png', caption: 'Keynote, Woman Powered' },
+          { n: 14, ext: 'jpg', caption: 'Poetry Program Director' },
+          { n: 5,  ext: 'png', caption: 'Regional Judge' },
+          { n: 10, ext: 'png', caption: 'Featured Artist & Recurring Workshop Leader' },
+          { n: 11, ext: 'jpg', caption: 'Program Director, Kowit Poetry Awards · Local Authors Showcase' },
+          { n: 12, ext: 'png', caption: 'Exhibited Poet, Plaza de Panama' },
+          { n: 4,  ext: 'png', caption: 'Recurring Visiting Author, MA Writing Program · Featured Performer, Poetry Day', hideOnMobile: true },
+        ].map(({ n, ext, caption, hideOnMobile }) => (
+          <figure class={`collab-logo-item${hideOnMobile ? ' hide-mobile' : ''}`}>
+            <img src={`/images/collab-${String(n).padStart(2, '0')}.${ext}`} alt="Partner organization" />
+            <figcaption>{caption}</figcaption>
+          </figure>
+        ))}
       </div>
     </div>
   </section>
