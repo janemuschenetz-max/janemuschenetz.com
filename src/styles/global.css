@@ -861,6 +861,7 @@ a.pub-item:hover .pub-item__title {
 /* --- Contact / Inquiries --- */
 .inquiries-section {
   background: var(--color-bg-alt);
+  padding: var(--space-md) 0;
 }
 
 .inquiries-grid {
@@ -870,7 +871,7 @@ a.pub-item:hover .pub-item__title {
 }
 
 .form-group {
-  margin-bottom: var(--space-sm);
+  margin-bottom: calc(var(--space-sm) * 0.6);
 }
 
 .form-group label {
