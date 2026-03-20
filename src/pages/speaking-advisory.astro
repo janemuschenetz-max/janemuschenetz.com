@@ -72,6 +72,25 @@ import Base from '../layouts/Base.astro';
   .collab-list .collab-role {
     color: var(--color-text-secondary);
   }
+  .collab-endorsement {
+    margin: var(--space-md) 0 var(--space-md);
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-md);
+    border-left: 2px solid var(--color-border);
+  }
+  .collab-endorsement p {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin: 0 0 0.5rem;
+  }
+  .collab-endorsement cite {
+    font-size: 0.78rem;
+    font-style: normal;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.03em;
+  }
 </style>
 <Base title="Speaking & Advisory — Jane Muschenetz" description="Poet and data storyteller Jane Muschenetz offers keynotes, workshops, and readings on data and poetics, science communication, identity, and belonging — for universities, conferences, literary festivals, and cultural institutions.">
   <section class="page-hero">
@@ -112,6 +131,10 @@ import Base from '../layouts/Base.astro';
         <li><strong>The San Diego Writers Festival</strong> <span class="collab-role"> — Program director, Poetry</span></li>
         <li><strong>Jewish Federation of San Diego</strong> <span class="collab-role"> — Keynote, <em>Immigrant Impact</em></span></li>
       </ul>
+      <blockquote class="collab-endorsement">
+        <p>"In an industry where so often egos and competitiveness get in the way of achieving cohesiveness, Jane leads with compassion, hard work, and a 'community first' approach that makes her an effective and admirable leader in our field."</p>
+        <cite>— Marni Freedman, Director, San Diego Writers Festival</cite>
+      </blockquote>
       <div class="collab-logos">
         {[
           { n: 1,  ext: 'png', caption: 'Featured Speaker, Poetry Stage' },
