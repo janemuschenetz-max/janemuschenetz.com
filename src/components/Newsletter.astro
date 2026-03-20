@@ -4,5 +4,18 @@
     <p class="newsletter__attribution">&mdash; Mary Oliver</p>
     <p class="newsletter__cta">News, events, and the occasional poem &mdash; delivered to your inbox.</p>
     <script is:inline async data-uid="b37444e105" src="https://jane-muschenetz.kit.com/b37444e105/index.js"></script>
+<script is:inline>
+  (function() {
+    function fixPlaceholder() {
+      var input = document.querySelector('[data-uid="b37444e105"] .formkit-input');
+      if (input) {
+        input.placeholder = 'email';
+      } else {
+        setTimeout(fixPlaceholder, 200);
+      }
+    }
+    fixPlaceholder();
+  })();
+</script>
   </div>
 </div>
