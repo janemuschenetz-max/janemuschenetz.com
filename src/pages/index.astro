@@ -16,7 +16,7 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
   .hero__subhead {
     font-family: var(--font-heading);
     font-style: italic;
-    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
   }
   .hero__bio {
     font-size: clamp(0.95rem, 1.5vw, 1.15rem);
@@ -30,6 +30,9 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
     hyphens: auto;
   }
   @media (min-width: 1200px) {
+    .hero__subhead {
+      white-space: nowrap;
+    }
     .hero__bio {
       hyphens: none;
     }
