@@ -1243,7 +1243,7 @@ a.pub-item:hover .pub-item__title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0;
   max-width: 120px;
   margin: 0;
   padding: 0;
@@ -1257,23 +1257,28 @@ a.pub-item:hover .pub-item__title {
   transition: filter var(--transition), transform var(--transition);
 }
 
-.collab-logo-item img:hover {
+.collab-logo-item:hover img {
   filter: grayscale(0%);
-  transform: scale(1.55);
+  transform: scale(1.5);
+  transform-origin: center bottom;
 }
 
 .collab-logo-item figcaption {
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   text-align: center;
   color: var(--color-text-secondary);
   line-height: 1.35;
   letter-spacing: 0.01em;
+  max-height: 0;
+  overflow: hidden;
   opacity: 0;
-  transition: opacity var(--transition);
+  transition: opacity var(--transition), max-height var(--transition), margin-top var(--transition);
 }
 
 .collab-logo-item:hover figcaption {
+  max-height: 4em;
   opacity: 1;
+  margin-top: 0.55rem;
 }
 
 /* ==========================================================================
