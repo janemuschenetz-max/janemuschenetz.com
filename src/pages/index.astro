@@ -13,6 +13,9 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
   :global(.work-card__image:hover) .press-img {
     transform: scale(1.08) !important;
   }
+  .hero__subhead {
+    font-style: italic;
+  }
   .hero__bio {
     font-size: 0.82rem;
     line-height: 1.55;
