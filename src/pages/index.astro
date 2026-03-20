@@ -17,10 +17,10 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
     font-style: italic;
   }
   .hero__bio {
-    font-size: 0.82rem;
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
     line-height: 1.55;
     color: var(--color-text-secondary);
-    max-width: 36em;
+    max-width: 600px;
     margin-top: -0.75rem;
     margin-bottom: 2rem;
     opacity: 0.88;
@@ -35,7 +35,8 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
       letter-spacing: 0.09em;
     }
     .hero__bio {
-      max-width: 48em;
+      font-size: 1rem;
+      max-width: 600px;
       hyphens: none;
     }
     .hero__cta {
