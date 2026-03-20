@@ -14,10 +14,12 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
     transform: scale(1.08) !important;
   }
   .hero__subhead {
+    font-family: var(--font-heading);
     font-style: italic;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   }
   .hero__bio {
-    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
     line-height: 1.55;
     color: var(--color-text-secondary);
     max-width: 600px;
@@ -29,14 +31,7 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
   }
   @media (min-width: 1200px) {
     .hero__subhead br { display: none; }
-    .hero__subhead {
-      white-space: nowrap;
-      font-size: 1rem;
-      letter-spacing: 0.09em;
-    }
     .hero__bio {
-      font-size: 1rem;
-      max-width: 600px;
       hyphens: none;
     }
     .hero__cta {
