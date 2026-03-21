@@ -29,6 +29,9 @@ const featuredItems = (await getCollection('featured')).filter((f) => f.data.act
     text-align: justify;
     hyphens: auto;
   }
+  .hero__bio + .hero__bio {
+    margin-top: -2.1rem;
+  }
   @media (min-width: 1200px) {
     .hero__subhead {
       white-space: nowrap;
