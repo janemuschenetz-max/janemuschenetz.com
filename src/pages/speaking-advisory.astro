@@ -75,11 +75,21 @@ import Base from '../layouts/Base.astro';
   .collab-highlights-row {
     display: flex;
     gap: var(--space-md);
-    align-items: flex-start;
+    align-items: stretch;
   }
   .collab-highlights-row .collab-list {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+  .collab-highlights-row .collab-list li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .collab-endorsement-stack {
     flex: 0 0 42%;
@@ -174,7 +184,7 @@ import Base from '../layouts/Base.astro';
           </blockquote>
         </div>
       </div>
-      <div class="collab-logos">
+      <div class="collab-logos" style="margin-top: var(--space-lg);">
         {[
           { n: 1,  ext: 'png', caption: 'Featured Speaker, Poetry Stage' },
           { n: 2,  ext: 'png', caption: 'Grant Recipient, Poetry to the People' },
