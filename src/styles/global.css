@@ -1236,7 +1236,7 @@ a.pub-item:hover .pub-item__title {
   flex-wrap: wrap;
   row-gap: var(--space-md);
   column-gap: var(--space-md);
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   opacity: 0.7;
 }
@@ -1251,8 +1251,7 @@ a.pub-item:hover .pub-item__title {
 }
 
 .collab-logo-item img {
-  height: 55px;
-  max-width: 140px;
+  height: 62px;
   width: auto;
   max-width: 100%;
   filter: grayscale(100%);
