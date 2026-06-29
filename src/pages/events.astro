@@ -25,6 +25,17 @@ import Base from '../layouts/Base.astro';
     font-size: 0.85rem;
     color: var(--color-text-secondary);
   }
+  .event__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-top: 0.4rem;
+    max-width: 680px;
+  }
+  .event__desc a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   .event__link {
     display: inline-block;
     margin-top: 0.5rem;
@@ -51,7 +62,22 @@ import Base from '../layouts/Base.astro';
   <section>
     <div class="container">
       <div class="events-list">
-        <p class="no-events">No upcoming events at this time. <a href="/#inquiries">Sign up for the newsletter</a> to be notified of future appearances.</p>
+
+        <div class="event">
+          <p class="event__date">August 14, 2026 &middot; 6–8pm</p>
+          <h2 class="event__title">Poetry at Queen Califia's Magical Circle</h2>
+          <p class="event__location">Kit Carson Park, Escondido, CA</p>
+          <p class="event__desc">A curated evening of women poets performing in Niki de Saint Phalle's final public work — a garden of mosaic statues covered in sparkling stones, reflective glass, and colorful ceramic tiles. Jane joins featured readers Karla Cordero, Tracey Knapp, and Patricia Aya Williams. Organized by <a href="https://thepoetryshop.com" target="_blank" rel="noopener">The Poetry Shop</a>'s Katie Kemple. All ages. Book sales on site.</p>
+        </div>
+
+        <div class="event">
+          <p class="event__date">November 12–14, 2026</p>
+          <h2 class="event__title">The Poet's Laboratory — Poets for Science Gathering</h2>
+          <p class="event__location">Kent State University, Kent, OH</p>
+          <p class="event__desc">Panel with Katie Manning at the Poets for Science Gathering. Speakers include current US Poet Laureate Arthur Sze, Maria Popova, Jane Hirshfield, Tracy K. Smith, and others.</p>
+          <a href="https://poetsforscience.org/gathering-2026/" target="_blank" rel="noopener" class="event__link">Learn More</a>
+        </div>
+
       </div>
     </div>
   </section>
