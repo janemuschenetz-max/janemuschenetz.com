@@ -118,6 +118,7 @@ section {
 
 .featured-section {
   padding-top: 0.25rem;
+  scroll-margin-top: 70px;
 }
 
 .grid {
