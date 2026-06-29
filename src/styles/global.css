@@ -111,11 +111,12 @@ section {
 }
 
 #work {
+  scroll-margin-top: 70px;
   padding-bottom: var(--space-sm);
 }
 
 .featured-section {
-  padding-top: var(--space-sm);
+  padding-top: 0;
 }
 
 .grid {
