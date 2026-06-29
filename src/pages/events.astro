@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<style>
+  .events-list {
+    margin-top: var(--space-md);
+  }
+  .event {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .event__date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.25rem;
+  }
+  .event__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    margin-bottom: 0.25rem;
+  }
+  .event__location {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+  .event__link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .no-events {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    padding: var(--space-md) 0;
+  }
+</style>
+<Base title="Events — Jane Yevgenia Muschenetz" description="Upcoming readings, talks, and public appearances by Jane Muschenetz.">
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Events</h1>
+      <p class="page-hero__subtitle">Upcoming readings, talks, and public appearances.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="events-list">
+        <p class="no-events">No upcoming events at this time. <a href="/#inquiries">Sign up for the newsletter</a> to be notified of future appearances.</p>
+      </div>
+    </div>
+  </section>
+</Base>

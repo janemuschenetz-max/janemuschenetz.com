@@ -227,6 +227,12 @@ section {
   color: var(--color-accent);
 }
 
+.nav-desktop a.nav-sub {
+  font-size: 0.7rem;
+  opacity: 0.65;
+  margin-left: -0.25rem;
+}
+
 /* Hamburger */
 .hamburger {
   display: flex;
