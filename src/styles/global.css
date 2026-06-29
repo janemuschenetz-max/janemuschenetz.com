@@ -111,11 +111,11 @@ section {
 }
 
 #work {
-  padding-bottom: calc(var(--space-lg) * 0.5);
+  padding-bottom: var(--space-sm);
 }
 
 .featured-section {
-  padding-top: calc(var(--space-lg) * 0.3);
+  padding-top: var(--space-sm);
 }
 
 .grid {
