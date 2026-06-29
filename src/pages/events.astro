@@ -5,6 +5,14 @@ import Base from '../layouts/Base.astro';
   .events-list {
     margin-top: var(--space-md);
   }
+  .event__image {
+    width: 100%;
+    max-height: 340px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
   .event {
     padding: var(--space-md) 0;
     border-bottom: 1px solid var(--color-border);
@@ -64,6 +72,7 @@ import Base from '../layouts/Base.astro';
       <div class="events-list">
 
         <div class="event">
+          <img src="/images/queen-califia.jpg" alt="Queen Califia's Magical Circle, Escondido" class="event__image">
           <p class="event__date">August 14, 2026 &middot; 6–8pm</p>
           <h2 class="event__title">Poetry at Queen Califia's Magical Circle</h2>
           <p class="event__location">Kit Carson Park, Escondido, CA</p>
@@ -71,6 +80,7 @@ import Base from '../layouts/Base.astro';
         </div>
 
         <div class="event">
+          <img src="/images/pfs-banner.jpg" alt="Poets for Science Gathering" class="event__image">
           <p class="event__date">November 12–14, 2026</p>
           <h2 class="event__title">The Poet's Laboratory — Poets for Science Gathering</h2>
           <p class="event__location">Kent State University, Kent, OH</p>
