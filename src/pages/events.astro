@@ -16,6 +16,11 @@ import Base from '../layouts/Base.astro';
     display: block;
     margin-bottom: var(--space-sm);
   }
+  .event__image--full {
+    max-height: none;
+    object-fit: contain;
+    background: none;
+  }
   .event {
     padding: calc(var(--space-md) * 2) 0;
     border-bottom: 1px solid var(--color-border);
@@ -87,7 +92,7 @@ import Base from '../layouts/Base.astro';
         </div>
 
         <div class="event">
-          <img src="/images/pfs-banner.jpg" alt="Poets for Science Gathering" class="event__image">
+          <img src="/images/pfs-banner.jpg" alt="Poets for Science Gathering" class="event__image event__image--full">
           <p class="event__date">November 12–14, 2026</p>
           <h2 class="event__title">The Poet's Laboratory — Poets for Science Gathering</h2>
           <p class="event__location">Kent State University, Kent, OH</p>
