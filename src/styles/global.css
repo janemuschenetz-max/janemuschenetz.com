@@ -1102,6 +1102,23 @@ a.pub-item:hover .pub-item__title {
   color: var(--color-text);
 }
 
+.footer-give {
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.footer-give a {
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+
+.footer-give a:hover {
+  color: var(--color-text);
+}
+
 .footer-social {
   display: flex;
   gap: 1rem;
