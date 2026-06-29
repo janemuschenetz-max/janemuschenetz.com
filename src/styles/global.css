@@ -112,12 +112,12 @@ section {
 
 #work {
   scroll-margin-top: 70px;
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 
 .featured-section {
-  padding-top: 0.5rem;
+  padding-top: 0.25rem;
 }
 
 .grid {
@@ -424,9 +424,9 @@ section {
   display: flex;
   align-items: baseline;
   gap: var(--space-sm);
-  margin-bottom: var(--space-sm);
+  margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-sm);
+  padding-bottom: 0.4rem;
 }
 
 .section-number {
