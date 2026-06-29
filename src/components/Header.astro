@@ -7,11 +7,10 @@ const { showDesktopNav = true } = Astro.props;
     {showDesktopNav && (
       <nav class="nav-desktop">
         <a href="/">Home</a>
-        <a href="/#featured">Featured</a>
-        <a href="/events" class="nav-sub">Events</a>
         <a href="/visual-data-poetry">Visual &amp; Data Poetry</a>
         <a href="/speaking-advisory">Speaking &amp; Advisory</a>
         <a href="/writing-press">Writing &amp; Press</a>
+        <a href="/events">Featured Events</a>
       </nav>
     )}
     <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -22,9 +21,8 @@ const { showDesktopNav = true } = Astro.props;
 
 <nav class="nav-mobile-overlay" id="mobile-nav">
   <a href="/">Home</a>
-  <a href="/#featured">Featured</a>
-  <a href="/events">Events</a>
   <a href="/visual-data-poetry">Visual &amp; Data Poetry</a>
   <a href="/speaking-advisory">Speaking &amp; Advisory</a>
   <a href="/writing-press">Writing &amp; Press</a>
+  <a href="/events">Featured Events</a>
 </nav>
