@@ -1106,6 +1106,7 @@ a.pub-item:hover .pub-item__title {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
   padding-bottom: var(--space-md);
+  text-align: center;
 }
 
 .footer-give a {
