@@ -8,6 +8,12 @@ import Base from '../layouts/Base.astro';
   :global(.page-hero__subtitle) {
     max-width: 100%;
   }
+  /* Keep the subhead on one line above phone/tablet widths; it may wrap below that */
+  @media (min-width: 769px) {
+    .page-hero .page-hero__subtitle {
+      white-space: nowrap;
+    }
+  }
   .bio-layout {
     display: grid;
     grid-template-columns: 210px 1fr;
